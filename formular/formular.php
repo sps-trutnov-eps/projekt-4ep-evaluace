@@ -7,4 +7,6 @@ session_start();
 
 $like = $_POST["option"]; // like & dislike
 $hodnoceni = $_POST["hodnoceni"]; // text hodnocení
+
+
 ?>
