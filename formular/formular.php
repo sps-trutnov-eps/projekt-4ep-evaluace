@@ -11,6 +11,7 @@ $ucitel = ""; // učitel
 $like = $_POST["option"]; // like & dislike
 $hodnoceni = $_POST["hodnoceni"]; // text hodnocení
 
+<<<<<<< HEAD
 // Názvy řádků v tabulce do té doby, než se dohodneme na názvu v databázi
 $nazevTabulky = ``;
 
@@ -25,5 +26,7 @@ mysqli_query($spojeni, "INSERT INTO $nazevTabulky($datumTabulka,$hodinaTabulka,$
 
 
 header();
+=======
+>>>>>>> t5_vyplneni_sobotka
 
 ?>
