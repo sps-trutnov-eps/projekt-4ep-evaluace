@@ -1,1 +1,6 @@
-Projekt třídy 4.EP, systém pro studentskou evaluaci výuky
+Projekt třídy 4.EP, systém pro studentskou evaluaci výuky (alias Nic navíc nedělej)
+Team 1 (alias Demeti)
+Vedoucí Holub Lukáš (alias Já)
+Bartoš Jaroslav (alias Fak)
+Kratky Tomáš (alias PanVšechMoří)
+Trojánek Šimon (alias Podpantoflák)
