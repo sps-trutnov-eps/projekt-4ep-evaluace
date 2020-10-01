@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <h1>Výběr hodiny</h1>
+        <h1>Vyberte svoji třídu a předmět</h1>
     </header>
     <main>
         <nav>
