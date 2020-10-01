@@ -12,9 +12,28 @@
     <main>
         <nav>
             <form method="post" action="ZATIM_NEEXISTUJE">
-                <input type="text" name="obor" placeholder="Obor ..." /><br />
-                <input type="text" name="rocnik" placeholder="Ročník ..." /><br />
-                <input type="text" name="predmet" placeholder="Předmět ..." /><br />
+
+                <label for="trida">Třída</label><br />
+                <select id="trida" name="trida" size="5">
+                    <option value="1">1.EP</option>
+                    <option value="2">2.EP</option>
+                    <option value="3">3.EP</option>
+                    <option value="4">4.EP</option>
+                    <option value="5">1.IT</option>
+                    <option value="6">2.IT</option>
+                    <option value="7">3.IT</option>
+                    <option value="8">4.IT</option>
+                </select><br />
+
+                <label for="predmet">Předmět</label><br />
+                <select id="predmet" name="predmet" size="5">
+                    <option value="1">APS</option>
+                    <option value="2">ICT</option>
+                    <option value="3">PVA</option>
+                    <option value="4">POS</option>
+                    <option value="5">OPS</option>
+                </select><br />
+
                 <input type="submit" value="Potvrdit" />
             </form>
         </nav>
