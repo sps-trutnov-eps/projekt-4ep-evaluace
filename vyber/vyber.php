@@ -11,7 +11,7 @@
     </header>
     <main>
         <nav>
-            <form method="post" action="ZATIM_NEEXISTUJE">
+            <form method="post" action="vyber_zpracovani.php">
 
                 <label for="trida">Třída</label><br />
                 <select id="trida" name="trida" size="5">
@@ -34,7 +34,7 @@
                     <option value="5">OPS</option>
                 </select><br />
 
-                <input type="submit" value="Potvrdit" />
+                <input type="submit" value="Pokračovat" />
             </form>
         </nav>
     </main>
