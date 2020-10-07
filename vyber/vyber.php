@@ -14,18 +14,22 @@
             <form method="post" action="vyber_zpracovani.php">
 
                 <label for="obor">Obor</label><br />
-                <select id="obor" name="obor" size="5">
+                <select id="obor" name="obor" size="2">
                     <option value="1">Elektonické počítačové systémy</option>
-                    <option value="1a">1.EP</option>
-                    <option value="2b">2.EP</option>
-                    <option value="3c">3.EP</option>
-                    <option value="4d">4.EP</option>
+                    <select id="tridaEP" name="tridaEP" size="4">
+                        <option value="1">1.EP</option>
+                        <option value="2">2.EP</option>
+                        <option value="3">3.EP</option>
+                        <option value="4">4.EP</option>
+                    </select>
 
                     <option value="2">Informační technologie</option>
-                    <option value="5a">1.IT</option>
-                    <option value="6b">2.IT</option>
-                    <option value="7c">3.IT</option>
-                    <option value="8d">4.IT</option>
+                    <select id="tridaIT" name="tridaIT" size="4">
+                        <option value="1">1.IT</option>
+                        <option value="2">2.IT</option>
+                        <option value="3">3.IT</option>
+                        <option value="4">4.IT</option>
+                    </select>
                 </select><br />
 
                 <label for="predmet">Předmět</label><br />
