@@ -1,13 +1,19 @@
 <?php
 require_once "../../config.php";
-$trida = $_POST["trida"];
+
+$obor = $_POST["obor"];
+$rocnik = $_POST["rocnik"];
 $predmet = $_POST["predmet"];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-if($trida == 0)
+if($obor == 0)
 {
-    echo "<p>Vyberte prosím třídu</p>";
+    echo "<p>Vyberte prosím obor</p>";
+}
+elseif($rocnik == 0)
+{
+    echo "<p>Vyberte prosím ročník</p>";
 }
 elseif($predmet == 0)
 {
