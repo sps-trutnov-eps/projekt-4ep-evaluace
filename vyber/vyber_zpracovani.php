@@ -3,6 +3,7 @@ require_once "../../config.php";
 
 $obor = $_POST["obor"];
 $rocnik = $_POST["rocnik"];
+$skupina = $_POST["skupina"];
 $predmet = $_POST["predmet"];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
@@ -14,6 +15,10 @@ if($obor == 0)
 elseif($rocnik == 0)
 {
     echo "<p>Vyberte prosím ročník</p>";
+}
+elseif($skupina == 0)
+{
+    echo "<p>Vyberte prosím skupinu</p>";
 }
 elseif($predmet == 0)
 {

@@ -20,10 +20,16 @@
 
                 <label for="rocnik">Ročník</label><br />
                     <select id="rocnik" name="rocnik" size="4">
-                        <option value="1">1.</option>
-                        <option value="2">2.</option>
-                        <option value="3">3.</option>
-                        <option value="4">4.</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select><br />
+
+                <label for="skupina">Skupina</label><br />
+                    <select id="skupina" name="skupina" size="2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                     </select><br />
 
                 <label for="predmet">Předmět</label><br />
