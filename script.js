@@ -1,4 +1,4 @@
-let textareaVyber = "<textarea name='podvyber' id='podvyber#*' cols='30' rows='2'></textarea>";
+let textareaVyber = "<div id='podvyber*' class='podvyber#'><input type='text' name='podvyber#' cols='30' rows='2'></textarea><button onclick='odstranitPodvyber(*)'>Odstranit možnost k výběru</button><br></div>";
 let formularText = "";
 let formularVyber = "<div id='pridatVyber#'><button onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button><br><div>";
 let formularHvezdy = "";
@@ -8,6 +8,7 @@ let i = 1;
 let pocetOtazek = 0;
 let z = 1;
 let k = 1;
+let pocetpodvyber = 0;
 
 function pridatDalsiOtazku() {
     vyberFormularZmena = vyberFormular.replaceAll("#", i.toString());
@@ -24,10 +25,15 @@ function moznostOdpovedi(cislo) {
     for(j = 0; j < prvky.length; j++) { 
         if(prvky[j].checked && prvky[j].value == "vyber"){
             formularVyberZmena = formularVyber.replaceAll("#", cislo.toString());
-            document.getElementById(cislo).insertAdjacentHTML("beforeend", formularVyberZmena);
+            document.getElementById("odstranit" + cislo).insertAdjacentHTML("beforebegin", formularVyberZmena);
         }
         else if(document.getElementById("pridatVyber" + cislo) != null && prvky[j].value != "vyber"){
             document.getElementById("pridatVyber" + cislo).remove();
+            var prvkypodvyberu = document.getElementsByClassName("podvyber" + cislo);
+            if(prvkypodvyberu.length > 0)
+                for(jj = prvkypodvyberu.length-1; jj >= 0; jj--){
+                    document.getElementById(prvkypodvyberu[jj].id).remove();
+                }
         } 
     } 
 }
@@ -35,6 +41,13 @@ function odstranitOtazku(cislo){
     document.getElementById(cislo).remove();
     pocetOtazek--;
 }
-function pridatDalsiVyber(){
-
+function pridatDalsiVyber(cislo){
+    var prvkyPodvyberu = document.getElementsByName('podvyber' + pocetpodvyber); 
+    textareaVyberZmena = textareaVyber.replaceAll("#", cislo.toString());
+    textareaVyberZmena = textareaVyberZmena.replaceAll("*", pocetpodvyber.toString());
+    pocetpodvyber++;
+    document.getElementById("pridatVyber" + cislo).insertAdjacentHTML("beforebegin", textareaVyberZmena);
+}
+function odstranitPodvyber(cislo){
+    document.getElementById("podvyber" + cislo).remove();
 }
