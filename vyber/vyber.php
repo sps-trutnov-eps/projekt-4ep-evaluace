@@ -7,6 +7,7 @@
     <title>Vyber</title>
 </head>
 <body>
+<div id="kontejner">
     <header>
         <h1>Vyberte svůj obor, třídu a předmět</h1>
     </header>
@@ -41,9 +42,10 @@
         <option value="1">1.</option>
         <option value="2">2.</option>
     </select>
+    <input type="submit" value="Dál">
 
 </form>
-
+</div>
     </main>
     <footer>
         <p>&copy; 4.EP 2020</p>
