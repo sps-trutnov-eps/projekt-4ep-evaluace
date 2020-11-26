@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="script.js"></script>
     <title>Document</title>
 </head>
 
@@ -33,18 +32,24 @@
                 }
                 ?>
             </select>
-            <div id="vyberCelkovehoHodnoceniHodiny">
-                <h3>Vyberte možnost celkového hodnocení</h3>
-                <input type='radio' id='like' name='formularVyberFormulare' value='like'>
-                <label for='like'>Like/Dislike</label><br>
-                <input type='radio' name='formularVyberFormulare' id='hvezda' value='hvezda'>
-                <label for='hvezda'>Hvězdové ohodnocení</label><br>
-                <input type='radio' name='formularVyberFormulare' id='bezHodnoceni' value='bezHodnoceni'>
-                <label for='bezHodnoceni'>Bez celkového hodnocení</label><br>
-            </div>
-            <button id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
-            <input type='submit' value='Odeslat' />
+            <form id='formularOtazky'>
+                <div id="vyberCelkovehoHodnoceniHodiny">
+                    <h3>Vyberte možnost celkového hodnocení</h3>
+                    <input type='radio' id='like' name='formularVyberFormulare' value='like'>
+                    <label for='like'>Like/Dislike</label><br>
+                    <input type='radio' name='formularVyberFormulare' id='hvezda' value='hvezda'>
+                    <label for='hvezda'>Hvězdové ohodnocení</label><br>
+                    <input type='radio' name='formularVyberFormulare' id='bezHodnoceni' value='bezHodnoceni'>
+                    <label for='bezHodnoceni'>Bez celkového hodnocení</label><br>
+                </div>
+                <div id="otazky"></div>
+                <button type="button" id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
+                <input type='submit' value='Odeslat' />
+            </form>
+
+            <!--<a href="#" onclick="alert(getCount(document.getElementById('otazky'), false));">Simple Count of Children</a> (Should result in 5)<br/>-->
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
