@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost:3306
--- Vytvořeno: Stř 25. lis 2020, 10:58
+-- Vytvořeno: Pát 27. lis 2020, 20:28
 -- Verze serveru: 10.1.41-MariaDB-0+deb9u1
 -- Verze PHP: 7.3.10-1+0~20191008.45+debian9~1.gbp365209
 
@@ -19,24 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Databáze: `7ep_jarolimek`
 --
-
--- --------------------------------------------------------
-
---
--- Struktura tabulky `eval_dotazniky`
---
-
-CREATE TABLE `eval_dotazniky` (
-  `id` int(4) NOT NULL,
-  `ucitel_id` int(2) NOT NULL,
-  `predmet_id` int(2) NOT NULL,
-  `trida_id` int(2) NOT NULL,
-  `skupina` int(1) NOT NULL,
-  `datum` date NOT NULL,
-  `skolniHodina` int(1) NOT NULL,
-  `temaHodiny` varchar(255) COLLATE utf8_czech_ci NOT NULL,
-  `zruseno` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
 
@@ -77,6 +59,24 @@ CREATE TABLE `eval_predmety` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabulky `eval_rozvrh`
+--
+
+CREATE TABLE `eval_rozvrh` (
+  `id` int(4) NOT NULL,
+  `ucitel_id` int(2) NOT NULL,
+  `predmet_id` int(2) NOT NULL,
+  `trida_id` int(2) NOT NULL,
+  `skupina` int(1) NOT NULL,
+  `datum` date NOT NULL,
+  `skolniHodina` int(1) NOT NULL,
+  `temaHodiny` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `zruseno` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabulky `eval_tridy`
 --
 
@@ -102,12 +102,6 @@ CREATE TABLE `eval_ucitele` (
 --
 
 --
--- Klíče pro tabulku `eval_dotazniky`
---
-ALTER TABLE `eval_dotazniky`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Klíče pro tabulku `eval_otazky`
 --
 ALTER TABLE `eval_otazky`
@@ -119,6 +113,12 @@ ALTER TABLE `eval_otazky`
 ALTER TABLE `eval_predmety`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nazev` (`nazev`);
+
+--
+-- Klíče pro tabulku `eval_rozvrh`
+--
+ALTER TABLE `eval_rozvrh`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Klíče pro tabulku `eval_tridy`
