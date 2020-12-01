@@ -1,5 +1,5 @@
 <?php
-require_once "../../config.php";
+require_once "../config.php";
 
 session_start();
 
@@ -15,7 +15,7 @@ $hodina = $_POST["hodina"];
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
 $dotazDotaznik = "SELECT * FROM eval_dotazniky WHERE trida_id = '$tridaID' AND predmet_id = '$predmetID'
-AND skupina = '$skupina' AND skolniHodina = '$hodina'";
+AND skupina = '$skupina' AND datum = '$hodina'";
 
 
 $dotaznik = mysqli_query($spojeni, $dotazDotaznik);

@@ -65,6 +65,8 @@ h1,h2{
     padding-bottom: 40px;
 }
 
+
+
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -85,7 +87,7 @@ input[type=text], select {
   }
   
   input[type=submit]:hover {
-    background-color: lightskyblue;
+    background-color: rgb(75, 183, 250);
   }
   
   div {

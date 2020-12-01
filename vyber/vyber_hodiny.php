@@ -1,3 +1,17 @@
+
+
+
+
+<?php
+require_once "../config.php";
+
+session_start();
+
+$dotazniky = $_SESSION["dotazniky"];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -8,25 +22,15 @@
 </head>
 <body>
 
-<?php
-require_once "../../config.php";
-
-session_start();
-
-$tridaID = $_SESSION["tridaID"];
-$predmetID = $_SESSION["predmetID"];
-$skupina = $_SESSION["skupina"];
-
-$spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
-
-$dotazHodiny = "SELECT skolniHodina FROM eval_dotazniky WHERE trida_id = '$tridaID' AND predmet_id = '$predmet_id' AND skupina = '$skupina'";
-
-$hodiny = mysqli_query($spojeni, $dotazHodiny);
-
-?>
 
 <div id="kontejner">
     <header>
+    <?php
+
+
+
+
+    ?>
         <h1>Vyberte hodinu.</h1>
     </header>
     <main>
@@ -36,10 +40,10 @@ $hodiny = mysqli_query($spojeni, $dotazHodiny);
 <label for="hodina">Hodina</label><br />
     <select class="vyber" name="hodina">
             <?php
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            foreach($dotazniky["datum"] as $dotaznik){
 
-            foreach($hodiny as $hodina){
-
-                echo "<option value='$hodina'>".$hodina."</option>";
+                echo "<option value='".$dotaznik/*["skolniHodina"]*/."'>".$dotaznik/*["ucitel_id"]*/."</option>";
 
             }
             //  výběr určité hodiny, nutno otestovat
@@ -51,8 +55,8 @@ $hodiny = mysqli_query($spojeni, $dotazHodiny);
 <input type="submit" value="Potvrdit"/>
 
 </form>
-</div>
 </main>
+</div>
     <footer>
         <p>&copy; 4.EP 2020</p>
     </footer>
@@ -60,6 +64,8 @@ $hodiny = mysqli_query($spojeni, $dotazHodiny);
 </html>
 
 <?php
+/*
 mysqli_close($spojeni);
 
 ?>
+*/
