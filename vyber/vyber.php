@@ -19,7 +19,7 @@
 
 ?>
 
-<div id="kontejner">
+<div id="stranka">
     <header>
         <h1>Vyberte svůj obor, třídu a předmět.</h1>
     </header>
