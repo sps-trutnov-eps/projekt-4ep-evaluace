@@ -46,8 +46,6 @@
                 <button type="button" id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
                 <input type='submit' value='Odeslat' />
             </form>
-
-            <!--<a href="#" onclick="alert(getCount(document.getElementById('otazky'), false));">Simple Count of Children</a> (Should result in 5)<br/>-->
     </div>
     <script src="script.js"></script>
 </body>
