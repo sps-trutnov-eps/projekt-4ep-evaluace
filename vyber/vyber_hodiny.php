@@ -23,7 +23,7 @@ $dotazniky = $_SESSION["dotazniky"];
 <body>
 
 
-<div id="kontejner">
+<div id="stranka">
     <header>
     <?php
 
