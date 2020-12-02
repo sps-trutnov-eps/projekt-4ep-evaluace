@@ -2,50 +2,71 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/student.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vyber</title>
+    <title>Výběr</title>
 </head>
 <body>
+
+<?php
+    require_once "../../config.php";
+
+    $x = 1;
+
+    $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
+    $predmety = mysqli_query($spojeni, "SELECT * FROM eval_predmety");
+    $tridy = mysqli_query($spojeni, "SELECT * FROM eval_tridy");
+
+?>
+
+<div id="kontejner">
     <header>
-        <h1>Vyberte svoj obor, třídu a předmět</h1>
+        <h1>Vyberte svůj obor, třídu a předmět.</h1>
     </header>
     <main>
-        <nav>
-            <form method="post" action="vyber_zpracovani.php">
+    
+<form method="post" action="vyber_zpracovani.php">
 
-                <label for="obor">Obor</label><br />
-                <select id="obor" name="obor" size="2">
-                    <option value="1">Elektonické počítačové systémy</option>
-                    <select id="tridaEP" name="tridaEP" size="4">
-                        <option value="1">1.EP</option>
-                        <option value="2">2.EP</option>
-                        <option value="3">3.EP</option>
-                        <option value="4">4.EP</option>
-                    </select>
+<label for="trida">Třída</label><br />
+    <select class="vyber" name="trida">
+            <?php
+            //$x = 1;
 
-                    <option value="2">Informační technologie</option>
-                    <select id="tridaIT" name="tridaIT" size="4">
-                        <option value="1">1.IT</option>
-                        <option value="2">2.IT</option>
-                        <option value="3">3.IT</option>
-                        <option value="4">4.IT</option>
-                    </select>
-                </select><br />
+            foreach($tridy as $trida){
+                echo "<option value=".$trida["id"].">".$trida["trida"]."</option>";
+                //$x = $x + 1;
+            }
+            // je samozrejme nutne aby v databazi neco bylo
+            ?>
+    </select>
 
-                <label for="predmet">Předmět</label><br />
-                <select id="predmet" name="predmet" size="5">
-                    <option value="1">APS</option>
-                    <option value="2">ICT</option>
-                    <option value="3">PVA</option>
-                    <option value="4">POS</option>
-                    <option value="5">OPS</option>
-                </select><br />
+<label for="predmet">Předmět</label>
+    <select class="vyber" name="predmet">
+            <?php
+            //$x = 1;
 
-                <input type="submit" value="Pokračovat" />
-            </form>
-        </nav>
-    </main>
+            foreach($predmety as $predmet){
+                echo "<option value=".$predmet["id"].">".$predmet["nazev"]."</option>";
+                //$x = $x + 1;
+            }
+            ?>
+    </select>
+
+
+<label for="skupina">Skupina</label><br>
+    <select class="vyber" name="skupina">
+        <option value="1">1.</option>
+        <option value="2">2.</option>
+    </select>
+
+<input id="submit" type="submit" value="Potvrdit"/>
+
+</form>
+</main>
+</div>
+
     <footer>
+        <p>&copy; 4.EP 2020</p>
     </footer>
 </body>
 </html>
