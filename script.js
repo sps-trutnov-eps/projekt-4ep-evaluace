@@ -2,7 +2,7 @@ let textareaVyber = "<div id='podvyber*' class='podvyber#'><input type='text' na
 let formularText = "";
 let formularVyber = "<div id='pridatVyber#'><button onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button><br><div>";
 let formularHvezdy = "";
-let formularLikeDislike = "";
+let vyberpoctuvybranychpododpovedi = "<input type='number' id='vyberpoctuvybranychpododpovedi#' onkeydown='return false' min ='1' max='1'><label >Maximální počet zaškrtnutelných</label>";
 let vyberFormular = "<div id='#'><h3>Otázka '#':</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
 let i = 1;
 let pocetOtazek = 0;
@@ -74,6 +74,12 @@ function odstranitOtazku(cislo){
     pocetOtazek--;
 }
 function pridatDalsiVyber(cislo){
+    if(document.getElementsByName("podvyber" + cislo).length == 0){
+        text = vyberpoctuvybranychpododpovedi.replaceAll("#", cislo.toString());
+        document.getElementById("pridatVyber" + cislo).insertAdjacentHTML("beforebegin", text);
+    }else{
+        document.getElementById("vyberpoctuvybranychpododpovedi" + cislo).setAttribute("max",document.getElementsByName("podvyber" + cislo).length+1);
+    }
     var prvkyPodvyberu = document.getElementsByName('podvyber' + pocetpodvyber); 
     textareaVyberZmena = textareaVyber.replaceAll("#", cislo.toString());
     textareaVyberZmena = textareaVyberZmena.replaceAll("*", pocetpodvyber.toString());
@@ -82,4 +88,10 @@ function pridatDalsiVyber(cislo){
 }
 function odstranitPodvyber(cislo){
     document.getElementById("podvyber" + cislo).remove();
+    pocetpodvyber--;
+    if(document.getElementsByClassName(document.getElementById("podvyber" + cislo).className).length == 0){
+        document.getElementById("vyberpoctuvybranychpododpovedi" + cislo).remove();
+    }else{
+        document.getElementById("vyberpoctuvybranychpododpovedi" + cislo).setAttribute("max",document.getElementsByName("podvyber" + cislo).length+1);
+    }
 }
