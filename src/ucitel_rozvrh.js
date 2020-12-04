@@ -1,7 +1,16 @@
-var dny = ["Po", "Út", "St", "Čt", "Pá"];
+function pridatHodinu(id) {
+    document.getElementById("popup").style.display = "flex";            //  POPUP OKENKO
+    $("#potvrdit").click(function() {
+        document.getElementById("popup").style.display = "none";
+        var predmet = document.getElementById("predmet").value;         //  POTŘEBA UDĚLAT PHP NA ODESLÁNÍ S IDčkem POLE
+        document.getElementById(id).innerHTML = predmet;
+        //
+    })
+}
 
-//$(".sudyLichy").attr("id", "sudy");
-function generovatRozvrh() {
+$(document).ready(function () {
+    //          GENERACE ROZVRHU
+    var dny = ["Po", "Út", "St", "Čt", "Pá"];
     var pole = "";
     for (i = 0; i <= 4; i++) {
         pole += "<tr id='" + dny[i] + "'><th>" + dny[i] + "</th>";
@@ -11,14 +20,8 @@ function generovatRozvrh() {
         pole += "</tr>";
     }
     document.getElementById("rozvrh").innerHTML = pole;
-}
 
-function pridatHodinu(id) {
-    document.getElementById(id).innerHTML = ":)";
-}
-
-$(document).ready(function () {
-    //          ÚPRAVA
+    //          ÚPRAVA ROZVRHU
     $("#upravy").click(function () {
         if (document.getElementById("upravy").innerHTML == "Upravit") {
             $("#upravy").text("Zastavit úpravy");
@@ -31,7 +34,7 @@ $(document).ready(function () {
     
 
     //          SUDÝ/LICHÝ TÝDEN
-    var datum = new Date(); 
+    var datum = new Date();
     function getWeekOfMonth(datum) {
         let upraveneDatum = datum.getDate()+datum.getDay();
         let prefixes = ['0', '1', '2', '3', '4', '5'];
@@ -60,7 +63,3 @@ $(document).ready(function () {
             }
     })
 })
-
-function generovatTemata() {
-    
-}

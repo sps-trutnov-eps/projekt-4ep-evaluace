@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Učitelský rozvrh</title>
-    <script type="text/javascript" src="ucitel_rozvrh.js"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="ucitel_rozvrh.js"></script>
 </head>
-<body onload="generovatDny()">
+<body>
   <button id="upravy">Upravit</button>
   <button id="sudyLichy"></button>
   <table>
@@ -25,11 +26,32 @@
       </tr>
     </thead>
     <tbody id="rozvrh">
-      <!--rozvrh bude doplněn javascriptem-->
+      <!--rozvrh je doplněn javascriptem-->
     </tbody>
   </table>
   <div id="temata">
-    <!--tamata budou doplněna javascriptem-->
+    <!--tamata jsou doplněna javascriptem-->
+  </div>
+  <div id="popup" style="display: none;">
+    <select id="predmet">
+      <option value="" selected disabled hidden>Vyberte předmět</option>
+      <option value="CMT">CMT</option>
+      <option value="PVA">PVA</option>
+      <option value="ANG">ANG</option>
+    </select>
+    <select id="trida">
+      <option value="" selected disabled hidden>Vyberte třídu</option>
+      <option value="">4.EP</option>
+      <option value="">3.EP</option>
+      <option value="">2.EP</option>
+    </select>
+    <select id="skupina">
+      <option value="" selected disabled hidden>Vyberte skupinu</option>
+      <option value="">-----</option>
+      <option value="">1. skupina</option>
+      <option value="">2. skupina</option>
+    </select>
+    <button value="submit" id="potvrdit">Potvrdit</button>
   </div>
 </body>
 </html>
