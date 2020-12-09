@@ -6,10 +6,10 @@
 <body>
 <main>
 <?php
-require_once "../../config.php";
+require_once "../config.php";
 
-$datum = $_POST["datum"];
-$predmet = $_POST["predmet"];
+if (isset($_POST["datum"]))$datum = $_POST["datum"];
+if (isset($_POST["predmet"]))$predmet = $_POST["predmet"];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 $data = mysqli_query($spojeni,"SELECT * FROM 'eval_otazky'"); 
@@ -17,18 +17,20 @@ $data = mysqli_query($spojeni,"SELECT * FROM 'eval_odpovedi'");
 echo"
 <datalist id='datum'>
 ";
-$data_dotazniky = mysqli_query($spojeni,"SELECT 'datum' FROM 'eval_rozvrh'"); 
+$data_dotazniky = mysqli_query($spojeni,"SELECT * FROM `eval_hodiny`"); 
 while($datum = mysqli_fetch_assoc($data_dotazniky))
 {
-    echo"<option value='$datum'>";
+    $date = $datum["datum"]; 
+    echo"<option value='$date'>";
 }
 echo"
 </datalist>
 <datalist id='predmet'>
 ";
-$data_predmety = mysqli_query($spojeni,"SELECT 'nazev' FROM 'eval_predmety'"); 
-while($predmet = mysqli_fetch_assoc($data_predmety))
+$data_predmety = mysqli_query($spojeni,"SELECT p.nazev FROM eval_predmety p INNER JOIN eval_hodiny h ON h.predmet_id = p.id"); 
+while($predmety = mysqli_fetch_assoc($data_predmety))
 {  
+    $predmet = $predmety["predmet"];
     echo"<option value='$predmet'>";
 }
 echo"
@@ -37,7 +39,8 @@ mysqli_close($spojeni);
 ?>
 <form method='post' action='eval_vasledky_vypis.php'>
     <input type='list' list='datum' name='datum'/><br>
-    <input type='list' list='predmet' name='permet'/><br>
+    <input type='list' list='predmet' name='predmet'/><br>
+    <input type='submit' name='Potvrdit'><br>
 </form>
 </main>    
 </body>
