@@ -21,7 +21,7 @@
 
 <div id="kontejner">
     <header>
-        <h1>Vyberte svůj třídu a předmět</h1>
+        <h1>Vyberte svoji třídu a předmět</h1>
     </header>
     <main>
     

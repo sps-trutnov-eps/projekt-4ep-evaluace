@@ -23,7 +23,7 @@ $dotazniky = $_SESSION["dotazniky"];
 <body>
 
 
-<div id="kontejner">
+<div id="stranka">
     <header>
     <?php
 
@@ -31,7 +31,7 @@ $dotazniky = $_SESSION["dotazniky"];
 
 
     ?>
-        <h1>Vyberte hodinu.</h1>
+        <h1>Vyberte hodinu</h1>
     </header>
     <main>
     

@@ -14,7 +14,7 @@ $hodina = $_POST["hodina"];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-$dotazDotaznik = "SELECT * FROM eval_dotazniky WHERE trida_id = '$tridaID' AND predmet_id = '$predmetID'
+$dotazDotaznik = "SELECT * FROM eval_hodiny WHERE trida_id = '$tridaID' AND predmet_id = '$predmetID'
 AND skupina = '$skupina' AND datum = '$hodina'";
 
 
