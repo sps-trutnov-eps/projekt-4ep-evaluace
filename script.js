@@ -33,6 +33,7 @@ function zjistitHodnoty() {
         if (typOtazky.value == "vyber") {
             data = document.querySelectorAll('.podvyber' + t);
             var vyber = [];
+            vyber[vyber.length] = document.getElementById("inputvyberucisla" + t).value;
 
             for (ii = 0; ii < data.length; ii++) {
                 vyberZInputu = document.getElementsByName("podvyber" + t)[ii].value;
@@ -49,10 +50,12 @@ function zjistitHodnoty() {
 
     otazky = JSON.stringify(otazky);
 
+    idHodiny = document.getElementById("vyberHodiny").value;
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "./ajax.php", false);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("a=otazky&array=" + otazky);
+    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny);
     if (xhr.readyState == 4 && xhr.status == 200) {
         console.log(xhr.response);
     }
