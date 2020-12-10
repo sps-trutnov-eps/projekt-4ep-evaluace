@@ -8,13 +8,9 @@ function pridatHodinu(id) {
     })
 }
 
-<<<<<<< HEAD
-function generovatRozvrh() {
-=======
 $(document).ready(function () {
     //          GENERACE ROZVRHU
     var dny = ["Po", "Út", "St", "Čt", "Pá"];
->>>>>>> t4_ucitel_stefanidis
     var pole = "";
     for (i = 0; i <= 4; i++) {
         pole += "<tr id='" + dny[i] + "'><th>" + dny[i] + "</th>";
@@ -25,28 +21,6 @@ $(document).ready(function () {
     }
     document.getElementById("rozvrh").innerHTML = pole;
 
-<<<<<<< HEAD
-function pridatHodinu(id) {
-    document.getElementById(id).innerHTML = ":)";
-}
-
-$(document).ready(function () {
-    $("#upravy").click(function () {
-        if (document.getElementById("upravy").innerHTML == "Upravit") {
-            $("#upravy").text("Zastavit úpravy");
-            $("th").attr("onclick", "pridatHodinu(this.id)");
-
-        } else {
-            $("#upravy").text("Upravit");   
-            $("th").attr("onclick", "");
-        }
-    })
-})
-
-function generovatTemata() {
-    
-}
-=======
     //          ÚPRAVA ROZVRHU
     $("#upravy").click(function () {
         if (document.getElementById("upravy").innerHTML == "Upravit") {
@@ -89,4 +63,3 @@ function generovatTemata() {
             }
     })
 })
->>>>>>> t4_ucitel_stefanidis
