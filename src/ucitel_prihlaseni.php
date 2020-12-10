@@ -22,9 +22,12 @@ else
         $_SESSION['idUcitel'] = $email["id"];
         header("location:ucitel_rozvrh.html");
     }
-    else
+    else if ($passwd == NULL) {
+        echo "<p>Vyplňte heslo.</p>";
+    }
+    else if($email["passwd"] != $passwd)
     {
-        echo "<p>Neplatné heslo pro uživatele <b>$email</b>.</p>";
+        echo "<p>Neplatné heslo pro email</p>";
     }
 }
 
