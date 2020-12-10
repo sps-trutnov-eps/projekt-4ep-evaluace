@@ -9,15 +9,21 @@
 <body>
     <h1>UI pro přidání otázek k danné hodině</h1>
     <div id="formular">
-            <select name="vyber" id="vyberHodiny">
+            <label for="start">Start date:</label>
+            <input onclick="zmenacasu()" type="date" id="start" name="end" value="">
+            <label for="end">Start date:</label>
+            <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max="">
+            <select onclick="hodinyPrepis()" name="vyber" id="vyberHodiny">
                 <option value="">Vyberte hodinu pro formulář</option>
                 <?php
                 session_start();
-                if (isset($_SESSION["__id_ucitele__"])) {
-                    $ucitelID = $_SESSION["__id_ucitele__"];
+
+                if (isset($_SESSION["idUcitel"])) {
+                    $ucitelID = $_SESSION["idUcitel"];
                     $spojeni = null; //spojeni;
-                    $sql = "SELECT * FROM /*databaze*/ WHERE ucitelID = $ucitelID";
+                    $sql = "SELECT * FROM eval_hodiny WHERE idUcitel = $ucitelID";
                     $data = mysqli_query($spojeni, $sql);
+
                     if (mysqli_num_rows($data) > 0) {
                         $data = mysqli_fetch_assoc($data);
                         //hodnoty uvozeny a zakončeny __ jsou hodnoty, které se nahradí později, až bude znám jejich finální název
@@ -29,6 +35,9 @@
                             echo "<option value='" . $idHodiny . "'>" . $hodina . " | " . $trida . " | " . $datum  . "</option>";
                         }
                     }
+                }
+                else{
+                    //header("location:"/*kam ho mám poslat*/);
                 }
                 ?>
             </select>

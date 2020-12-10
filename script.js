@@ -116,3 +116,17 @@ function odstranitPodvyber(cislo){
         document.getElementById("inputvyberucisla" + jmenotridy.slice(-1)).value = 0;
     }
 }
+function zmenacasu(){
+    document.getElementById("end").setAttribute("min",document.getElementById("start").value);
+    document.getElementById("start").setAttribute("max",document.getElementById("end").value);
+}
+function hodinyPrepis(){
+    startDate = document.getElementById("start").value;
+    endDate = document.getElementById("end").value;
+    if(endDate !== "" && startDate !== ""){ // netřeba řešit zobrazí se všechny/ od / do / mezi
+        console.log("here");
+    }
+    else{
+        alert("Datum rozsahu musí být zvoleno, zvolte prosím počáteční i koncové datum.")
+    }
+}
