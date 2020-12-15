@@ -9,31 +9,51 @@
 <body>
     <h1>UI pro přidání otázek k danné hodině</h1>
     <div id="formular">
-            <label for="start">Start date:</label>
+            <label for="start">Počáteční datum výběru:</label>
             <input onclick="zmenacasu()" type="date" id="start" name="end" value="">
-            <label for="end">Start date:</label>
-            <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max="">
+            <label for="end">Konečné datum výběru:</label>
+            <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
             <select onclick="hodinyPrepis()" name="vyber" id="vyberHodiny">
                 <option value="">Vyberte hodinu pro formulář</option>
                 <?php
+                require_once "../../config.php";
+                $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
                 session_start();
+
+                //odstranit po debugu !!!!!
+                $_SESSION["idUcitel"] = 2;//odstranit po debugu !!!!!
+                //odstranit po debugu !!!!!
 
                 if (isset($_SESSION["idUcitel"])) {
                     $ucitelID = $_SESSION["idUcitel"];
-                    $spojeni = null; //spojeni;
-                    $sql = "SELECT * FROM eval_hodiny WHERE idUcitel = $ucitelID";
+                    $sql = "SELECT * FROM eval_hodiny WHERE ucitel_id = $ucitelID";
                     $data = mysqli_query($spojeni, $sql);
-
+                    $sql = "SELECT * FROM eval_predmety";
+                    $predmety = mysqli_query($spojeni, $sql);
+                    $sql = "SELECT * FROM eval_tridy";
+                    $tridy = mysqli_query($spojeni, $sql);
+                    //echo "<option value=''>" . var_dump($predmety[1]["nazev"]) . "</option>";
                     if (mysqli_num_rows($data) > 0) {
-                        $data = mysqli_fetch_assoc($data);
-                        //hodnoty uvozeny a zakončeny __ jsou hodnoty, které se nahradí později, až bude znám jejich finální název
-                        foreach ($data as $moznost) {
-                            $idHodiny = $moznost["__id_hodiny__"];
-                            $hodina = $moznost["__nazev_hodiny__"];
-                            $trida = $moznost["__trida__"];
-                            $datumHodiny = $moznost["__datum_hodiny__"];
-                            echo "<option value='" . $idHodiny . "'>" . $hodina . " | " . $trida . " | " . $datum  . "</option>";
-                        }
+                        while($radek = mysqli_fetch_array($data,MYSQLI_ASSOC)){
+                            $idPredmet = $radek["predmet_id"];
+                            $idHodiny = $radek["id"];
+                            $hodina = $radek["skolniHodina"];
+                            $idTrida = $radek["trida_id"];
+                            while($predmet = mysqli_fetch_array($predmety,MYSQLI_ASSOC)){
+                                if($predmet["id"] == $idPredmet){
+                                    $finalPredmet = $predmet["nazev"];
+                                    break;
+                                }
+                            }
+                            while($trida = mysqli_fetch_array($tridy,MYSQLI_ASSOC)){
+                                if($trida["id"] == $idTrida){
+                                    $finalTrida = $trida["trida"];
+                                    break;
+                                }
+                            }
+                            $datumHodiny = date("d.m.Y",strtotime($radek["datum"]));
+                            echo "<option value='" . $idHodiny . "' class='". $datumHodiny ."'>" . $hodina . ". hodina | " . $datumHodiny  . " | " . $finalTrida . " | " .  $finalPredmet  . "</option>";
+                        } 
                     }
                 }
                 else{

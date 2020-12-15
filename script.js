@@ -3,13 +3,14 @@ let formularText = "";
 let formularVyber = "<div id='pridatVyber#'><button type='button'  onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button><br><div>";
 let formularHvezdy = "";
 let vyberpoctuvybranychpododpovedi = "<div id='vyberpoctuvybranychpododpovedi#'><input type='number' id='inputvyberucisla#' onclick='return false' onkeydown='return false' min ='0' max='1'><label >Maximální počet zaškrtnutelných</label></div>";
-let vyberFormular = "<div id='#'><h3>Otázka '#':</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
+let vyberFormular = "<div id='#'><h3>Otázka:</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
 let i = 1;
 let pocetOtazek = 0;
 let z = 1;
 let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
+window.addEventListener("load", nastavitDatumyUVyberuDatumu());
 
 formularOtazky.addEventListener('submit', e => {
 	e.preventDefault();
@@ -128,8 +129,21 @@ function hodinyPrepis(){
     endDate = document.getElementById("end").value;
     if(endDate !== "" && startDate !== ""){ // netřeba řešit zobrazí se všechny/ od / do / mezi
         console.log("here");
+
+
+
     }
     else{
         alert("Datum rozsahu musí být zvoleno, zvolte prosím počáteční i koncové datum.")
     }
+}
+function nastavitDatumyUVyberuDatumu(){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+
+    document.getElementById("end").setAttribute("value",today);
+    document.getElementById("start").setAttribute("value",today);
 }
