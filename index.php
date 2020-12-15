@@ -28,17 +28,32 @@
                     $ucitelID = $_SESSION["idUcitel"];
                     $sql = "SELECT * FROM eval_hodiny WHERE ucitel_id = $ucitelID";
                     $data = mysqli_query($spojeni, $sql);
+                    $sql = "SELECT * FROM eval_predmety";
+                    $predmety = mysqli_query($spojeni, $sql);
+                    $sql = "SELECT * FROM eval_tridy";
+                    $tridy = mysqli_query($spojeni, $sql);
+                    //echo "<option value=''>" . var_dump($predmety[1]["nazev"]) . "</option>";
                     if (mysqli_num_rows($data) > 0) {
-                        for($indexx = 0; $indexx < mysqli_num_rows($data); $indexx++){
-                            while($radek = mysqli_fetch_array($data,MYSQLI_ASSOC)){
-                                $idPredmet = $radek["predmet_id"];
-                                $idHodiny = $radek["id"];
-                                $hodina = $radek["skolniHodina"];
-                                $trida = $radek["trida_id"];
-                                $datumHodiny = date("d.m.Y",strtotime($radek["datum"]));
-                                echo "<option value='" . $idHodiny . "'>" . $hodina . " | " . $trida . " | " . $datumHodiny  . "</option>";
-                            }                            
-                        }
+                        while($radek = mysqli_fetch_array($data,MYSQLI_ASSOC)){
+                            $idPredmet = $radek["predmet_id"];
+                            $idHodiny = $radek["id"];
+                            $hodina = $radek["skolniHodina"];
+                            $idTrida = $radek["trida_id"];
+                            while($predmet = mysqli_fetch_array($predmety,MYSQLI_ASSOC)){
+                                if($predmet["id"] == $idPredmet){
+                                    $finalPredmet = $predmet["nazev"];
+                                    break;
+                                }
+                            }
+                            while($trida = mysqli_fetch_array($tridy,MYSQLI_ASSOC)){
+                                if($trida["id"] == $idTrida){
+                                    $finalTrida = $trida["trida"];
+                                    break;
+                                }
+                            }
+                            $datumHodiny = date("d.m.Y",strtotime($radek["datum"]));
+                            echo "<option value='" . $idHodiny . "' class='". $datumHodiny ."'>" . $hodina . ". hodina | " . $datumHodiny  . " | " . $finalTrida . " | " .  $finalPredmet  . "</option>";
+                        } 
                     }
                 }
                 else{
