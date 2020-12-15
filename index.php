@@ -9,30 +9,35 @@
 <body>
     <h1>UI pro přidání otázek k danné hodině</h1>
     <div id="formular">
-            <label for="start">Start date:</label>
+            <label for="start">Počáteční datum výběru:</label>
             <input onclick="zmenacasu()" type="date" id="start" name="end" value="">
-            <label for="end">Start date:</label>
-            <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max="">
+            <label for="end">Konečné datum výběru:</label>
+            <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
             <select onclick="hodinyPrepis()" name="vyber" id="vyberHodiny">
                 <option value="">Vyberte hodinu pro formulář</option>
                 <?php
+                require_once "../../config.php";
+                $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
                 session_start();
+
+                //odstranit po debugu !!!!!
+                $_SESSION["idUcitel"] = 2;//odstranit po debugu !!!!!
+                //odstranit po debugu !!!!!
 
                 if (isset($_SESSION["idUcitel"])) {
                     $ucitelID = $_SESSION["idUcitel"];
-                    $spojeni = null; //spojeni;
-                    $sql = "SELECT * FROM eval_hodiny WHERE idUcitel = $ucitelID";
+                    $sql = "SELECT * FROM eval_hodiny WHERE ucitel_id = $ucitelID";
                     $data = mysqli_query($spojeni, $sql);
-
                     if (mysqli_num_rows($data) > 0) {
-                        $data = mysqli_fetch_assoc($data);
-                        //hodnoty uvozeny a zakončeny __ jsou hodnoty, které se nahradí později, až bude znám jejich finální název
-                        foreach ($data as $moznost) {
-                            $idHodiny = $moznost["__id_hodiny__"];
-                            $hodina = $moznost["__nazev_hodiny__"];
-                            $trida = $moznost["__trida__"];
-                            $datumHodiny = $moznost["__datum_hodiny__"];
-                            echo "<option value='" . $idHodiny . "'>" . $hodina . " | " . $trida . " | " . $datum  . "</option>";
+                        for($indexx = 0; $indexx < mysqli_num_rows($data); $indexx++){
+                            while($radek = mysqli_fetch_array($data,MYSQLI_ASSOC)){
+                                $idPredmet = $radek["predmet_id"];
+                                $idHodiny = $radek["id"];
+                                $hodina = $radek["skolniHodina"];
+                                $trida = $radek["trida_id"];
+                                $datumHodiny = date("d.m.Y",strtotime($radek["datum"]));
+                                echo "<option value='" . $idHodiny . "'>" . $hodina . " | " . $trida . " | " . $datumHodiny  . "</option>";
+                            }                            
                         }
                     }
                 }

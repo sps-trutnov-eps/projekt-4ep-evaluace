@@ -10,6 +10,7 @@ let z = 1;
 let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
+window.addEventListener("load", nastavitDatumyUVyberuDatumu());
 
 formularOtazky.addEventListener('submit', e => {
 	e.preventDefault();
@@ -132,4 +133,14 @@ function hodinyPrepis(){
     else{
         alert("Datum rozsahu musí být zvoleno, zvolte prosím počáteční i koncové datum.")
     }
+}
+function nastavitDatumyUVyberuDatumu(){
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+
+    document.getElementById("end").setAttribute("value",today);
+    document.getElementById("start").setAttribute("value",today);
 }
