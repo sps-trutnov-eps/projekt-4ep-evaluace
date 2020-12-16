@@ -22,36 +22,36 @@ formularOtazky.addEventListener('submit', e => {
 
 function zjistitHodnoty() {
     var checkRadio = document.querySelector('input[name="formularVyberFormulare"]:checked');
-    var otazky = [];
-
-    otazky[otazky.length] = checkRadio.value;
+    var otazky = '{"moznostHodnoceni": "' + checkRadio.value + '", "otazky": [';
 
     var t = 1;
     do {
-        var textOtazky = document.getElementById('otazka' + t);
         var typOtazky = document.querySelector('input[name="volbaOdpovedi' + t + '"]:checked');
+        var textOtazky = document.getElementById('otazka'+ t);
 
-        otazky[otazky.length] = textOtazky.value;
+        otazky = otazky + '{"typ": "' + typOtazky.value + '", "text": "' + textOtazky.value + '"';
 
         if (typOtazky.value == "vyber") {
             data = document.querySelectorAll('.podvyber' + t);
-            var vyber = [];
-            vyber[vyber.length] = document.getElementById("inputvyberucisla" + t).value;
+            pocetZaskrtnutelnych = document.getElementById("inputvyberucisla" + t).value;
+            otazky = otazky + ', "pocetZaskrtnutelnych": ' + pocetZaskrtnutelnych + ', "moznosti": [';
 
             for (ii = 0; ii < data.length; ii++) {
                 vyberZInputu = document.getElementsByName("podvyber" + t)[ii].value;
 
-                vyber[vyber.length] = vyberZInputu;
+                otazky = otazky + '{"text": "' + vyberZInputu + '"}, ';
             }
-
-            otazky[otazky.length] = vyber;
+            
+            otazky = otazky.slice(0,-2);
+            otazky = otazky + ']}, ';
         } else
-            otazky[otazky.length] = typOtazky.value;
+            otazky = otazky + '}, ';
 
         t++;
     } while (t < pocetOtazek + 1);
 
-    otazky = JSON.stringify(otazky);
+    otazky = otazky.slice(0,-2);
+    otazky = otazky + ']}';
 
     idHodiny = document.getElementById("vyberHodiny").value;
 
