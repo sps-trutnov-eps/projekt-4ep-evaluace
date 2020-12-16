@@ -11,7 +11,9 @@ let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
 window.addEventListener("load", nastavitDatumyUVyberuDatumu());
-
+window.onload = (event) => {
+    zmenacasu();
+  };
 formularOtazky.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -130,11 +132,26 @@ function zmenacasu() {
             break;
         }
     }
+    hodinyPrepis();
 }
 function hodinyPrepis() {
     startDate = document.getElementById("start").value;
     endDate = document.getElementById("end").value;
     if (endDate !== "" && startDate !== "") { // netřeba řešit zobrazí se všechny/ od / do / mezi
+        moznosti = document.getElementById("vyberHodiny").getElementsByTagName("option");
+        for(let k = 1; k < moznosti.length; k++){
+            datum = moznosti[k].className;
+            datumKPorovnani = new Date (datum);
+            startovniDatum = new Date (startDate);
+            konecneDatum = new Date (endDate);
+            if(startovniDatum.getTime() <= datumKPorovnani && konecneDatum.getTime() >= datumKPorovnani){
+                moznosti[k].style.visibility = "visible";
+                moznosti[k].style.fontSize = "1em";
+            }else{
+                moznosti[k].style.visibility = "hidden";
+                moznosti[k].style.fontSize = "0";
+            }
+        }
         
 
 
@@ -155,7 +172,7 @@ function nastavitDatumyUVyberuDatumu() {
 }
 function pridatNazevFormulare(){
     if(document.getElementById("ulozitFormular").checked){
-        var text = "<textarea name='nazevFormuText' id='nazevFormuText' cols='30' rows='4'></textarea>";
+        var text = "<textarea name='nazevFormuText' id='nazevFormuText' cols='30' rows='4'></textarea><br>";
         document.getElementById("odeslatFormular").insertAdjacentHTML("beforebegin", text);
     }else{
         document.getElementById("nazevFormuText").remove();

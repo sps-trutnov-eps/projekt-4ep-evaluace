@@ -11,14 +11,15 @@
         require_once "../../config.php";
         $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
         session_start();
-        $ucitelID = $_SESSION["idUcitel"];
+        if(isset($_SESSION["idUcitel"]))
+            $ucitelID = $_SESSION["idUcitel"];
     ?>
     <h1>UI pro přidání otázek k danné hodině</h1>
     <div id="formular">
             <label for="start">Počáteční datum výběru:</label>
-            <input onclick="zmenacasu()" type="date" id="start" name="end" value="">
+            <input onchange="zmenacasu()" type="date" id="start" name="end" value="">
             <label for="end">Konečné datum výběru:</label>
-            <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
+            <input onchange="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
             <select name="sablony">
                 <option value="">Použijte některý uložený formulář</option>
                 <?php
@@ -32,7 +33,7 @@
                         }
                 ?>
             </select>
-            <select onclick="hodinyPrepis()" name="vyber" id="vyberHodiny">
+            <select name="vyber" id="vyberHodiny">
                 <option value="">Vyberte hodinu pro formulář</option>
                 <?php
 
@@ -70,12 +71,12 @@
                                     }
                                 }
                                 $datumHodiny = date("d.m.Y", strtotime($radek["datum"]));
-                                echo "<option value='" . $idHodiny . "' class='" . $datumHodiny . "'>" . $hodina . ". hodina | " . $datumHodiny  . " | " . $finalTrida . " | " .  $finalPredmet  . "</option>";
+                                echo "<option value='" . $idHodiny . "' class='" . $radek["datum"] . "'>" . $hodina . ". hodina | " . $datumHodiny  . " | " . $finalTrida . " | " .  $finalPredmet  . "</option>";
                             }
                         }
                 }
                 else{
-                    //header("location:"/*kam ho mám poslat*/);
+                    //header("location:"/*kam ho mám poslat -> (_!_) ?*/);
                 }
                 ?>
             </select>
