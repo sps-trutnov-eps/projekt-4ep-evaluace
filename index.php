@@ -23,7 +23,7 @@
             <select name="sablony">
                 <option value="">Použijte některý uložený formulář</option>
                 <?php
-                    $sql = "SELECT id,nazev FROM eval_formulare_vzory WHERE idUcitel = $ucitelID AND nazev IS NOT NULL ";
+                    $sql = "SELECT id,nazev FROM eval_formulare_vzory WHERE idUcitel = $ucitelID AND nazev != ''";
                     $formulareSeznam = mysqli_query($spojeni, $sql);
                     if (mysqli_num_rows($formulareSeznam) > 0)
                         while ($radekFormualre = mysqli_fetch_array($formulareSeznam, MYSQLI_ASSOC)) {
