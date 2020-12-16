@@ -21,13 +21,7 @@ $data = mysqli_query($spojeni, $dotazHodiny);
 $dotazniky = mysqli_fetch_assoc($data);
 
 session_start();
-/*
-$_SESSION["trida"] = $trida;
-$_SESSION["predmet"] = $predmet;
-$_SESSION["skupina"] = $skupina;
-$_SESSION["tridaID"] = $tridaID;
-$_SESSION["predmetID"] = $predmetID;
-*/
+
 $_SESSION["dotazniky"] = $dotazniky;
 
 if(empty($dotazniky["datum"]) == true)
@@ -40,7 +34,7 @@ else
     header("location:vyber_hodiny.php");
 }
 
-//echo "<script>console.log('".date("Y-m-d")."')</script>";
+
 echo "<script>console.log('".$dotazniky["datum"]."')</script>";
 echo "<script>console.log('".$dotazniky["skolniHodina"]."')</script>";
 

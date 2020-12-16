@@ -57,6 +57,7 @@
     <select class="vyber" name="skupina">
         <option value="1">1.</option>
         <option value="2">2.</option>
+        <option value="0">Celá třída</option>
     </select>
 
 <input id="submit" type="submit" value="Potvrdit"/>
