@@ -15,7 +15,7 @@ $trida = mysqli_query($spojeni, $dotazTrida);
 $predmet = mysqli_query($spojeni, $dotazPredmet);
 */
 
-$dotazHodiny = "SELECT * FROM eval_dotazniky WHERE trida_id = '$tridaID' AND predmet_id = '$predmetID' AND skupina = '$skupina'";
+$dotazHodiny = "SELECT * FROM eval_hodiny WHERE trida_id = '$tridaID' AND predmet_id = '$predmetID' AND skupina = '$skupina'";
 $data = mysqli_query($spojeni, $dotazHodiny);
 
 $dotazniky = mysqli_fetch_assoc($data);
