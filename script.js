@@ -3,18 +3,21 @@ let formularText = "";
 let formularVyber = "<div id='pridatVyber#'><button type='button'  onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button><br><div>";
 let formularHvezdy = "";
 let vyberpoctuvybranychpododpovedi = "<div id='vyberpoctuvybranychpododpovedi#'><input type='number' id='inputvyberucisla#' onclick='return false' onkeydown='return false' min ='0' max='1'><label >Maximální počet zaškrtnutelných</label></div>";
-let vyberFormular = "<div id='#'><h3>Otázka '#':</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
+let vyberFormular = "<div id='#'><h3>Otázka:</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
 let i = 1;
 let pocetOtazek = 0;
 let z = 1;
 let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
-
+window.addEventListener("load", nastavitDatumyUVyberuDatumu());
+window.onload = (event) => {
+    zmenacasu();
+  };
 formularOtazky.addEventListener('submit', e => {
-	e.preventDefault();
+    e.preventDefault();
 
-	zjistitHodnoty();
+    zjistitHodnoty();
 });
 
 function zjistitHodnoty() {
@@ -25,7 +28,7 @@ function zjistitHodnoty() {
 
     var t = 1;
     do {
-        var textOtazky = document.getElementById('otazka'+ t);
+        var textOtazky = document.getElementById('otazka' + t);
         var typOtazky = document.querySelector('input[name="volbaOdpovedi' + t + '"]:checked');
 
         otazky[otazky.length] = textOtazky.value;
@@ -59,77 +62,119 @@ function zjistitHodnoty() {
     if (xhr.readyState == 4 && xhr.status == 200) {
         console.log(xhr.response);
     }
-    
+
 }
 
 function pridatDalsiOtazku() {
     vyberFormularZmena = vyberFormular.replaceAll("#", i.toString());
     if (pocetOtazek > 0)
-        document.getElementById(i-1).insertAdjacentHTML("afterEnd", vyberFormularZmena);
+        document.getElementById(i - 1).insertAdjacentHTML("afterEnd", vyberFormularZmena);
     else
         document.getElementById("otazky").insertAdjacentHTML("beforeend", vyberFormularZmena);
     pocetOtazek++;
     i++;
 }
-function moznostOdpovedi(cislo) {  
-    var prvky = document.getElementsByName('volbaOdpovedi' + cislo); 
-        
-    for(j = 0; j < prvky.length; j++) { 
-        if(prvky[j].checked && prvky[j].value == "vyber"){
+function moznostOdpovedi(cislo) {
+    var prvky = document.getElementsByName('volbaOdpovedi' + cislo);
+
+    for (j = 0; j < prvky.length; j++) {
+        if (prvky[j].checked && prvky[j].value == "vyber") {
             formularVyberZmena = formularVyber.replaceAll("#", cislo.toString());
             document.getElementById("odstranit" + cislo).insertAdjacentHTML("beforebegin", formularVyberZmena);
         }
-        else if(document.getElementById("pridatVyber" + cislo) != null && prvky[j].value != "vyber"){
+        else if (document.getElementById("pridatVyber" + cislo) != null && prvky[j].value != "vyber") {
             document.getElementById("pridatVyber" + cislo).remove();
             var prvkypodvyberu = document.getElementsByClassName("podvyber" + cislo);
-            if(prvkypodvyberu.length > 0)
-                for(jj = prvkypodvyberu.length-1; jj >= 0; jj--){
+            if (prvkypodvyberu.length > 0)
+                for (jj = prvkypodvyberu.length - 1; jj >= 0; jj--) {
                     document.getElementById(prvkypodvyberu[jj].id).remove();
                 }
-        } 
-    } 
+        }
+    }
 }
-function odstranitOtazku(cislo){
+function odstranitOtazku(cislo) {
     document.getElementById(cislo).remove();
     pocetOtazek--;
 }
-function pridatDalsiVyber(cislo){
-    if(document.getElementsByName("podvyber" + cislo).length == 0){
+function pridatDalsiVyber(cislo) {
+    if (document.getElementsByName("podvyber" + cislo).length == 0) {
         text = vyberpoctuvybranychpododpovedi.replaceAll("#", cislo.toString());
         document.getElementById("pridatVyber" + cislo).insertAdjacentHTML("beforebegin", text);
         document.getElementById("inputvyberucisla" + cislo).value = 0;
-    }else{
-        document.getElementById("inputvyberucisla" + cislo).setAttribute("max",document.getElementsByName("podvyber" + cislo).length+1);
+    } else {
+        document.getElementById("inputvyberucisla" + cislo).setAttribute("max", document.getElementsByName("podvyber" + cislo).length + 1);
         document.getElementById("inputvyberucisla" + cislo).value = 0;
     }
-    var prvkyPodvyberu = document.getElementsByName('podvyber' + pocetpodvyber); 
+    var prvkyPodvyberu = document.getElementsByName('podvyber' + pocetpodvyber);
     textareaVyberZmena = textareaVyber.replaceAll("#", cislo.toString());
     textareaVyberZmena = textareaVyberZmena.replaceAll("*", pocetpodvyber.toString());
     pocetpodvyber++;
     document.getElementById("pridatVyber" + cislo).insertAdjacentHTML("beforebegin", textareaVyberZmena);
 }
-function odstranitPodvyber(cislo){
+function odstranitPodvyber(cislo) {
     jmenotridy = document.getElementById("podvyber" + cislo).className;
     document.getElementById("podvyber" + cislo).remove();
     pocetpodvyber--;
-    if(document.getElementsByClassName(jmenotridy).length == 0){
+    if (document.getElementsByClassName(jmenotridy).length == 0) {
         document.getElementById("vyberpoctuvybranychpododpovedi" + jmenotridy.slice(-1)).remove();
-    }else{
-        document.getElementById("inputvyberucisla" + jmenotridy.slice(-1)).setAttribute("max",document.getElementsByName(jmenotridy).length);
+    } else {
+        document.getElementById("inputvyberucisla" + jmenotridy.slice(-1)).setAttribute("max", document.getElementsByName(jmenotridy).length);
         document.getElementById("inputvyberucisla" + jmenotridy.slice(-1)).value = 0;
     }
 }
-function zmenacasu(){
-    document.getElementById("end").setAttribute("min",document.getElementById("start").value);
-    document.getElementById("start").setAttribute("max",document.getElementById("end").value);
+function zmenacasu() {
+    document.getElementById("end").setAttribute("min", document.getElementById("start").value);
+    document.getElementById("start").setAttribute("max", document.getElementById("end").value);
+    var mySelect = document.getElementById('vyberHodiny');
+    for (var i, j = 0; i = mySelect.options[j]; j++) {
+        if (i.value == "") {
+            mySelect.selectedIndex = j;
+            break;
+        }
+    }
+    hodinyPrepis();
 }
-function hodinyPrepis(){
+function hodinyPrepis() {
     startDate = document.getElementById("start").value;
     endDate = document.getElementById("end").value;
-    if(endDate !== "" && startDate !== ""){ // netřeba řešit zobrazí se všechny/ od / do / mezi
-        console.log("here");
+    if (endDate !== "" && startDate !== "") { // netřeba řešit zobrazí se všechny/ od / do / mezi
+        moznosti = document.getElementById("vyberHodiny").getElementsByTagName("option");
+        for(let k = 1; k < moznosti.length; k++){
+            datum = moznosti[k].className;
+            datumKPorovnani = new Date (datum);
+            startovniDatum = new Date (startDate);
+            konecneDatum = new Date (endDate);
+            if(startovniDatum.getTime() <= datumKPorovnani && konecneDatum.getTime() >= datumKPorovnani){
+                moznosti[k].style.visibility = "visible";
+                moznosti[k].style.fontSize = "1em";
+            }else{
+                moznosti[k].style.visibility = "hidden";
+                moznosti[k].style.fontSize = "0";
+            }
+        }
+        
+
+
     }
-    else{
+    else {
         alert("Datum rozsahu musí být zvoleno, zvolte prosím počáteční i koncové datum.")
+    }
+}
+function nastavitDatumyUVyberuDatumu() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+
+    document.getElementById("end").setAttribute("value", today);
+    document.getElementById("start").setAttribute("value", today);
+}
+function pridatNazevFormulare(){
+    if(document.getElementById("ulozitFormular").checked){
+        var text = "<textarea name='nazevFormuText' id='nazevFormuText' cols='30' rows='4'></textarea><br>";
+        document.getElementById("odeslatFormular").insertAdjacentHTML("beforebegin", text);
+    }else{
+        document.getElementById("nazevFormuText").remove();
     }
 }
