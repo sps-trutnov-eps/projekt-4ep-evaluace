@@ -1,4 +1,4 @@
-var dny = ["Po", "Út", "St", "Čt", "Pá"];
+var dny = ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"];
 
 function pridatHodinu(id) {
     document.getElementById("popup").style.display = "flex";            //  POPUP OKENKO
@@ -6,21 +6,77 @@ function pridatHodinu(id) {
         document.getElementById("popup").style.display = "none";
         var predmet = document.getElementById("predmet").value;         //  POTŘEBA UDĚLAT PHP NA ODESLÁNÍ S IDčkem POLE
         document.getElementById(id).innerHTML = predmet;
-        //
     })
 }
 
 function generovatRozvrh() {
         var tyden = document.getElementById("sudyLichy").innerHTML;
         var pole = "";
-        for (i = 0; i <= 4; i++) {
-            pole += "<tr id='" + dny[i] + "'><th>" + dny[i] + "</th>";
+        for (i = 1; i <= 5; i++) {
+            pole += "<tr><th>" + dny[i] + "</th>";
             for (y = 1; y <= 9; y++) {
-                pole += "<td id='"+ tyden + "_" + y + "_" + dny[i] + "' onclick=''></td>";          //          GENERACE ROZVRHU
+                pole += "<td id='" + dny[i] + "' value='"+ tyden + "_" + y + "_" + dny[i] + "' onclick=''></td>";          //          GENERACE ROZVRHU
             }
             pole += "</tr>";
         }
         document.getElementById("rozvrh").innerHTML = pole;
+}
+
+function pridaniDatumu() {
+    var d = new Date(2020,10,30);
+    var den = d.getDate();
+    var mesic = d.getMonth();
+    var rok = d.getFullYear();
+    var posledniDenMesice = new Date(rok, mesic + 1, 0); //.getDate
+    var posledniDenMinulyhoMesice = new Date(rok, mesic, 0);
+    var posledniDenRoku = new Date(rok, 12, 0)
+    var novyRok = new Date (rok + 1, 0);
+    var denVtydnuPlus = d.getDay();
+    var denVtydnuMinus = (d.getDay()-1);
+    var denPlus = den;
+    var denMinus = (den - 1);
+    
+    for (denVtydnuPlus; denVtydnuPlus <= 5; denVtydnuPlus++) {
+        if (denPlus > posledniDenMesice.getDate() && posledniDenMesice.getMonth() === mesic) {
+            if (denPlus > posledniDenRoku.getDate() && posledniDenRoku.getMonth() === mesic) {
+                denPlus = 1;
+                for (let x = 1; x <= 9; x++) {
+                    document.getElementById(dny[denVtydnuPlus]).setAttribute("id", novyRok.getFullYear() + "-" + (novyRok.getMonth() + 1) + "-" + denPlus);
+                }
+            }
+            else {
+                denPlus = 1;
+                for (let x = 1; x <= 9; x++) {
+                    document.getElementById(dny[denVtydnuPlus]).setAttribute("id", rok + "-" + (mesic + 1) + "-" + denPlus);
+                    
+                }
+            }
+        }
+        else {
+            for (let x = 1; x <= 9; x++) {
+                document.getElementById(dny[denVtydnuPlus]).setAttribute("id", rok + "-" + (mesic + 1) + "-" + denPlus);
+            }
+        }
+        denPlus++;
+    }
+
+    for (denVtydnuMinus; denVtydnuMinus > 0; denVtydnuMinus--) {
+        for (let z = 1; z <= 9; z++) {
+            if (denMinus < 1) {
+                if (denMinus < 1 && novyRok.getMonth() === mesic) {
+                    document.getElementById(dny[denVtydnuMinus]).setAttribute("id", staryRok.getFullYear() + "-" + (staryRok.getMonth()) + "-" + denMinus);
+                }
+                else {
+                    document.getElementById(dny[denVtydnuMinus]).setAttribute("id", rok + "-" + mesic + "-" + denMinus);
+                }
+                denMinus = posledniDenMinulyhoMesice.getDate();
+            }
+            else {
+                document.getElementById(dny[denVtydnuMinus]).setAttribute("id", rok + "-" + (mesic + 1) + "-" + denMinus);
+            }
+        }
+        denMinus--;
+    }
 }
 
 function sudyLichy() {
@@ -68,4 +124,5 @@ $(document).ready(function () {
     sudyLichy();
     generovatRozvrh();
     upravaRozvrhu();
+    pridaniDatumu();
 })
