@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost:3306
--- Vytvořeno: Stř 09. pro 2020, 11:52
+-- Vytvořeno: Stř 16. pro 2020, 11:13
 -- Verze serveru: 10.1.41-MariaDB-0+deb9u1
 -- Verze PHP: 7.3.10-1+0~20191008.45+debian9~1.gbp365209
 
@@ -31,6 +31,7 @@ CREATE TABLE `eval_formulare` (
   `idVzoru` int(11) NOT NULL,
   `idHodiny` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
 
 -- --------------------------------------------------------
 
@@ -60,6 +61,19 @@ CREATE TABLE `eval_hodiny` (
   `skolniHodina` int(1) NOT NULL,
   `temaHodiny` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `zruseno` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `eval_nezarazene`
+--
+
+CREATE TABLE `eval_nezarazene` (
+  `id` int(11) NOT NULL,
+  `povoleno_od` date NOT NULL,
+  `povoleno_do` date NOT NULL,
+  `idVzoru` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -105,6 +119,7 @@ CREATE TABLE `eval_tridy` (
 CREATE TABLE `eval_ucitele` (
   `id` int(11) NOT NULL,
   `email` varchar(30) COLLATE utf8_czech_ci NOT NULL,
+  `auth_code` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `passwd` varchar(255) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
@@ -128,6 +143,12 @@ ALTER TABLE `eval_formulare_vzory`
 -- Klíče pro tabulku `eval_hodiny`
 --
 ALTER TABLE `eval_hodiny`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Klíče pro tabulku `eval_nezarazene`
+--
+ALTER TABLE `eval_nezarazene`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -175,6 +196,11 @@ ALTER TABLE `eval_formulare_vzory`
 --
 ALTER TABLE `eval_hodiny`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pro tabulku `eval_nezarazene`
+--
+ALTER TABLE `eval_nezarazene`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pro tabulku `eval_odpovedi`
 --
