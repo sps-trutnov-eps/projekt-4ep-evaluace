@@ -1,5 +1,5 @@
 <?php
-require_once "../../config.php";
+require_once "../config.php";
 
 $tridaID = $_POST["trida"];
 $predmetID = $_POST["predmet"];

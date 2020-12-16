@@ -9,7 +9,7 @@
 <body>
 
 <?php
-    require_once "../../config.php";
+    require_once "../config.php";
 
     $x = 1;
 
@@ -21,7 +21,7 @@
 
 <div id="kontejner">
     <header>
-        <h1>Vyberte svůj obor, třídu a předmět.</h1>
+        <h1>Vyberte svoji třídu a předmět</h1>
     </header>
     <main>
     

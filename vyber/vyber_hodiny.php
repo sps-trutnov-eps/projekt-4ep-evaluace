@@ -1,5 +1,9 @@
+
+
+
+
 <?php
-require_once "../../config.php";
+require_once "../config.php";
 
 session_start();
 
@@ -19,7 +23,7 @@ $dotazniky = $_SESSION["dotazniky"];
 <body>
 
 
-<div id="kontejner">
+<div id="stranka">
     <header>
     <?php
 
@@ -42,15 +46,15 @@ $dotazniky = $_SESSION["dotazniky"];
         <option value="5">5.</option>
         <option value="6">6.</option>
         <option value="7">7.</option>
-            <?php
+            //<?php
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            foreach($dotazniky["datum"] as $dotaznik){
+            //foreach($dotazniky["datum"] as $dotaznik){
 
-                echo "<option value='".$dotaznik/*["skolniHodina"]*/."'>".$dotaznik/*["ucitel_id"]*/."</option>";
+                //echo "<option value='".$dotaznik/*["skolniHodina"]*/."'>".$dotaznik/*["ucitel_id"]*/."</option>";
 
-            }
+            //}
             //  výběr určité hodiny, nutno otestovat
-            ?>
+            //?>
     </select>
 
 
