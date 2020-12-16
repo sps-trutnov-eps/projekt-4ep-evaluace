@@ -7,6 +7,12 @@
 </head>
 
 <body>
+    <?php
+        require_once "../../config.php";
+        $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
+        session_start();
+        $ucitelID = $_SESSION["idUcitel"];
+    ?>
     <h1>UI pro přidání otázek k danné hodině</h1>
     <div id="formular">
             <label for="start">Počáteční datum výběru:</label>
@@ -14,21 +20,27 @@
             <label for="end">Konečné datum výběru:</label>
             <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
             <select name="sablony">
-                
+                <option value="">Použijte již některý předešlý formulář</option>
+                <?php
+                    $sql = "SELECT id,nazev FROM eval_formulare_vzory WHERE idUcitel = $ucitelID AND nazev IS NOT NULL ";
+                    $formulareSeznam = mysqli_query($spojeni, $sql);
+                    if (mysqli_num_rows($formulareSeznam) > 0)
+                        while ($radekFormualre = mysqli_fetch_array($formulareSeznam, MYSQLI_ASSOC)) {
+                            $idFormulare = $radekFormualre["id"];
+                            $nazevFormulare = $radekFormualre["nazev"];
+                            echo "<option value='" . $idFormulare ."'>" . $nazevFormulare . "</option>";
+                        }
+                ?>
             </select>
             <select onclick="hodinyPrepis()" name="vyber" id="vyberHodiny">
                 <option value="">Vyberte hodinu pro formulář</option>
                 <?php
-                require_once "../../config.php";
-                $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
-                session_start();
 
                 //odstranit po debugu !!!!!
                 $_SESSION["idUcitel"] = 2;//odstranit po debugu !!!!!
                 //odstranit po debugu !!!!!
 
                 if (isset($_SESSION["idUcitel"])) {
-                    $ucitelID = $_SESSION["idUcitel"];
                     $sql = "SELECT * FROM eval_hodiny WHERE ucitel_id = $ucitelID";
                     $data = mysqli_query($spojeni, $sql);
                     $sql = "SELECT * FROM eval_predmety";
@@ -36,7 +48,7 @@
                     $sql = "SELECT * FROM eval_tridy";
                     $tridy = mysqli_query($spojeni, $sql);
                     //echo "<option value=''>" . var_dump($predmety[1]["nazev"]) . "</option>";
-                    if (mysqli_num_rows($data) > 0) {
+                    if (mysqli_num_rows($data) > 0)
                         while ($radek = mysqli_fetch_array($data, MYSQLI_ASSOC)) {
                             $idPredmet = $radek["predmet_id"];
                             $idHodiny = $radek["id"];
@@ -60,8 +72,7 @@
                                 $datumHodiny = date("d.m.Y", strtotime($radek["datum"]));
                                 echo "<option value='" . $idHodiny . "' class='" . $datumHodiny . "'>" . $hodina . ". hodina | " . $datumHodiny  . " | " . $finalTrida . " | " .  $finalPredmet  . "</option>";
                             }
-                        } 
-                    }
+                        }
                 }
                 else{
                     //header("location:"/*kam ho mám poslat*/);
