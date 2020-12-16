@@ -20,7 +20,7 @@
             <label for="end">Konečné datum výběru:</label>
             <input onclick="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
             <select name="sablony">
-                <option value="">Použijte již některý předešlý formulář</option>
+                <option value="">Použijte některý uložený formulář</option>
                 <?php
                     $sql = "SELECT id,nazev FROM eval_formulare_vzory WHERE idUcitel = $ucitelID AND nazev IS NOT NULL ";
                     $formulareSeznam = mysqli_query($spojeni, $sql);
@@ -91,7 +91,11 @@
                 </div>
                 <div id="otazky"></div>
                 <button type="button" id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
-                <input type='submit' value='Odeslat' />
+                <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
+                    <input onclick ="pridatNazevFormulare()" type="checkbox" id="ulozitFormular" name="ulozitFormular" value="true">
+                <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
+                <label for="ulozitFormular">Uložit tento formulář</label><br>
+                <input id="odeslatFormular" type='submit' value='Odeslat' />
             </form>
     </div>
     <script src="script.js"></script>
