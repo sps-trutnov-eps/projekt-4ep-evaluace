@@ -18,15 +18,6 @@
 
      $table = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-     if (mysqli_connect_errno()) 
-     { 
-        echo "Připojení do databáze selhalo."; 
-     } 
-     else
-     {
-        //ZBYTEK KÓDU SEM
-     }
-
      $formularIdRozvrh = $_POST[]; // rozvrh pošle info jaký formular se má vypsat
 
      $formular = mysqli_query($table, "SELECT FROM WHERE = $formularIdRozvrh"); // vybere všechny informace k formuláři který se má vypsat
@@ -35,17 +26,15 @@
      if($row == 1)
      {
 
-        // ZDE BUDE ROZEBRÁN STRING OD ZLESÁKA A UTVOŘEN Z TOHO FORMULÁŘ
-
-        $formularDotazu = json_decode($formular,true);
-        $nazevDotazniku = "Zde nám zdělte váš názor";
-
-        //prvni Ano/Ne, hvezdy, Bez Hodnoceni
-
        //jedna velká forma a skládat ji?(zde začátek form?)
+
+       $formularDotazu = json_decode($formular,true);
+       $nazevDotazniku = "Zde nám zdělte váš názor";
+
        echo "<form action='' method='post' id ='formularFORM'>";
 
-       foreach($formularDotazu as $otazky)
+
+       foreach($formularDotazu as $otazka)
        {
 
            switch ($otazka->typ) {
@@ -109,14 +98,25 @@
             case 'vyber':
                 echo "
                 <table><tr>
-                <th>'.$otazka->text.'<th>
-                </tr><table>
-                "
+                <th>'.$otazka->text.'<th>";
 
-                foreach($vyber as )
-                ;
+                $cisloMoznosti = 0;
+
+                foreach($vyber->moznost as $moznosti)
+
+                    echo"
+                    <td><input type='checkbox' id='$cisloMoznosti' name='$cisloMoznosti' value='$cisloMoznosti'><label for='$cisloMoznosti'> '.$moznost->text.'</label><br></td>
+
+                    "                    
+                    ;
+
+                $cisloMoznosti++;
+
                 break;
-                
+
+                $cisloMoznosti = 0;
+                echo "</tr></table>";
+
             default:
                 echo "                
                 <table><tr>
@@ -127,7 +127,7 @@
 
        }
 
-        echo "</form>"
+        echo "</form>";
 
      }
      else
@@ -137,40 +137,6 @@
      
 
     ?>
-
-    <p>Příklad jak to bude vypadat.</p>
-
-
-    <!-- 
-
-    Následující kód bude nahrazen kódem který autmaticky píše otázky podle dat.
-    @Vojtech @Sobotka
-
-    -->
-
-        <form action="formular.php" method="post">
-            <table>
-                <th>
-                    Zde nám zdělte váš názor
-                </th>
-                <tr>
-                    <td><input type="radio" id="like" value="like" name="option"><label for="">Like</label></td>
-                    <td><input type="radio" id="dislike" value="dislike" name="option"><label for="">Dislike</label></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><textarea placeholder="Zde napište vaše případné poznámky." name="text" id="text" style="resize: none;" maxlength="250" cols="40" rows="10"></textarea></td>
-                </tr>
-                
-                <tr>
-                    <td><input type="submit" value="Odeslat"><td>
-                </tr>
-            </table>
-        </form>
-    </body>
-
-
-
-
 
     <footer>
         <i>&copy; Günther, Provazník, Sobotka, Vojtěch, Vaněk 2020</i>
