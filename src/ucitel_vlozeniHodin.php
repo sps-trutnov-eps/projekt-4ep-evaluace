@@ -7,17 +7,16 @@ $ucitel = $_SESSION['idUcitel'];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-$predmety = mysqli_query($spojeni, "SELECT  FROM eval_hodiny WHERE ucitel_id = "$ucitel" OR skolniHodina = "$skolniHodina"");
+$data = mysqli_query($spojeni, "SELECT predmet, trida, skupina FROM eval_hodiny WHERE ucitel_id = "$ucitel" OR skolniHodina = "$skolniHodina"");
+//UDĚLAT SQL PŘÍKAZ
 
 mysqli_close($spojeni);
 
 $json = '{"data":[';
-    foreach($predmety as $radek)
-        $json .= '"'.$radek["nazev"].'",';
+    foreach($data as $radek)
+        $json .= '{"predmet":"'.$radek["predmet"].'","trida":"'.$radek["trida"].'","skupina":"'.$radek["skupina"].'"},';
 
     $json = substr($json, 0, strlen($json) - 1);
 $json .= ']}';
 
 echo $json;
-
-//ZATÍM NEFUNKČNÍ!!!!!!!!!!!!!!!!!!

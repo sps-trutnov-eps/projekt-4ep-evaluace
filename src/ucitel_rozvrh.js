@@ -58,9 +58,11 @@ function vlozeniHodinDoRozvrhu(skolniHodina) { //ZATÍM NEFUNKČNÍ!!!!!!!!!!!!!
             url: "ucitel_vlozeniHodin.php",
             success: function(data) {
                 let odpoved = JSON.parse(data)["data"];
-                
+                let vlozeni = "";
                 for(let i in odpoved)
-                    $("#skolniHodina").html(odpoved[i]);
+                    vlozeni += "<div>" + odpoved[i]["predmet"] + "</div><div>" + odpoved[i]["trida"] + "</div><div>" + odpoved[i]["skupina"] + "</div>";
+
+                document.getElementById(skolniHodina).innerHTML = vlozeni;
             },
             error: function() {
                 alert("Při zpracování dotazu došlo k neočekávané chybě.");
