@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost:3306
--- Vytvořeno: Stř 16. pro 2020, 11:13
+-- Vytvořeno: Čtv 17. pro 2020, 19:34
 -- Verze serveru: 10.1.41-MariaDB-0+deb9u1
 -- Verze PHP: 7.3.10-1+0~20191008.45+debian9~1.gbp365209
 
@@ -32,7 +32,6 @@ CREATE TABLE `eval_formulare` (
   `idHodiny` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -41,6 +40,7 @@ CREATE TABLE `eval_formulare` (
 
 CREATE TABLE `eval_formulare_vzory` (
   `id` int(11) NOT NULL,
+  `nazev` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `otazka` text COLLATE utf8_czech_ci NOT NULL,
   `idUcitel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
@@ -58,7 +58,7 @@ CREATE TABLE `eval_hodiny` (
   `trida_id` int(11) NOT NULL,
   `skupina` int(1) NOT NULL,
   `datum` date NOT NULL,
-  `skolniHodina` int(1) NOT NULL,
+  `skolniHodina` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `temaHodiny` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `zruseno` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
