@@ -3,7 +3,7 @@ let formularText = "";
 let formularVyber = "<div id='pridatVyber#'><button type='button'  onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button><br><div>";
 let formularHvezdy = "";
 let vyberpoctuvybranychpododpovedi = "<div id='vyberpoctuvybranychpododpovedi#'><input type='number' id='inputvyberucisla#' onclick='return false' onkeydown='return false' min ='0' max='1'><label >Maximální počet zaškrtnutelných</label></div>";
-let vyberFormular = "<div id='#'><h3>Otázka:</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
+let vyberFormular = "<div id='#'class='prvkyOtazekDIV'><h3>Otázka:</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
 let i = 1;
 let pocetOtazek = 0;
 let z = 1;
@@ -67,9 +67,9 @@ function zjistitHodnoty() {
 
 function pridatDalsiOtazku() {
     vyberFormularZmena = vyberFormular.replaceAll("#", i.toString());
-    if (pocetOtazek > 0)
-        document.getElementById(i - 1).insertAdjacentHTML("afterEnd", vyberFormularZmena);
-    else
+    if (pocetOtazek > 0){
+        pocetOtazekDIV = document.getElementById("otazky").lastChild.insertAdjacentHTML("afterEnd", vyberFormularZmena);
+    }else
         document.getElementById("otazky").insertAdjacentHTML("beforeend", vyberFormularZmena);
     pocetOtazek++;
     i++;
@@ -172,9 +172,9 @@ function nastavitDatumyUVyberuDatumu() {
 }
 function pridatNazevFormulare(){
     if(document.getElementById("ulozitFormular").checked){
-        var text = "<textarea name='nazevFormuText' id='nazevFormuText' cols='30' rows='4'></textarea><br>";
-        document.getElementById("odeslatFormular").insertAdjacentHTML("beforebegin", text);
+        var text = "<div id='nazevFormuTextDIV'><textarea name='nazevFormuText' id='nazevFormuText' cols='30' rows='4'></textarea><br></div>";
+        document.getElementById("ulozitLabel").insertAdjacentHTML("afterend", text);
     }else{
-        document.getElementById("nazevFormuText").remove();
+        document.getElementById("nazevFormuTextDIV").remove();
     }
 }

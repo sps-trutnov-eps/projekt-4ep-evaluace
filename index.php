@@ -92,10 +92,10 @@
                 </div>
                 <div id="otazky"></div>
                 <button type="button" id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
-                <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
+                <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost, možná ?-->
                     <input onclick ="pridatNazevFormulare()" type="checkbox" id="ulozitFormular" name="ulozitFormular" value="true">
                 <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
-                <label for="ulozitFormular">Uložit tento formulář</label><br>
+                <label for="ulozitFormular" id="ulozitLabel">Uložit tento formulář</label><br>
                 <input id="odeslatFormular" type='submit' value='Odeslat' />
             </form>
     </div>
