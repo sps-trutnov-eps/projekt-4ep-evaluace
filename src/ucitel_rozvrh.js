@@ -10,7 +10,7 @@ function pridatHodinu(id) {
         var trida = document.getElementById("trida").value;
         var skupina = document.getElementById("skupina").value;
         var skolniHodina = id;
-        var datum;      //DOPLNIT DATUM!!!!!!!!!!!!!!!!!!!!
+        var datum = document.getElementById(id).value;
 
         if (predmet == "")
             alert("Nevyplnil/a jste všechny údaje.");
@@ -134,9 +134,7 @@ function vlozeniHodinDoRozvrhu(skolniHodina) { //ZATÍM NEFUNKČNÍ!!!!!!!!!!!!!
             url: "ucitel_vlozeniHodin.php",
             success: function(data) {
                 let odpoved = JSON.parse(data)["data"];
-                let vlozeni = "";
-                for(let i in odpoved)
-                    vlozeni += "<div>" + odpoved[i]["predmet"] + "</div><div>" + odpoved[i]["trida"] + "</div><div>" + odpoved[i]["skupina"] + "</div>";
+                vlozeni = "<div>" + odpoved[0] + "</div><div>" + odpoved[1] + "</div><div>" + odpoved[2] + "</div>";
 
                 document.getElementById(skolniHodina).innerHTML = vlozeni;
             },

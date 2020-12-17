@@ -16,4 +16,4 @@ $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 */
 mysqli_close($spojeni);
 
-//DODĚLAT VLOŽENÍ NA CELÝ ROK!!!!!!!!!!!!!!!!! <- PŘIČÍTÁNÍ 14 DNŮ K DATU
+//DODĚLAT VLOŽENÍ NA CELÝ ROK!!!!!!!!!!!!!!!!! <- PŘIČÍTÁNÍ 14 DNŮ K DATU DO POSLEDNÍHO ŠKOLNÍHO DNE
