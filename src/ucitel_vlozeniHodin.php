@@ -7,7 +7,7 @@ $ucitel = $_SESSION['idUcitel'];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-$data = mysqli_query($spojeni, "SELECT predmet, trida, skupina FROM eval_hodiny WHERE ucitel_id = "$ucitel" OR skolniHodina = "$skolniHodina"");
+$data = mysqli_query($spojeni, "SELECT predmet, trida, skupina FROM eval_hodiny WHERE ucitel_id = '"$ucitel"' AND skolniHodina = '"$skolniHodina"'");
 //UDĚLAT SQL PŘÍKAZ
 
 mysqli_close($spojeni);
