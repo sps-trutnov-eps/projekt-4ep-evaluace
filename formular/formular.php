@@ -45,12 +45,12 @@
        //jedna velká forma a skládat ji?(zde začátek form?)
        echo "<form action='' method='post' id ='formularFORM'>";
 
-       foreach($formularDotazu as $otazka)
+       foreach($formularDotazu as $otazky)
        {
 
            switch ($otazka->typ) {
             
-            case 'AnoNe':
+            case 'like':
                 echo "
                 <table><tr>
                 <th>$nazevDotazniku</th>
@@ -61,7 +61,7 @@
                 ;
                 break;
 
-            case 'Hvezda':
+            case 'hvezda':
                 echo "
                 <table><tr>
                 <th>$nazevDotazniku</th>
@@ -75,7 +75,7 @@
                 ;
                 break;
 
-            case 'BezHodnoceni':
+            case 'bezHodnoceni':
                 echo "
                 <table><tr>
                 <th>$nazevDotazniku<th>
@@ -83,6 +83,8 @@
                 "
                 ;
                 break;
+
+                //OTAZKY DO SAMOSTATNEHO SWITCH vv
 
             case 'text':
                 echo "
@@ -92,10 +94,29 @@
                 "
                 ;
                 break;
+
+            case 'anoNe':
+                echo "
+                <table><tr>
+                <th>'.$otazka->text.'</th>
+                <td><input type='radio' id='like' value='like' name='option'><label for=''>Like</label></td>
+                <td><input type='radio' id='dislike' value='dislike' name='option'><label for=''>Dislike</label></td>
+                </tr></table>
+                "
+                ;
+            break;
+
+            case 'vyber':
+                echo "
+                <table><tr>
+                <th>'.$otazka->text.'<th>
+                </tr><table>
+                "
+
+                foreach($vyber as )
+                ;
+                break;
                 
-
-                    
-
             default:
                 echo "                
                 <table><tr>
