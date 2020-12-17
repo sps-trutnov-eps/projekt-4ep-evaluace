@@ -1,4 +1,6 @@
 var dny = ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"];
+var data = ["--","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
+var mesice = ["01","02","03","04","05","06","07","08","09","10","11","12"];
 
 function pridatHodinu(id) {
     document.getElementById("popup").style.display = "flex";            //  POPUP OKENKO
@@ -15,67 +17,84 @@ function generovatRozvrh() {
         for (i = 1; i <= 5; i++) {
             pole += "<tr><th>" + dny[i] + "</th>";
             for (y = 1; y <= 9; y++) {
-                pole += "<td id='" + dny[i] + "' value='"+ tyden + "_" + y + "_" + dny[i] + "' onclick=''></td>";          //          GENERACE ROZVRHU
+                pole += "<td id='"+ tyden + "_" + y + "_" + dny[i] + "' onclick=''></td>";          //          GENERACE ROZVRHU
             }
             pole += "</tr>";
         }
         document.getElementById("rozvrh").innerHTML = pole;
+        pridaniDatumu();
 }
 
 function pridaniDatumu() {
-    var d = new Date(2020,10,30);
-    var den = d.getDate();
-    var mesic = d.getMonth();
-    var rok = d.getFullYear();
-    var posledniDenMesice = new Date(rok, mesic + 1, 0); //.getDate
-    var posledniDenMinulyhoMesice = new Date(rok, mesic, 0);
-    var posledniDenRoku = new Date(rok, 12, 0)
-    var novyRok = new Date (rok + 1, 0);
-    var denVtydnuPlus = d.getDay();
-    var denVtydnuMinus = (d.getDay()-1);
-    var denPlus = den;
-    var denMinus = (den - 1);
-    
-    for (denVtydnuPlus; denVtydnuPlus <= 5; denVtydnuPlus++) {
-        if (denPlus > posledniDenMesice.getDate() && posledniDenMesice.getMonth() === mesic) {
-            if (denPlus > posledniDenRoku.getDate() && posledniDenRoku.getMonth() === mesic) {
-                denPlus = 1;
-                for (let x = 1; x <= 9; x++) {
-                    document.getElementById(dny[denVtydnuPlus]).setAttribute("id", novyRok.getFullYear() + "-" + (novyRok.getMonth() + 1) + "-" + denPlus);
-                }
-            }
-            else {
-                denPlus = 1;
-                for (let x = 1; x <= 9; x++) {
-                    document.getElementById(dny[denVtydnuPlus]).setAttribute("id", rok + "-" + (mesic + 1) + "-" + denPlus);
-                    
-                }
-            }
+    var prvnihoZari = new Date(2021, 9, 0);
+    prvnihoZari.setMonth(8, 1);
+    var den = prvnihoZari.getDate();
+    var mesic = prvnihoZari.getMonth();
+    var rok = prvnihoZari.getFullYear();
+    var aktualniTyden = document.getElementById("sudyLichy");
+    var denPrvniho = prvnihoZari.getDay();
+    var doplneni = prvnihoZari.getDay() - 1;
+    var denPristihoT = prvnihoZari.getDate() + 13;
+
+    for (denPrvniho; denPrvniho <= 5; denPrvniho++) {
+        if (prvnihoZari.getDay() == 6) {
+
+        }
+        else if (prvnihoZari.getDay() == 0) {
+
         }
         else {
-            for (let x = 1; x <= 9; x++) {
-                document.getElementById(dny[denVtydnuPlus]).setAttribute("id", rok + "-" + (mesic + 1) + "-" + denPlus);
+            if (aktualniTyden.innerHTML == "Lichý" && aktualniTyden.value == 1) {
+                for (let x = 1; x <= 9; x++) {
+                    document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[denPrvniho]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[den]);
+                }
+            }
+            else if (aktualniTyden.innerHTML == "Lichý" && aktualniTyden.value == 2) {
+                for (let x = 1; x <= 9; x++) {
+                    document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[denPrvniho]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[(den + 7)]);
+                }
+            }
+            
+            else if (aktualniTyden.innerHTML == "Sudý" && aktualniTyden.value == 1) {
+                for (let x = 1; x <= 9; x++) {
+                    document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[denPrvniho]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[den]);
+                }
+            }
+            else if (aktualniTyden.innerHTML == "Sudý" && aktualniTyden.value == 2) {
+                for (let x = 1; x <= 9; x++) {
+                    document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[denPrvniho]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[(den + 7)]);
+                }
             }
         }
-        denPlus++;
+        den++;
     }
+    prvnihoZari.setMonth(8, 1);
+    den = prvnihoZari.getDate();
 
-    for (denVtydnuMinus; denVtydnuMinus > 0; denVtydnuMinus--) {
-        for (let z = 1; z <= 9; z++) {
-            if (denMinus < 1) {
-                if (denMinus < 1 && novyRok.getMonth() === mesic) {
-                    document.getElementById(dny[denVtydnuMinus]).setAttribute("id", staryRok.getFullYear() + "-" + (staryRok.getMonth()) + "-" + denMinus);
-                }
-                else {
-                    document.getElementById(dny[denVtydnuMinus]).setAttribute("id", rok + "-" + mesic + "-" + denMinus);
-                }
-                denMinus = posledniDenMinulyhoMesice.getDate();
-            }
-            else {
-                document.getElementById(dny[denVtydnuMinus]).setAttribute("id", rok + "-" + (mesic + 1) + "-" + denMinus);
+    for (y = 1; y <= doplneni; doplneni--) {
+        if (aktualniTyden.innerHTML == "Lichý" && aktualniTyden.value == 1) {
+            for (let x = 1; x <= 9; x++) {
+                document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[doplneni]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[denPristihoT]);
             }
         }
-        denMinus--;
+        else if (aktualniTyden.innerHTML == "Lichý" && aktualniTyden.value == 2) {
+            for (let x = 1; x <= 9; x++) {
+                document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[doplneni]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[(den+6)]);
+            }
+        }
+        
+        else if (aktualniTyden.innerHTML == "Sudý" && aktualniTyden.value == 1) {
+            for (let x = 1; x <= 9; x++) {
+                document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[doplneni]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[denPristihoT]);
+            }           
+        }
+        else if (aktualniTyden.innerHTML == "Sudý" && aktualniTyden.value == 2) {
+            for (let x = 1; x <= 9; x++) {
+                document.getElementById(aktualniTyden.innerHTML+"_"+x+"_"+dny[doplneni]).setAttribute("value", rok + "-" + mesice[mesic] + "-" + data[(den+6)]);
+            }
+        }
+        denPristihoT--;
+        den--;
     }
 }
 
@@ -91,18 +110,32 @@ function sudyLichy() {
     var sudy = "Sudý";
     if (getWeekOfMonth(datum) / 2 != 0) {
         document.getElementById("sudyLichy").innerHTML = lichy;
+        document.getElementById("sudyLichy").value = "1";
     }
     else {
         document.getElementById("sudyLichy").innerHTML = sudy;                                      //          SUDÝ/LICHÝ TÝDEN
+        document.getElementById("sudyLichy").value = "1";
     }
 
     $("#sudyLichy").click(function () {
-            if (document.getElementById("sudyLichy").innerHTML == lichy) {
+            if (document.getElementById("sudyLichy").innerHTML == lichy && document.getElementById("sudyLichy").value == 1) {
                 document.getElementById("sudyLichy").innerHTML = sudy;
+                document.getElementById("sudyLichy").value = "2";
+                generovatRozvrh();
+            }
+            else if (document.getElementById("sudyLichy").innerHTML == sudy && document.getElementById("sudyLichy").value == 2) {
+                document.getElementById("sudyLichy").innerHTML = lichy;
+                document.getElementById("sudyLichy").value = "1";
+                generovatRozvrh();
+            }
+            else if (document.getElementById("sudyLichy").innerHTML == sudy && document.getElementById("sudyLichy").value == 1) {
+                document.getElementById("sudyLichy").innerHTML = lichy;
+                document.getElementById("sudyLichy").value = "2";
                 generovatRozvrh();
             }
             else {
-                document.getElementById("sudyLichy").innerHTML = lichy;
+                document.getElementById("sudyLichy").innerHTML = sudy;
+                document.getElementById("sudyLichy").value = "1";
                 generovatRozvrh();
             }
     })
@@ -124,5 +157,4 @@ $(document).ready(function () {
     sudyLichy();
     generovatRozvrh();
     upravaRozvrhu();
-    pridaniDatumu();
 })
