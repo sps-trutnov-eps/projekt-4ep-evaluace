@@ -20,3 +20,10 @@
             mysqli_query($spojeni, "INSERT INTO eval_formulare (`idVzoru`, `idHodiny`) VALUES ('$idForm','$idHodiny')");
         }
     }
+    if(isset($_POST["formularID"])){
+        $formID = $_POST["formularID"];
+        $sql = "SELECT * FROM eval_formulare_vzory WHERE id=$formID";
+        $data = mysqli_query($spojeni, $sql);
+        $data = mysqli_fetch_assoc($data);
+        echo($data["otazka"]);
+    }

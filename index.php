@@ -8,6 +8,7 @@
 
 <body>
     <?php
+    //session upravit na testbedu
         require_once "../../config.php";
         $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
         session_start();
@@ -20,7 +21,7 @@
             <input onchange="zmenacasu()" type="date" id="start" name="end" value="">
             <label for="end">Konečné datum výběru:</label>
             <input onchange="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
-            <select name="sablony">
+            <select name="sablony" onchange="zmenaformulare()" id="formulareSablonySELECT">
                 <option value="">Použijte některý uložený formulář</option>
                 <?php
                     $sql = "SELECT id,nazev FROM eval_formulare_vzory WHERE idUcitel = $ucitelID AND nazev != ''";

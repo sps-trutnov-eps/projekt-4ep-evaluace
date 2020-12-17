@@ -178,3 +178,19 @@ function pridatNazevFormulare(){
         document.getElementById("nazevFormuTextDIV").remove();
     }
 }
+function zmenaformulare() {
+    var answer = window.confirm("Pokud vyberete formulář z nabídky, Váš stávající vytvořený formulář se přepíše, opravdu chcete vybrat formulář z nabídky?");
+    if (answer) {
+        document.getElementById("otazky").innerHTML = "";
+        pocetOtazek = 0;
+        idFormulare = document.getElementById("formulareSablonySELECT").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "./ajax.php", false);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("formularID=" + idFormulare);
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            vratka = xhr.response;
+            console.log(vratka);
+        }
+    }
+}
