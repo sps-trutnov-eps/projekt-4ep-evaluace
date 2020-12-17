@@ -55,10 +55,14 @@ function zjistitHodnoty() {
 
     idHodiny = document.getElementById("vyberHodiny").value;
 
+    if(document.getElementById("ulozitFormular").checked) {
+        var nazev = document.getElementById("nazevFormuText").value;
+    }
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "./ajax.php", false);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny);
+    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny + "&nazev=" + nazev);
     if (xhr.readyState == 4 && xhr.status == 200) {
         console.log(xhr.response);
     }
