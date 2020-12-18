@@ -4,40 +4,87 @@ var mesice = ["01","02","03","04","05","06","07","08","09","10","11","12"];
 
 function pridatHodinu(id) {
     document.getElementById("popup").style.display = "flex";            //  POPUP OKENKO
-    $("#potvrdit").click(function() {
-        document.getElementById("popup").style.display = "none";
-        var predmet = document.getElementById("predmet").value;
-        var trida = document.getElementById("trida").value;
-        var skupina = document.getElementById("skupina").value;
-        var skolniHodina = id;
-        var datum = document.getElementById(id).value;
+    document.getElementById("potvrdit").setAttribute("onclick", "odesilaniDoDB('" + id + "')");
 
-        if (predmet == "")
-            alert("Nevyplnil/a jste všechny údaje.");
-        else if (trida == "")
-            alert("Nevyplnil/a jste všechny údaje.");
-        else if (skupina == "")
-            alert("Nevyplnil/a jste všechny údaje.");
-        else
+}
+
+function odesilaniDoDB(id) {
+    document.getElementById("popup").style.display = "none";
+    var predmet = document.getElementById("predmet").value;
+    var trida = document.getElementById("trida").value;
+    var skupina = document.getElementById("skupina").value;
+    var skolniHodina = id;
+    var datum = document.getElementById(id).getAttribute("value");  
+    //2020-09-01
+    var newDate = new Date (datum);
+    var yyyy = newDate.getFullYear() + 1;
+    var mm = newDate.getMonth();
+    var dd = newDate.getDate();
+    var konecSkolnihoRoku = new Date(yyyy, 6, 1);
+    var dvaTydnyPred = new Date(yyyy, 5, 17);
+
+    Date.prototype.addDays = function(days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    if (predmet == "")
+        alert("Nevyplnil/a jste všechny údaje.");
+    else if (trida == "")
+        alert("Nevyplnil/a jste všechny údaje.");
+    else if (skupina == "")
+        alert("Nevyplnil/a jste všechny údaje.");
+    else {
+        var zkouska = newDate;
+        for (let o = 0; o < 1; o++) {
             $.ajax(
-                {
-                    type: "POST",
-                    url: "ucitel_odeslaniDB.php",
-                    data: {
-                        predmet: predmet,
-                        trida: trida,
-                        skupina: skupina,
-                        skolniHodina: skolniHodina,
-                        datum: datum
-                    },
-                    success: function() {
-                    },
-                    error: function() {
-                        alert("Při zpracování dotazu došlo k neočekávané chybě.");
-                    }
+            {
+                type: "POST",
+                url: "ucitel_odeslaniDB.php",
+                data: {
+                    predmet: predmet,
+                    trida: trida,
+                    skupina: skupina,
+                    skolniHodina: skolniHodina,
+                    datum: datum
+                },
+                success: function() {
+                },
+                error: function() {
+                    alert("Při zpracování dotazu došlo k neočekávané chybě.");
                 }
+            }
             );
-    })
+            console.log(datum);
+            for (let i = 14; zkouska<konecSkolnihoRoku && zkouska<dvaTydnyPred; i=i+14) {
+                zkouska = newDate.addDays(i);
+                var rok = zkouska.getFullYear();
+                var mesic = mesice[zkouska.getMonth()];
+                var den = data[zkouska.getDate()];
+                var novyDatum = rok+"-"+mesic+"-"+den;
+                console.log(novyDatum);
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "ucitel_odeslaniDB.php",
+                        data: {
+                            predmet: predmet,
+                            trida: trida,
+                            skupina: skupina,
+                            skolniHodina: skolniHodina,
+                            datum: novyDatum
+                        },
+                        success: function() {
+                        },
+                        error: function() {
+                            alert("Při zpracování dotazu došlo k neočekávané chybě.");
+                        }
+                    }
+                );
+            }
+        }
+    }
 }
 
 function generovatRozvrh() {
@@ -55,7 +102,7 @@ function generovatRozvrh() {
 }
 
 function pridaniDatumu() {
-    var prvnihoZari = new Date(2021, 9, 0);
+    var prvnihoZari = new Date();
     prvnihoZari.setMonth(8, 1);
     var den = prvnihoZari.getDate();
     var mesic = prvnihoZari.getMonth();
@@ -169,21 +216,25 @@ function sudyLichy() {
                 document.getElementById("sudyLichy").innerHTML = sudy;
                 document.getElementById("sudyLichy").value = "2";
                 generovatRozvrh();
+                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
             else if (document.getElementById("sudyLichy").innerHTML == sudy && document.getElementById("sudyLichy").value == 2) {
                 document.getElementById("sudyLichy").innerHTML = lichy;
                 document.getElementById("sudyLichy").value = "1";
                 generovatRozvrh();
+                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
             else if (document.getElementById("sudyLichy").innerHTML == sudy && document.getElementById("sudyLichy").value == 1) {
                 document.getElementById("sudyLichy").innerHTML = lichy;
                 document.getElementById("sudyLichy").value = "2";
                 generovatRozvrh();
+                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
             else {
                 document.getElementById("sudyLichy").innerHTML = sudy;
                 document.getElementById("sudyLichy").value = "1";
                 generovatRozvrh();
+                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
     })
 }
