@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost:3306
--- Vytvořeno: Čtv 17. pro 2020, 19:34
+-- Vytvořeno: Pát 18. pro 2020, 17:57
 -- Verze serveru: 10.1.41-MariaDB-0+deb9u1
 -- Verze PHP: 7.3.10-1+0~20191008.45+debian9~1.gbp365209
 
@@ -42,7 +42,7 @@ CREATE TABLE `eval_formulare_vzory` (
   `id` int(11) NOT NULL,
   `nazev` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `otazka` text COLLATE utf8_czech_ci NOT NULL,
-  `idUcitel` int(11) NOT NULL
+  `idUcitele` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -53,9 +53,9 @@ CREATE TABLE `eval_formulare_vzory` (
 
 CREATE TABLE `eval_hodiny` (
   `id` int(11) NOT NULL,
-  `ucitel_id` int(11) NOT NULL,
-  `predmet_id` int(11) NOT NULL,
-  `trida_id` int(11) NOT NULL,
+  `idUcitele` int(11) NOT NULL,
+  `idPredmetu` int(11) NOT NULL,
+  `idTridy` int(11) NOT NULL,
   `skupina` int(1) NOT NULL,
   `datum` date NOT NULL,
   `skolniHodina` varchar(255) COLLATE utf8_czech_ci NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE `eval_predmety` (
 
 CREATE TABLE `eval_tridy` (
   `id` int(11) NOT NULL,
-  `trida` varchar(5) COLLATE utf8_czech_ci NOT NULL
+  `nazev` varchar(5) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
@@ -169,7 +169,7 @@ ALTER TABLE `eval_predmety`
 --
 ALTER TABLE `eval_tridy`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `trida` (`trida`);
+  ADD UNIQUE KEY `trida` (`nazev`);
 
 --
 -- Klíče pro tabulku `eval_ucitele`
