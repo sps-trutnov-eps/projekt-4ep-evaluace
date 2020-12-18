@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="otazky.css"/>
 </head>
 
 <body>
+<div id="stranka">
     <?php
     //session upravit na testbedu
         require_once "../../config.php";
@@ -17,10 +19,12 @@
     ?>
     <h1>UI pro přidání otázek k danné hodině</h1>
     <div id="formular">
+    <div id="datum">
             <label for="start">Počáteční datum výběru:</label>
             <input onchange="zmenacasu()" type="date" id="start" name="end" value="">
-            <label for="end">Konečné datum výběru:</label>
+            &nbsp;<label for="end">Konečné datum výběru:</label>
             <input onchange="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
+            </div>
             <select name="sablony" onchange="zmenaformulare()" id="formulareSablonySELECT">
                 <option value="">Použijte některý uložený formulář</option>
                 <?php
@@ -82,7 +86,7 @@
                 ?>
             </select>
             <form id='formularOtazky'>
-                <div id="vyberCelkovehoHodnoceniHodiny">
+                <div id="vyberCelkovehoHodnoceniHodiny"><br>
                     <h3>Vyberte možnost celkového hodnocení</h3>
                     <input onchange="kontrolaUpravyVybranehoFormulareZmena(false)" type='radio' id='like' name='formularVyberFormulare' value='like'>
                     <label for='like'>Like/Dislike</label><br>
@@ -92,15 +96,21 @@
                     <label for='bezHodnoceni'>Bez celkového hodnocení</label><br>
                 </div>
                 <div id="otazky"></div>
+                <div id="checkbox">
                 <button type="button" id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
                 <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost, možná ?-->
                     <input onclick ="pridatNazevFormulare()" type="checkbox" id="ulozitFormular" name="ulozitFormular" value="true">
                 <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
                 <label for="ulozitFormular" id="ulozitLabel">Uložit tento formulář</label><br>
+                </div>
                 <input id="odeslatFormular" type='submit' value='Odeslat' />
             </form>
     </div>
+    <footer>
+        <address>2019 &copy; 4.EP</address>
+    </footer>
     <script src="script.js"></script>
+</div>
 </body>
 
 </html>
