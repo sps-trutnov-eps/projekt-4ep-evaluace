@@ -4,38 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="otazky.css"/>
+    <link rel="stylesheet" type="text/css" href="otazky.css" />
 </head>
 
 <body>
-<div id="stranka">
-    <?php
-    //session upravit na testbedu
+    <div id="stranka">
+        <?php
+        //session upravit na testbedu
         require_once "../../config.php";
         $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
         session_start();
-        if(isset($_SESSION["idUcitel"]))
+        if (isset($_SESSION["idUcitel"]))
             $ucitelID = $_SESSION["idUcitel"];
-    ?>
-    <h1>UI pro přidání otázek k danné hodině</h1>
-    <div id="formular">
-    <div id="datum">
-            <label for="start">Počáteční datum výběru:</label>
-            <input onchange="zmenacasu()" type="date" id="start" name="end" value="">
-            &nbsp;<label for="end">Konečné datum výběru:</label>
-            <input onchange="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
+        ?>
+        <h1>UI pro přidání otázek k danné hodině</h1>
+        <div id="formular">
+            <div id="datum">
+                <label for="start">Počáteční datum výběru:</label>
+                <input onchange="zmenacasu()" type="date" id="start" name="end" value="">
+                &nbsp;<label for="end">Konečné datum výběru:</label>
+                <input onchange="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
             </div>
             <select name="sablony" onchange="zmenaformulare()" id="formulareSablonySELECT">
                 <option value="">Použijte některý uložený formulář</option>
                 <?php
-                    $sql = "SELECT id,nazev FROM eval_formulare_vzory WHERE idUcitel = $ucitelID AND nazev != ''";
-                    $formulareSeznam = mysqli_query($spojeni, $sql);
-                    if (mysqli_num_rows($formulareSeznam) > 0)
-                        while ($radekFormualre = mysqli_fetch_array($formulareSeznam, MYSQLI_ASSOC)) {
-                            $idFormulare = $radekFormualre["id"];
-                            $nazevFormulare = $radekFormualre["nazev"];
-                            echo "<option value='" . $idFormulare ."'>" . $nazevFormulare . "</option>";
-                        }
+                $sql = "SELECT id,nazev FROM eval_formulare_vzory WHERE idUcitel = $ucitelID AND nazev != ''";
+                $formulareSeznam = mysqli_query($spojeni, $sql);
+                if (mysqli_num_rows($formulareSeznam) > 0)
+                    while ($radekFormualre = mysqli_fetch_array($formulareSeznam, MYSQLI_ASSOC)) {
+                        $idFormulare = $radekFormualre["id"];
+                        $nazevFormulare = $radekFormualre["nazev"];
+                        echo "<option value='" . $idFormulare . "'>" . $nazevFormulare . "</option>";
+                    }
                 ?>
             </select>
             <select name="vyber" id="vyberHodiny">
@@ -43,7 +43,7 @@
                 <?php
 
                 //odstranit po debugu !!!!!
-                $_SESSION["idUcitel"] = 2;//odstranit po debugu !!!!!
+                $_SESSION["idUcitel"] = 2; //odstranit po debugu !!!!!
                 //odstranit po debugu !!!!!
 
                 if (isset($_SESSION["idUcitel"])) {
@@ -79,8 +79,7 @@
                                 echo "<option value='" . $idHodiny . "' class='" . $radek["datum"] . "'>" . $hodina . ". hodina | " . $datumHodiny  . " | " . $finalTrida . " | " .  $finalPredmet  . "</option>";
                             }
                         }
-                }
-                else{
+                } else {
                     //header("location:"/*kam ho mám poslat -> (_!_) ?*/);
                 }
                 ?>
@@ -97,20 +96,20 @@
                 </div>
                 <div id="otazky"></div>
                 <div id="checkbox">
-                <button type="button" id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
-                <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost, možná ?-->
-                    <input onclick ="pridatNazevFormulare()" type="checkbox" id="ulozitFormular" name="ulozitFormular" value="true">
-                <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
-                <label for="ulozitFormular" id="ulozitLabel">Uložit tento formulář</label><br>
+                    <button type="button" id="pridatOtazku" onclick="pridatDalsiOtazku()">Přídat další otázku</button><br>
+                    <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost, možná ?-->
+                    <input onclick="pridatNazevFormulare()" type="checkbox" id="ulozitFormular" name="ulozitFormular" value="true">
+                    <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
+                    <label for="ulozitFormular" id="ulozitLabel">Uložit tento formulář</label><br>
                 </div>
                 <input id="odeslatFormular" type='submit' value='Odeslat' />
             </form>
+        </div>
+        <script src="script.js"></script>
     </div>
     <footer>
         <address>2019 &copy; 4.EP</address>
     </footer>
-    <script src="script.js"></script>
-</div>
 </body>
 
 </html>
