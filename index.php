@@ -84,11 +84,11 @@
             <form id='formularOtazky'>
                 <div id="vyberCelkovehoHodnoceniHodiny">
                     <h3>Vyberte možnost celkového hodnocení</h3>
-                    <input type='radio' id='like' name='formularVyberFormulare' value='like'>
+                    <input onchange="kontrolaUpravyVybranehoFormulareZmena(false)" type='radio' id='like' name='formularVyberFormulare' value='like'>
                     <label for='like'>Like/Dislike</label><br>
-                    <input type='radio' name='formularVyberFormulare' id='hvezda' value='hvezda'>
+                    <input onchange="kontrolaUpravyVybranehoFormulareZmena(false)" type='radio' name='formularVyberFormulare' id='hvezda' value='hvezda'>
                     <label for='hvezda'>Hvězdové ohodnocení</label><br>
-                    <input type='radio' name='formularVyberFormulare' id='bezHodnoceni' value='bezHodnoceni'>
+                    <input onchange="kontrolaUpravyVybranehoFormulareZmena(false)" type='radio' name='formularVyberFormulare' id='bezHodnoceni' value='bezHodnoceni'>
                     <label for='bezHodnoceni'>Bez celkového hodnocení</label><br>
                 </div>
                 <div id="otazky"></div>

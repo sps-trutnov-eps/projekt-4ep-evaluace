@@ -86,13 +86,9 @@ function pridatDalsiOtazku() {
     pocetOtazek++;
     i++;
 }
-function moznostOdpovedi(cislo,prostor) {
+function moznostOdpovedi(cislo,prostor1) {
     var prvky = document.getElementsByName('volbaOdpovedi' + cislo);
-    if(!prostor)
-        if(document.getElementById("formulareSablonySELECT").value != ""){
-            document.getElementById("formulareSablonySELECT").value = "";
-            document.getElementById("ulozitFormular").style.visibility = "visible";
-        }
+    kontrolaUpravyVybranehoFormulareZmena(prostor1);
         for (j = 0; j < prvky.length; j++) {
             if (prvky[j].checked && prvky[j].value == "vyber") {
                 formularVyberZmena = formularVyber.replaceAll("#", cislo.toString());
@@ -101,6 +97,7 @@ function moznostOdpovedi(cislo,prostor) {
             }
             else if (document.getElementById("pridatVyber" + cislo) != null && prvky[j].value != "vyber") {
                 document.getElementById("pridatVyber" + cislo).remove();
+                document.getElementById("vyberpoctuvybranychpododpovedi" + cislo).remove();
                 var prvkypodvyberu = document.getElementsByClassName("podvyber" + cislo);
                 if (prvkypodvyberu.length > 0)
                     for (jj = prvkypodvyberu.length - 1; jj >= 0; jj--) {
@@ -207,7 +204,7 @@ function zmenaformulare() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             vratka = JSON.parse(xhr.response);
             console.log(vratka.otazky);
-            document.getElementById("vyberCelkovehoHodnoceniHodiny").value = vratka.moznostOdpovedi;
+            document.getElementById(vratka.moznostHodnoceni).checked = true;
             for(ii = 0;ii<vratka.otazky.length; ii++){
                 pridatDalsiOtazku();
                 indexOtazkyPredchozi = i-1;
@@ -226,10 +223,20 @@ function zmenaformulare() {
             }
         }
         document.getElementById("ulozitFormular").style.visibility = "hidden";
+        document.getElementById("ulozitLabel").style.visibility = "hidden";
     }else{
         document.getElementById("formulareSablonySELECT").value = "";
         document.getElementById("ulozitFormular").style.visibility = "visible";
+        document.getElementById("ulozitLabel").style.visibility = "visible";
     }
+}
+function kontrolaUpravyVybranehoFormulareZmena(prostor){
+    if(!prostor)
+        if(document.getElementById("formulareSablonySELECT").value != ""){
+            document.getElementById("formulareSablonySELECT").value = "";
+            document.getElementById("ulozitFormular").style.visibility = "visible";
+            document.getElementById("ulozitLabel").style.visibility = "visible";
+        }
 }
 
 /*
