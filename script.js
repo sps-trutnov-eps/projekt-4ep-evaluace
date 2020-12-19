@@ -1,9 +1,9 @@
-let textareaVyber = "<div id='podvyber*' class='podvyber#'><input type='text' name='podvyber#' cols='30' rows='2'></textarea><button onclick='odstranitPodvyber(*)'>Odstranit možnost k výběru</button><br></div>";
+let textareaVyber = "<div id='podvyber*' class='podvyber#'><input class='podvyberINPUT' type='text' name='podvyber#' cols='30' rows='2'></textarea><button class='odstranitPodVyber' onclick='odstranitPodvyber(*)'>Odstranit možnost k výběru</button><br></div>";
 let formularText = "";
-let formularVyber = "<div id='pridatVyber#'><button type='button'  onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button><br><div>";
+let formularVyber = "<div class='pridatVyber' id='pridatVyber#'><button type='button' class='pridatDalsiVyber'  onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button></div>";
 let formularHvezdy = "";
-let vyberpoctuvybranychpododpovedi = "<div id='vyberpoctuvybranychpododpovedi#'><input type='number' id='inputvyberucisla#' onclick='return false' onkeydown='return false' min ='0' max='1'><label >Maximální počet zaškrtnutelných</label></div>";
-let vyberFormular = "<div id='#'class='prvkyOtazekDIV'><h3>Otázka:</h3><textarea name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#,false)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#,false)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#,false)'><label for='vyber'>Výběr</label><br><button id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div>";
+let vyberpoctuvybranychpododpovedi = "<div id='vyberpoctuvybranychpododpovedi#'><input type='number' onchange='kontrolaUpravyVybranehoFormulareZmena(false)' id='inputvyberucisla#' onclick='return false' onkeydown='return false' min ='0' max='1'><label >Maximální počet zaškrtnutelných</label></div>";
+let vyberFormular = "<div id='#'class='prvkyOtazekDIV'><h3>Otázka:</h3><textarea class ='textarea' name='zadanaOtazka' id='otazka#' cols='30' rows='4'></textarea><h3>Možnost odpovědi:</h3><input type='radio' name='volbaOdpovedi#' value='text' id='text#' onchange='moznostOdpovedi(#,false)'><label for='text'>Text</label><br><input type='radio' name='volbaOdpovedi#' value='anoNe' id='anoNe#' onchange='moznostOdpovedi(#,false)'><label for='anoNe'>Ano/Ne</label><br><input type='radio' name='volbaOdpovedi#' value='vyber' id='vyber#' onchange='moznostOdpovedi(#,false)'><label for='vyber'>Výběr</label><br><div class='rychlospojka'><button class='odstranit' id='odstranit#' onclick='odstranitOtazku(#)'>Odstranit tuto otázku</button><br></div></div>";
 let i = 1;
 let pocetOtazek = 0;
 let z = 1;
@@ -122,6 +122,7 @@ function pridatDalsiVyber(cislo) {
     var prvkyPodvyberu = document.getElementsByName('podvyber' + pocetpodvyber);
     textareaVyberZmena = textareaVyber.replaceAll("#", cislo.toString());
     textareaVyberZmena = textareaVyberZmena.replaceAll("*", pocetpodvyber.toString());
+    //console.log(pocetpodvyber);
     pocetpodvyber++;
     document.getElementById("pridatVyber" + cislo).insertAdjacentHTML("beforebegin", textareaVyberZmena);
 }
@@ -203,7 +204,7 @@ function zmenaformulare() {
         xhr.send("formularID=" + idFormulare);
         if (xhr.readyState == 4 && xhr.status == 200) {
             vratka = JSON.parse(xhr.response);
-            console.log(vratka.otazky);
+            //console.log(vratka.otazky);
             document.getElementById(vratka.moznostHodnoceni).checked = true;
             for(ii = 0;ii<vratka.otazky.length; ii++){
                 pridatDalsiOtazku();
@@ -211,7 +212,7 @@ function zmenaformulare() {
                 document.getElementById(vratka.otazky[ii].typ + indexOtazkyPredchozi).checked = true;
                 document.getElementById("otazka"+indexOtazkyPredchozi).value = vratka.otazky[ii].text;
                 moznost = moznostOdpovedi(indexOtazkyPredchozi, true);
-                console.log(moznost);
+                //console.log(moznost);
                 if(moznost){
                     for(iii = 0; iii<vratka.otazky[ii].moznosti.length; iii++){
                         pridatDalsiVyber(indexOtazkyPredchozi);
