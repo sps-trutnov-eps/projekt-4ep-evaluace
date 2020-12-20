@@ -29,24 +29,25 @@ function zjistitHodnoty() {
         var typOtazky = document.querySelector('input[name="volbaOdpovedi' + t + '"]:checked');
         var textOtazky = document.getElementById('otazka'+ t);
 
-        otazky = otazky + '{"typ": "' + typOtazky.value + '", "text": "' + textOtazky.value + '"';
+        if (typOtazky != null && textOtazky != null) {
+            otazky = otazky + '{"typ": "' + typOtazky.value + '", "text": "' + textOtazky.value + '"';
 
-        if (typOtazky.value == "vyber") {
-            data = document.querySelectorAll('.podvyber' + t);
-            pocetZaskrtnutelnych = document.getElementById("inputvyberucisla" + t).value;
-            otazky = otazky + ', "pocetZaskrtnutelnych": ' + pocetZaskrtnutelnych + ', "moznosti": [';
+            if (typOtazky.value == "vyber") {
+                data = document.querySelectorAll('.podvyber' + t);
+                pocetZaskrtnutelnych = document.getElementById("inputvyberucisla" + t).value;
+                otazky = otazky + ', "pocetZaskrtnutelnych": ' + pocetZaskrtnutelnych + ', "moznosti": [';
 
-            for (ii = 0; ii < data.length; ii++) {
-                vyberZInputu = document.getElementsByName("podvyber" + t)[ii].value;
+                for (ii = 0; ii < data.length; ii++) {
+                    vyberZInputu = document.getElementsByName("podvyber" + t)[ii].value;
 
-                otazky = otazky + '{"text": "' + vyberZInputu + '"}, ';
-            }
-            
-            otazky = otazky.slice(0,-2);
-            otazky = otazky + ']}, ';
-        } else
-            otazky = otazky + '}, ';
-
+                    otazky = otazky + '{"text": "' + vyberZInputu + '"}, ';
+                }
+                
+                otazky = otazky.slice(0,-2);
+                otazky = otazky + ']}, ';
+            } else
+                otazky = otazky + '}, ';
+        }
         t++;
     } while (t < pocetOtazek + 1);
 
@@ -108,7 +109,7 @@ function moznostOdpovedi(cislo,prostor1) {
 }
 function odstranitOtazku(cislo) {
     document.getElementById(cislo).remove();
-    pocetOtazek--;
+    //pocetOtazek--;
 }
 function pridatDalsiVyber(cislo) {
     if (document.getElementsByName("podvyber" + cislo).length == 0) {
