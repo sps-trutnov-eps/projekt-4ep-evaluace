@@ -5,7 +5,7 @@ require_once "../../config.php";
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
 $predmety = mysqli_query($spojeni, "SELECT id, nazev FROM eval_predmety");
-$tridy = mysqli_query($spojeni, "SELECT id, trida FROM eval_tridy");
+$tridy = mysqli_query($spojeni, "SELECT id, nazev FROM eval_tridy");
 
 mysqli_close($spojeni);
 
@@ -18,7 +18,7 @@ $json .= '],';
 
 $json .= '"data2":[';
     foreach($tridy as $radek)
-        $json .= '{"nazev":"'.$radek["trida"].'","id":"'.$radek["id"].'"},';
+        $json .= '{"nazev":"'.$radek["nazev"].'","id":"'.$radek["id"].'"},';
 
     $json = substr($json, 0, strlen($json) - 1);
 $json .= ']}';

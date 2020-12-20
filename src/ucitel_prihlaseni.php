@@ -1,6 +1,6 @@
 <?php
 
-require_once "../config.php";
+require_once "../../config.php";
 
 $email = $_POST["email"];
 $passwd = $_POST["passwd"];
