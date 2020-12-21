@@ -1,0 +1,408 @@
+@media all and (min-width:1281px){
+    
+    
+    body{
+        background-image: url(obrazky/pozadi.jpg);
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        }
+		#stranka{
+			width: 80%;
+		}
+}
+@media all and (max-width:1280px){
+
+
+
+
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background-image: url("background.png");
+}
+main{
+    background-color: white;
+}
+header {
+    color: black;
+    padding: 20px;
+    text-align: center;
+    clear: both;
+}
+#stranka{
+    margin: 0 auto;
+    background-color: white;
+}
+header,footer {
+  color: black;
+  padding: 20px;
+  text-align: center;
+  clear: both;
+
+}
+
+header{
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+label{
+    font-size: 20px;
+}
+footer{
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #f2f2f2;
+    clear: both;
+}
+h1{
+    font-size: 70px;
+    text-align: center;
+    font-weight: bold;
+}
+h3{
+    font-size: 30px;
+}
+div {
+    background-color: white;
+    /*padding: 40px; nedava smysl
+    padding-left: 140px;
+    padding-right: 140px;*/
+  }
+  #pridatOtazku, input[type=submit]  {
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: center;
+    background-color:#F48B4C;
+    color: white;
+    padding: 14px 20px;
+    /*margin: 8px 0;*/
+    border-color: white;
+    border: solid 1px white;
+    cursor: pointer;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+#datum{
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+input[type=text], select {
+    padding: 1em 20px;
+    /*margin: 8px 0;*/
+   display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display:inline-block;
+  }
+input[type=submit]:hover , #pridatOtazku:hover,.odstranit:hover, .pridatDalsiVyber:hover, .odstranitPodVyber:hover{
+    background-color: #FFB361;
+}
+input[type=submit]:active , #pridatOtazku:active,.odstranit:active, .pridatDalsiVyber:active, .odstranitPodVyber:active{
+    border: none;
+}
+  
+input[type=radio] {
+    width: 5%;
+    background-color: black;
+    color:black;
+    /*padding: 14px 20px;
+    margin: 8px 0;*/
+    border: none;
+    cursor: pointer;
+
+  }
+  input[type=checkbox]{
+    width: 5%;
+    color:black;
+    /*padding: 14px 20px;
+    margin: 8px 0;*/
+    border: none;
+    cursor: pointer;  
+}
+input[type=email]{
+  width: 50%;
+  color:black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-color: black;
+  cursor: pointer;
+  margin-top: 2%;
+  margin-left:10%;
+  margin-bottom: 2%;
+  
+}
+
+input[type=password]{
+width: 50%;
+  color:black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-color: black;
+  cursor: pointer; 
+  margin-left:10%;
+  display:block;
+}
+
+
+
+input[type=heslo]{
+    width: 50%;
+    color:black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-color: black;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-left:10%;
+    margin-bottom: 2%;
+    
+  }
+
+  input[type=heslo_znovu]{
+    width: 50%;
+      color:black;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border-color: black;
+      cursor: pointer; 
+      margin-left:10%;
+      display:block;
+    }
+
+.prvkyOtazekDIV{
+    padding-top: 1em;
+}
+#stranka{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+#formular{    
+    padding: 2em 10%;
+}
+div[class^='podvyber']{
+    padding-left: 0;
+}
+.odstranitPodVyber{
+    height: 3.3em;
+    width: 30%;
+}
+.pridatDalsiVyber, #nazevFormuTextDIV{
+    display: inline-block;
+    width: 100%;
+}
+.pridatVyber, .odstranit{
+    display: inline-block;
+    width: 50%;
+}
+.odstranit, .pridatDalsiVyber, .odstranitPodVyber{
+    padding: 1em;
+    background-color:#F48B4C;
+    border: solid 1px white;
+    color: white;
+    box-shadow: none;
+}
+.rychlospojka{
+    margin: 0 auto;
+    padding: 0.5em 0 0.2em 0;
+    width: 100%;
+}
+input[type=date]{
+    width: 130px;
+}
+.podvyberINPUT{
+    width: 70%;
+}
+.textarea,#nazevFormuText,#selekty,#datum{
+    width: 100%;
+}
+select{
+    width: calc(50% - 3px);
+    display: inline-block;
+    
+}
+#startdate, #enddate{
+    width:calc(50% - 3px);
+    display: inline-block;
+}
+
+input[type=number]{
+    padding: 0.2em;
+    width: min-content;
+}
+
+#upravy, #sudyLichy  {
+    background-color: #F48B4C;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    }
+#upravy{
+    margin-top: 2%;
+    margin-left:10%;
+    margin-bottom: 2%;
+}
+
+/* Hodnocení tabulka */
+#hodnoceni{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+#hodnoceni table, td, th {  
+   border: 1px solid #FCC93A;
+    text-align: left;
+  }
+  
+ #hodnoceni table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+    
+  }
+  
+  #hodnoceni th, td {
+    padding: 15px;
+  }
+  #hodnoceni td{
+      width:25%;
+  }
+ /* #hodnoceni textarea{
+    width: 150%;
+    display: block;
+  }*/
+ 
+  #hodnoceni input[type=radio]{
+        margin-right: 3%;
+  }
+
+/* Tablulka ucitel */
+#ucitel table,#ucitel td,#ucitel th {  
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+ #ucitel table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  
+  #ucitel th,#ucitel td {
+    padding: 15px;
+  }
+
+  /* Tabulka vysledky */
+
+  #vysledkytabulka table,#vysledkytabulka td,#vysledkytabulka th {  
+   border-color: white;
+    text-align: left;
+  }
+  
+  #vysledkytabulka table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  
+  #vysledkytabulka th,#vysledkytabulka td {
+    padding: 15px;
+  }
+  #vysledkytabulka th{
+      width: 50%;
+  }
+
+  /* Popup */
+
+  #popup{
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.7;
+      position: absolute;
+      top:0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  /*Student */
+
+  #student{
+    margin-left:10%;
+    margin-right: 10%;
+  }
+  .vyber{
+      margin-bottom: 2%;
+  }
+ /* Vysledky */
+ #vysledky1{
+    margin-left:10%;
+    margin-right: 10%;
+  }
+#vysledky1 label{
+    padding-bottom: 10px;
+}
+ 
+ #vysledky1 input[type=list] {
+    padding: 1em 20px;
+    /*margin: 8px 0;*/
+   display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display:inline-block;
+    width: calc(100% - 3px);
+    display: inline-block;
+    margin-bottom: 2%;
+    margin-top: 0.5%;
+  }
+
+  #vysledky2{
+    margin-left:10%;
+    margin-right: 10%;
+  }
+
+.spodek{
+    padding-bottom: 2%;
+}
+
+
+   /* Rozcestí */
+#rozcesti{
+    text-align: center;
+    margin-bottom:  2%;
+}
+
+#rozcesti a:link,#rozcesti a:visited {
+    background-color: white;
+    color: black;
+    padding: 20px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    margin-right: 2%;
+    margin-left: 2%;
+    font-size: 50px;
+    border: 2px solid orange;
+  }
+  
+  #rozcesti a:hover,#rozcesti a:active {
+    background-color: #FCC93A;
+  }
