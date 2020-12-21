@@ -17,7 +17,7 @@ $nejvetsi;
 
 
 ///////////////////////////////////////////////////////////// normální vyplnění dotazníku
-if (isset($_POST['classic']))
+if (isset($_POST['classic']) == true)
 {
 
 
@@ -50,8 +50,9 @@ while($i <= count($dotazniky))
     $i++;
 
 }
-echo "<script>console.log('".$nejvetsi[5]."')</script>";
-echo "<script>console.log('".$nejvetsi[0]."')</script>";
+// Zobrazí datum a id hodiny
+//echo "<script>console.log('".$nejvetsi[5]."')</script>";
+//echo "<script>console.log('".$nejvetsi[0]."')</script>";
 
 session_start();
 
@@ -68,19 +69,21 @@ $_SESSION["hodinaID"] = $hodinaID;
 
 if(empty($dotazniky) == true)
 {
-    header("location:error.php");
+    echo "<script>console.log('classic nefunguje')</script>";
+    //header("location:error.php");
 }
 
 else
 {
-    header("location:uspech.php");
+    echo "<script>console.log('classic funguje')</script>";
+    //header("location:uspech.php");
 }
 
 }
 
 /////////////////////////////////////////////////////////////////////////// vyplnění celkového dotazníku (za pololetí)
 
-if (isset($_POST['special']))
+else if (isset($_POST['special']) == true)
 {
 
 $data2 = mysqli_query($spojeni, $dotazHodiny);
@@ -103,12 +106,14 @@ $_SESSION["NezID"] = $dotaznikID;
 
 if(empty($dotaznikNez) == true)
 {
-    header("location:error.php");
+    echo "<script>console.log('special nefunguje')</script>";
+    //header("location:error.php");
 }
 
 else
 {
-    header("location:uspech.php");
+    echo "<script>console.log('special funguje')</script>";
+    //header("location:uspech.php");
 }
 
 
@@ -118,7 +123,8 @@ else
 /////////////////////////////////////////////////////////////////////////// chyba
 else
 {
-    header("location:error.php");
+    echo "<script>console.log('nic nefunguje')</script>";
+    //header("location:error.php");
 }
 //echo "<script>console.log('".$dotazniky["id"]."')</script>";
 //echo "<script>console.log('".$dotazniky["skolniHodina"]."')</script>";

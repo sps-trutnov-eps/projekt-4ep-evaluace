@@ -230,24 +230,76 @@ input[type=number]{
     margin-bottom: 2%;
 }
 
-/* Tablulky */
+/* Hodnocení tabulka */
+#hodnoceni{
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+#hodnoceni table, td, th {  
+   border: 1px solid #FCC93A;
+    text-align: left;
+  }
+  
+ #hodnoceni table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+    
+  }
+  
+  #hodnoceni th, td {
+    padding: 15px;
+  }
+  #hodnoceni td{
+      width:25%;
+  }
+ /* #hodnoceni textarea{
+    width: 150%;
+    display: block;
+  }*/
+ 
+  #hodnoceni input[type=radio]{
+        margin-right: 3%;
+  }
 
-table, td, th {  
+/* Tablulka ucitel */
+#ucitel table,#ucitel td,#ucitel th {  
     border: 1px solid #ddd;
     text-align: left;
   }
   
-  table {
+ #ucitel table {
     border-collapse: collapse;
     width: 80%;
     margin-left:auto;
     margin-right:auto;
   }
   
-  th, td {
+  #ucitel th,#ucitel td {
     padding: 15px;
   }
 
+  /* Tabulka vysledky */
+
+  #vysledkytabulka table,#vysledkytabulka td,#vysledkytabulka th {  
+   border-color: white;
+    text-align: left;
+  }
+  
+  #vysledkytabulka table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  
+  #vysledkytabulka th,#vysledkytabulka td {
+    padding: 15px;
+  }
+  #vysledkytabulka th{
+      width: 50%;
+  }
 
   /* Popup */
 
@@ -272,6 +324,36 @@ table, td, th {
   .vyber{
       margin-bottom: 2%;
   }
+ /* Vysledky */
+ #vysledky1{
+    margin-left:10%;
+    margin-right: 10%;
+  }
+#vysledky1 label{
+    padding-bottom: 10px;
+}
+ 
+ #vysledky1 input[type=list] {
+    padding: 1em 20px;
+    /*margin: 8px 0;*/
+   display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display:inline-block;
+    width: calc(100% - 3px);
+    display: inline-block;
+    margin-bottom: 2%;
+    margin-top: 0.5%;
+  }
+
+  #vysledky2{
+    margin-left:10%;
+    margin-right: 10%;
+  }
+
+.spodek{
+    padding-bottom: 2%;
+}
 
 
    /* Rozcestí */
@@ -280,7 +362,7 @@ table, td, th {
     margin-bottom:  2%;
 }
 
-a:link, a:visited {
+#rozcesti a:link,#rozcesti a:visited {
     background-color: white;
     color: black;
     padding: 20px 60px;
@@ -295,6 +377,6 @@ a:link, a:visited {
     border: 2px solid orange;
   }
   
-  a:hover, a:active {
+  #rozcesti a:hover,#rozcesti a:active {
     background-color: #FCC93A;
   }

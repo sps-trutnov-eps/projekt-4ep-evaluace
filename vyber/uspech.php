@@ -13,10 +13,18 @@
 
        session_start();
 
+       $idHodiny = 0;
+       $idNez = 0;
 
+        if(isset($_SESSION["hodinaID"]) == true)
+        {
+            $idHodiny = $_SESSION["hodinaID"];
+        }
 
-       $idHodiny = $_SESSION["hodinaID"];
-       $idNez = $_SESSION["NezID"];
+        if(isset($_SESSION["NezID"]) == true)
+        {
+            $idNez = $_SESSION["NezID"];
+        }
 
        $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
@@ -37,23 +45,27 @@
     <header>
         <h1>Vše v pohodě</h1>
         <?php
+        echo "<p>Clasic:</p>";
         echo "<p>" . $dotaznik["id"] . "</p>"; 
         echo "<p>" . $dotaznik["ucitel_id"] . "</p>"; 
         echo "<p>" . $dotaznik["predmet_id"] . "</p>"; 
         echo "<p>" . $dotaznik["skupina"] . "</p>"; 
         echo "<p>" . $dotaznik["datum"] . "</p>"; 
+        echo "<p>Konec</p>";
 
-
+        echo "<p>Special:</p>";
         echo "<p>" . $dotaznik2["id"] . "</p>"; 
         echo "<p>" . $dotaznik2["povoleno_od"] . "</p>"; 
         echo "<p>" . $dotaznik2["povoleno_do"] . "</p>"; 
         echo "<p>" . $dotaznik2["idVzoru"] . "</p>"; 
+        echo "<p>Konec</p>";
 
         ?>
     </header>
     <main>
-    <a href="vyber.php">Zpět</a>
-
+        <div id="rozcesti">
+            <a href="vyber.php">Zpět</a>
+        </div>
     </main>
 </div>
     <footer>
