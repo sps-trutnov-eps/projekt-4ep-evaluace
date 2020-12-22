@@ -14,12 +14,9 @@ function odesilaniDoDB(id) {
     var trida = document.getElementById("trida").value;
     var skupina = document.getElementById("skupina").value;
     var skolniHodina = id;
-    var datum = document.getElementById(id).getAttribute("value");  
-    //2020-09-01
+    var datum = document.getElementById(id).getAttribute("value");
     var newDate = new Date (datum);
     var yyyy = newDate.getFullYear() + 1;
-    var mm = newDate.getMonth();
-    var dd = newDate.getDate();
     var konecSkolnihoRoku = new Date(yyyy, 6, 1);
     var dvaTydnyPred = new Date(yyyy, 5, 17);
 
@@ -36,7 +33,7 @@ function odesilaniDoDB(id) {
     else if (skupina == "")
         alert("Nevyplnil/a jste všechny údaje.");
     else {
-        var zkouska = newDate;
+        var noveDatum = newDate;
         for (let o = 0; o < 1; o++) {
             $.ajax(
             {
@@ -56,14 +53,14 @@ function odesilaniDoDB(id) {
                 }
             }
             );
-            console.log(datum);
-            for (let i = 14; zkouska<konecSkolnihoRoku && zkouska<dvaTydnyPred; i=i+14) {
-                zkouska = newDate.addDays(i);
-                var rok = zkouska.getFullYear();
-                var mesic = mesice[zkouska.getMonth()];
-                var den = data[zkouska.getDate()];
+
+            for (let i = 14; noveDatum<konecSkolnihoRoku && noveDatum<dvaTydnyPred; i=i+14) {
+                noveDatum = newDate.addDays(i);
+                var rok = noveDatum.getFullYear();
+                var mesic = mesice[noveDatum.getMonth()];
+                var den = data[noveDatum.getDate()];
                 var novyDatum = rok+"-"+mesic+"-"+den;
-                console.log(novyDatum);
+                
                 $.ajax(
                     {
                         type: "POST",
@@ -174,10 +171,15 @@ function pridaniDatumu() {
         denPristihoT--;
         den--;
     }
+
+    var aktualniDatum = new Date();
+
+    if (aktualniDatum > konecSkolnihoRoku) {
+        // O PRÁZDNINÁCH SMAZÁNÍ Z DATABÁZE
+    }
 }
 
 function vlozeniHodinDoRozvrhu(skolniHodina) {
-    console.log(skolniHodina);
     $.ajax(
         {
             type: "POST",
@@ -186,7 +188,6 @@ function vlozeniHodinDoRozvrhu(skolniHodina) {
                 skolniHodina: skolniHodina
             },
             success: function(data) {
-                console.log(data);
                 let odpoved = JSON.parse(data)["data"];
                 if (odpoved[0] == undefined) {
                 }
@@ -197,8 +198,48 @@ function vlozeniHodinDoRozvrhu(skolniHodina) {
                         var pole = "<div>" + odpoved[0] + "</div><div>" + odpoved[1] + "</div><div>1. skupina</div>";
                     else
                         var pole = "<div>" + odpoved[0] + "</div><div>" + odpoved[1] + "</div><div>2. skupina</div>";
-                    
+                        
                     document.getElementById(skolniHodina).innerHTML = pole;
+                    $("#" + skolniHodina).attr("onclick", "vypsaniTemat(this.id)");
+                }
+            },
+            error: function() {
+                alert("Při zpracování dotazu došlo k neočekávané chybě.");
+            }
+        }
+        );
+}
+
+function vypsaniTemat(id) {
+    $.ajax(
+        {
+            type: "POST",
+            url: "ucitel_vypsaniTemat.php",
+            data: {
+                skolniHodina: id
+            },
+            success: function(data) {
+                let regex = /,]/gi;
+                let odpoved = data.replace(regex, "]");
+                let json = JSON.parse(odpoved);
+                console.log(json);
+                if (json == undefined) {
+                }
+                else {
+                    var pole = "";
+                    for (i = 0; i < json.predmet.length; i++) {
+                        var u = new Date(json.datum[i]);
+                        var datum = u.getDate() + "." + (u.getMonth() + 1) + "." + u.getFullYear();
+                        if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                            pole += "<div id='radek'><input type='checkbox'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina</div>";
+                        }
+                        else {
+                            pole += "<div id='radek'><input type='checkbox'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída</div>"
+                        }
+                        
+                    }
+                    
+                    document.getElementById("temata").innerHTML = pole;
                 }
             },
             error: function() {
@@ -263,6 +304,8 @@ function upravaRozvrhu() {
         } else {
             $("#upravy").text("Upravit");   
             $("td").attr("onclick", "");
+            $("#popup").removeAttr("style").hide();
+            generovatRozvrh();
         }
     })
 }
