@@ -85,6 +85,7 @@ function odesilaniDoDB(id) {
             }
         }
     }
+    vlozeniHodinDoRozvrhu(skolniHodina);
 }
 
 function generovatRozvrh() {
@@ -93,7 +94,8 @@ function generovatRozvrh() {
         for (i = 1; i <= 5; i++) {
             pole += "<tr><th>" + dny[i] + "</th>";
             for (y = 1; y <= 9; y++) {
-                pole += "<td id='"+ tyden + "_" + y + "_" + dny[i] + "' onload='vlozeniHodinDoRozvrhu("+ tyden + "_" + y + "_" + dny[i] + ")' onclick=''></td>";          //  GENERACE ROZVRHU
+                pole += "<td id='"+ tyden + "_" + y + "_" + dny[i] + "' onclick=''></td>";          //  GENERACE ROZVRHU
+                vlozeniHodinDoRozvrhu(tyden + "_" + y + "_" + dny[i]);
             }
             pole += "</tr>";
         }
@@ -174,22 +176,36 @@ function pridaniDatumu() {
     }
 }
 
-function vlozeniHodinDoRozvrhu(skolniHodina) { //ZATÍM NEFUNKČNÍ!!!!!!!!!!!!!!!!!!!!!!!!
+function vlozeniHodinDoRozvrhu(skolniHodina) {
+    console.log(skolniHodina);
     $.ajax(
         {
-            type: "LOAD",
-            url: "ucitel_vlozeniHodin.php",
+            type: "POST",
+            url: "ucitel_vypsaniHodin.php",
+            data: {
+                skolniHodina: skolniHodina
+            },
             success: function(data) {
+                console.log(data);
                 let odpoved = JSON.parse(data)["data"];
-                vlozeni = "<div>" + odpoved[0] + "</div><div>" + odpoved[1] + "</div><div>" + odpoved[2] + "</div>";
-
-                document.getElementById(skolniHodina).innerHTML = vlozeni;
+                if (odpoved[0] == undefined) {
+                }
+                else {
+                    if (odpoved[2] == 0)
+                        var pole = "<div>" + odpoved[0] + "</div><div>" + odpoved[1] + "</div><div>celá třída</div>";
+                    else if (odpoved[2] == 1)
+                        var pole = "<div>" + odpoved[0] + "</div><div>" + odpoved[1] + "</div><div>1. skupina</div>";
+                    else
+                        var pole = "<div>" + odpoved[0] + "</div><div>" + odpoved[1] + "</div><div>2. skupina</div>";
+                    
+                    document.getElementById(skolniHodina).innerHTML = pole;
+                }
             },
             error: function() {
                 alert("Při zpracování dotazu došlo k neočekávané chybě.");
             }
         }
-    );
+        );
 }
 
 function sudyLichy() {
@@ -278,7 +294,26 @@ function dataProPopupOkenko() {
     );
 }
 
+function testPrihlaseni() {
+    $.ajax(
+        {
+            type: "LOAD",
+            url: "ucitel_kontrolaPrihlaseni.php",
+            success: function(data) {
+                if (data == 0) {
+                    alert("Nejste přihlášen/a.");
+                    location.href = "ucitel_prihlaseni.html";
+                }
+            },
+            error: function() {
+                alert("Při zpracování dotazu došlo k neočekávané chybě.");
+            }
+        }
+    );
+}
+
 $(document).ready(function () {
+    testPrihlaseni();
     sudyLichy();
     generovatRozvrh();
     upravaRozvrhu();
