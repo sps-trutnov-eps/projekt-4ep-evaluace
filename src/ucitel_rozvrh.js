@@ -294,7 +294,26 @@ function dataProPopupOkenko() {
     );
 }
 
+function testPrihlaseni() {
+    $.ajax(
+        {
+            type: "LOAD",
+            url: "ucitel_kontrolaPrihlaseni.php",
+            success: function(data) {
+                if (data == 0) {
+                    alert("Nejste přihlášen/a.");
+                    location.href = "ucitel_prihlaseni.html";
+                }
+            },
+            error: function() {
+                alert("Při zpracování dotazu došlo k neočekávané chybě.");
+            }
+        }
+    );
+}
+
 $(document).ready(function () {
+    testPrihlaseni();
     sudyLichy();
     generovatRozvrh();
     upravaRozvrhu();

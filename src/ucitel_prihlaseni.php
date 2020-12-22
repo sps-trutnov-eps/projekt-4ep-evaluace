@@ -6,7 +6,7 @@ $email = $_POST["email"];
 $passwd = $_POST["passwd"];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
-$data = mysqli_query($spojeni, "SELECT * FROM `eval_ucitele` WHERE email = '$email'");
+$data = mysqli_query($spojeni, "SELECT * FROM eval_ucitele WHERE email = '$email'");
 
 if(mysqli_num_rows($data) == 0)
 {
