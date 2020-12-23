@@ -28,6 +28,16 @@
     <tbody id="rozvrh">
     </tbody>
   </table>
+  <div id="datum" style="display: none;">
+    <div id='startdate'>
+        <label for="start">Počáteční datum výběru:</label>
+        <input onchange="zmenacasu()" type="date" id="start" name="end" value="">
+    </div>
+    <div id='enddate'>
+        <label for="end">Konečné datum výběru:</label>
+        <input onchange="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
+    </div>
+  </div>
   <div id="temata">
     <!--doplnit temata javascriptem-->
   </div>

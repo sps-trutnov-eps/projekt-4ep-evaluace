@@ -83,6 +83,12 @@ function odesilaniDoDB(id) {
         }
     }
     vlozeniHodinDoRozvrhu(skolniHodina);
+
+    var aktualniDatum = new Date();
+
+    if (aktualniDatum > konecSkolnihoRoku) {
+        // O PRÁZDNINÁCH SMAZÁNÍ Z DATABÁZE
+    }
 }
 
 function generovatRozvrh() {
@@ -171,12 +177,6 @@ function pridaniDatumu() {
         denPristihoT--;
         den--;
     }
-
-    var aktualniDatum = new Date();
-
-    if (aktualniDatum > konecSkolnihoRoku) {
-        // O PRÁZDNINÁCH SMAZÁNÍ Z DATABÁZE
-    }
 }
 
 function vlozeniHodinDoRozvrhu(skolniHodina) {
@@ -219,10 +219,11 @@ function vypsaniTemat(id) {
                 skolniHodina: id
             },
             success: function(data) {
+                document.getElementById("datum").style.display = "flex";
+                nastavitDatumyUVyberuDatumu();
                 let regex = /,]/gi;
                 let odpoved = data.replace(regex, "]");
                 let json = JSON.parse(odpoved);
-                console.log(json);
                 if (json == undefined) {
                 }
                 else {
@@ -230,11 +231,76 @@ function vypsaniTemat(id) {
                     for (i = 0; i < json.predmet.length; i++) {
                         var u = new Date(json.datum[i]);
                         var datum = u.getDate() + "." + (u.getMonth() + 1) + "." + u.getFullYear();
-                        if (json.skupina[i] == 1 || json.skupina[i] == 2) {
-                            pole += "<div id='radek'><input type='checkbox'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina</div>";
+                        if (json.temaHodiny[i] == "") {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - <input type='button' value='Přidat téma hodiny'></div>";
+                            }
+                            else {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - <input type='button' value='Přidat téma hodiny'></div>";
+                            }
+                        } else {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + "</div>";
+                            }
+                            else {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + "</div>";
+                            }
                         }
-                        else {
-                            pole += "<div id='radek'><input type='checkbox'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída</div>"
+                        
+                    }
+                    
+                    document.getElementById("temata").innerHTML = pole;
+                }
+                $("#datum").attr("value", json.predmet[0]);
+            },
+            error: function() {
+                alert("Při zpracování dotazu došlo k neočekávané chybě.");
+            }
+        }
+        );
+}
+
+function hodinyPrepis() {
+    var hodina = document.getElementById("datum").getAttribute("value");
+    var Od = document.getElementById("end").getAttribute("min");
+    var Do = document.getElementById("start").getAttribute("max");
+
+    $.ajax(
+        {
+            type: "POST",
+            url: "ucitel_filtrTemat.php",
+            data: {
+                predmet: hodina,
+                Od: Od,
+                Do: Do
+            },
+            success: function(data) {
+                document.getElementById("datum").style.display = "flex";
+                nastavitDatumyUVyberuDatumu();
+                let regex = /,]/gi;
+                let odpoved = data.replace(regex, "]");
+                let json = JSON.parse(odpoved);
+                if (json == undefined) {
+                }
+                else {
+                    var pole = "";
+                    for (i = 0; i < json.predmet.length; i++) {
+                        var u = new Date(json.datum[i]);
+                        var datum = u.getDate() + "." + (u.getMonth() + 1) + "." + u.getFullYear();
+                        if (json.temaHodiny[i] == "") {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - <input type='button' value='Přidat téma hodiny'></div>";
+                            }
+                            else {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - <input type='button' value='Přidat téma hodiny'></div>";
+                            }
+                        } else {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + "</div>";
+                            }
+                            else {
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + "</div>";
+                            }
                         }
                         
                     }
@@ -247,6 +313,12 @@ function vypsaniTemat(id) {
             }
         }
         );
+}
+
+function zmenacasu() {
+    document.getElementById("end").setAttribute("min", document.getElementById("start").value);
+    document.getElementById("start").setAttribute("max", document.getElementById("end").value);
+    hodinyPrepis();
 }
 
 function sudyLichy() {
@@ -335,6 +407,17 @@ function dataProPopupOkenko() {
             }
         }
     );
+}
+
+function nastavitDatumyUVyberuDatumu() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+
+    document.getElementById("end").setAttribute("value", today);
+    document.getElementById("start").setAttribute("value", today);
 }
 
 function testPrihlaseni() {
