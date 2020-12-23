@@ -4,8 +4,11 @@ var mesice = ["01","02","03","04","05","06","07","08","09","10","11","12"];
 
 function pridatHodinu(id) {
     document.getElementById("popup").style.display = "flex";            //  POPUP OKENKO
-    document.getElementById("potvrdit").setAttribute("onclick", "odesilaniDoDB('" + id + "')");
-
+    if (document.getElementById(id).innerHTML == "") {
+        document.getElementById("potvrdit").setAttribute("onclick", "odesilaniDoDB('" + id + "')");
+    } else {
+        document.getElementById("potvrdit").setAttribute("onclick", "meneniVDB('" + id + "')");
+    }
 }
 
 function odesilaniDoDB(id) {
@@ -89,6 +92,83 @@ function odesilaniDoDB(id) {
     if (aktualniDatum > konecSkolnihoRoku) {
         // O PRÁZDNINÁCH SMAZÁNÍ Z DATABÁZE
     }
+}
+
+function meneniVDB(id) {
+    document.getElementById("popup").style.display = "none";
+    var predmet = document.getElementById("predmet").value;
+    var trida = document.getElementById("trida").value;
+    var skupina = document.getElementById("skupina").value;
+    var skolniHodina = id;
+    var datum = document.getElementById(id).getAttribute("value");
+    var newDate = new Date (datum);
+    var yyyy = newDate.getFullYear() + 1;
+    var konecSkolnihoRoku = new Date(yyyy, 6, 1);
+    var dvaTydnyPred = new Date(yyyy, 5, 17);
+
+    Date.prototype.addDays = function(days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    if (predmet == "")
+        alert("Nevyplnil/a jste všechny údaje.");
+    else if (trida == "")
+        alert("Nevyplnil/a jste všechny údaje.");
+    else if (skupina == "")
+        alert("Nevyplnil/a jste všechny údaje.");
+    else {
+        var noveDatum = newDate;
+        for (let o = 0; o < 1; o++) {
+            $.ajax(
+            {
+                type: "POST",
+                url: "ucitel_meneniDB.php",
+                data: {
+                    predmet: predmet,
+                    trida: trida,
+                    skupina: skupina,
+                    skolniHodina: skolniHodina,
+                    datum: datum
+                },
+                success: function() {
+                },
+                error: function() {
+                    alert("Při zpracování dotazu došlo k neočekávané chybě.");
+                }
+            }
+            );
+
+            for (let i = 14; noveDatum<konecSkolnihoRoku && noveDatum<dvaTydnyPred; i=i+14) {
+                noveDatum = newDate.addDays(i);
+                var rok = noveDatum.getFullYear();
+                var mesic = mesice[noveDatum.getMonth()];
+                var den = data[noveDatum.getDate()];
+                var novyDatum = rok+"-"+mesic+"-"+den;
+                
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "ucitel_meneniDB.php",
+                        data: {
+                            predmet: predmet,
+                            trida: trida,
+                            skupina: skupina,
+                            skolniHodina: skolniHodina,
+                            datum: novyDatum
+                        },
+                        success: function() {
+                        },
+                        error: function() {
+                            alert("Při zpracování dotazu došlo k neočekávané chybě.");
+                        }
+                    }
+                );
+            }
+        }
+    }
+    vlozeniHodinDoRozvrhu(skolniHodina);
 }
 
 function generovatRozvrh() {
@@ -177,6 +257,12 @@ function pridaniDatumu() {
         denPristihoT--;
         den--;
     }
+
+    var aktualniDatum = new Date();
+
+    /*if (aktualniDatum > konecSkolnihoRoku) {
+        // O PRÁZDNINÁCH SMAZÁNÍ Z DATABÁZE
+    }*/
 }
 
 function vlozeniHodinDoRozvrhu(skolniHodina) {
@@ -439,9 +525,9 @@ function testPrihlaseni() {
 }
 
 $(document).ready(function () {
-    testPrihlaseni();
     sudyLichy();
     generovatRozvrh();
     upravaRozvrhu();
     dataProPopupOkenko();
+    testPrihlaseni();
 });
