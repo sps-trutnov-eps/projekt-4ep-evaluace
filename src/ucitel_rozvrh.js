@@ -305,6 +305,7 @@ function vypsaniTemat(id) {
                 skolniHodina: id
             },
             success: function(data) {
+                sessionStorage.setItem("id", id);
                 document.getElementById("datum").style.display = "flex";
                 nastavitDatumyUVyberuDatumu();
                 let regex = /,]/gi;
@@ -338,6 +339,7 @@ function vypsaniTemat(id) {
                     document.getElementById("temata").innerHTML = pole;
                 }
                 $("#datum").attr("value", json.predmet[0]);
+                $("#datum").attr("name", json.trida[0]);
             },
             error: function() {
                 alert("Při zpracování dotazu došlo k neočekávané chybě.");
@@ -348,6 +350,7 @@ function vypsaniTemat(id) {
 
 function hodinyPrepis() {
     var hodina = document.getElementById("datum").getAttribute("value");
+    var trida = document.getElementById("datum").getAttribute("name");
     var Od = document.getElementById("end").getAttribute("min");
     var Do = document.getElementById("start").getAttribute("max");
 
@@ -357,6 +360,7 @@ function hodinyPrepis() {
             url: "ucitel_filtrTemat.php",
             data: {
                 predmet: hodina,
+                trida: trida,
                 Od: Od,
                 Do: Do
             },
@@ -405,6 +409,11 @@ function zmenacasu() {
     document.getElementById("end").setAttribute("min", document.getElementById("start").value);
     document.getElementById("start").setAttribute("max", document.getElementById("end").value);
     hodinyPrepis();
+}
+
+function reset() {
+    var id = sessionStorage.getItem("id");
+    vypsaniTemat(id);
 }
 
 function sudyLichy() {

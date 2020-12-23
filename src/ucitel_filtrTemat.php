@@ -5,12 +5,13 @@ require_once "../../config.php";
 session_start();
 $ucitel = $_SESSION['idUcitel'];
 $predmet = $_POST['predmet'];
+$trida = $_POST['trida'];
 $Od = $_POST['Od'];
 $Do = $_POST['Do'];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-$data = mysqli_query($spojeni, "SELECT p.nazev AS predmet, t.nazev AS trida, h.skupina AS skupina, h.datum AS datum, h.temaHodiny AS temaHodiny FROM (eval_hodiny h LEFT JOIN eval_predmety p ON h.predmet_id = p.id) LEFT JOIN eval_tridy t ON h.trida_id = t.id WHERE h.ucitel_id = '$ucitel' AND p.nazev = '$predmet' AND h.datum >= '$Od' AND h.datum <= '$Do' ORDER BY datum");
+$data = mysqli_query($spojeni, "SELECT p.nazev AS predmet, t.nazev AS trida, h.skupina AS skupina, h.datum AS datum, h.temaHodiny AS temaHodiny FROM (eval_hodiny h LEFT JOIN eval_predmety p ON h.predmet_id = p.id) LEFT JOIN eval_tridy t ON h.trida_id = t.id WHERE h.ucitel_id = '$ucitel' AND p.nazev = '$predmet' AND t.nazev = '$trida' AND h.datum >= '$Od' AND h.datum <= '$Do' ORDER BY datum");
 
 mysqli_close($spojeni);
 
