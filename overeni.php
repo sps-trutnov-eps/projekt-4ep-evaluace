@@ -40,7 +40,7 @@ $userinf = mysqli_fetch_assoc($res);
     </header>
 
     <main>
-        <form action="over.php" method="post">
+        <form action="reg_over.php" method="post">
             <table class="overeni">
                 <tr>
                     <td>Heslo: </td>
