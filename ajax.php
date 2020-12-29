@@ -16,9 +16,9 @@
                 $ucitelID = $_SESSION['idUcitel'];
                 if(isset($_POST['nazev'])) {
                     $nazev = $_POST['nazev'];
-                    mysqli_query($spojeni, "INSERT INTO eval_formulare_vzory (`otazka`,`idUcitel`,`nazev`) VALUES ('$array','$ucitelID','$nazev')");
+                    mysqli_query($spojeni, "INSERT INTO eval_formulare_vzory (`otazka`,`idUcitele`,`nazev`) VALUES ('$array','$ucitelID','$nazev')");
                 } else {
-                    mysqli_query($spojeni, "INSERT INTO eval_formulare_vzory (`otazka`,`idUcitel`) VALUES ('$array','$ucitelID')");
+                    mysqli_query($spojeni, "INSERT INTO eval_formulare_vzory (`otazka`,`idUcitele`) VALUES ('$array','$ucitelID')");
                 }
                                 
                 $idForm = mysqli_insert_id($spojeni);
