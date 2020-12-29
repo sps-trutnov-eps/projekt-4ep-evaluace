@@ -10,9 +10,10 @@ let z = 1;
 let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
-window.addEventListener("load", nastavitDatumyUVyberuDatumu());
+//window.addEventListener("load", nastavitDatumyUVyberuDatumu());
 window.onload = (event) => {
-    zmenacasu();
+    //zmenacasu();
+    idHodiny = window.location.href.split('=')[1];
   };
 formularOtazky.addEventListener('submit', e => {
     e.preventDefault();
@@ -54,7 +55,7 @@ function zjistitHodnoty() {
     otazky = otazky.slice(0,-2);
     otazky = otazky + ']}';
 
-    idHodiny = document.getElementById("vyberHodiny").value;
+    //idHodiny = document.getElementById("vyberHodiny").value;
 
     if(document.getElementById("ulozitFormular").checked) {
         var nazev = "&nazev=";
@@ -72,7 +73,10 @@ function zjistitHodnoty() {
             case "NeniVybranaHodina":
                 alert("Není vybraná hodina!");
                 break;
-            default: console.log(xhr.response);
+            default: 
+                console.log(xhr.response);
+                window.location = "./ucitel_rozvrh.php";
+                break;
         }
     }
 

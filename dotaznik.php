@@ -17,10 +17,24 @@
         require_once "../../config.php";
         $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
         session_start();
+        $cisloHodiny = $_GET['id'];
         if (isset($_SESSION["idUcitel"]))
             $ucitelID = $_SESSION["idUcitel"];
+        else
+            header("Location: ucitel_prihlaseni.php");
+
+        if(!isset($_GET['id']))
+            header("Location: ucitel_rozvrh.php");
+        else{
+            $hodina = $_GET['id'];
+            $sql = "SELECT * FROM eval_formulare WHERE idHodiny = $hodina";
+            $data = mysqli_query($spojeni, $sql);
+            if(mysqli_num_rows($data) > 0)
+                header("Location: ucitel_rozvrh.php");
+        }
         ?>
         <div id="formular">
+            <input type="hidden" id='vyberHodiny' value="">
             <!--<div id="datum">
                 <div id='startdate'>
                     <label for="start">Počáteční datum výběru:</label>
