@@ -406,3 +406,31 @@ input[type=number]{
   #rozcesti a:hover,#rozcesti a:active {
     background-color: #FCC93A;
   }
+
+  /* registrace */
+.flash_ok {
+    margin: 10px 0px 10px 0px;
+    background: rgba(61, 172, 61, 0.644);
+    border: 2px solid darkgreen;
+    color:red;
+    padding: 9px;
+}
+.flash_err{
+    margin: 10px 0px 10px 0px;
+    background: lightpink;
+    border: 2px solid red;
+    color: red;
+    padding: 9px;
+}
+.input_register{
+    margin-left: 5px !important;
+}
+.overeni{
+    margin-top: 10px;
+    border: 0;
+    border-collapse: collapse;
+}
+.overeni td{
+    border: 0;
+    padding: 3px;
+}
