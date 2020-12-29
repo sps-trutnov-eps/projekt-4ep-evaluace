@@ -15,8 +15,7 @@ if(mysqli_num_rows($data) == 0)
 else
 {
     $email = mysqli_fetch_assoc($data);
-
-    if($email["passwd"] == $passwd)
+    if(password_verify($passwd, $email["passwd"]))
     {
         session_start();
         $_SESSION['idUcitel'] = $email["id"];
@@ -25,7 +24,7 @@ else
     else if ($passwd == NULL) {
         echo "<p>Vyplňte heslo.</p>";
     }
-    else if($email["passwd"] != $passwd)
+    else if(!password_verify($passwd, $email["passwd"]))
     {
         echo "<p>Neplatné heslo pro email</p>";
     }
