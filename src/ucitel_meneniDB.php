@@ -12,6 +12,6 @@ $ucitel = $_SESSION['idUcitel'];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-mysqli_query($spojeni, "UPDATE eval_hodiny SET predmet_id = '$predmet', trida_id = '$trida', skupina = '$skupina' WHERE ucitel_id = '$ucitel' AND datum = '$datum' AND skolniHodina = '$skolniHodina'");
+mysqli_query($spojeni, "UPDATE eval_hodiny SET idPredmetu = '$predmet', idTridy = '$trida', skupina = '$skupina' WHERE idUcitele = '$ucitel' AND datum = '$datum' AND skolniHodina = '$skolniHodina'");
 
 mysqli_close($spojeni);

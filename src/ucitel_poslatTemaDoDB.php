@@ -21,6 +21,6 @@ while ($radek = mysqli_fetch_assoc($data2)) {
     $tridaId = $radek['id'];
 }
 
-mysqli_query($spojeni, "UPDATE eval_hodiny SET temaHodiny = '$tema' WHERE ucitel_id = '$ucitel' AND datum = '$datum' AND predmet_id = '$predmetId' AND trida_id = '$tridaId'");
+mysqli_query($spojeni, "UPDATE eval_hodiny SET temaHodiny = '$tema' WHERE idUcitele = '$ucitel' AND datum = '$datum' AND idPredmetu = '$predmetId' AND idTridy = '$tridaId'");
 
 mysqli_close($spojeni);

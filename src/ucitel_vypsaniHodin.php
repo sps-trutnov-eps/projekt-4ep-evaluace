@@ -8,7 +8,7 @@ $skolniHodina = $_POST['skolniHodina'];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-$data = mysqli_query($spojeni, "SELECT p.nazev AS predmet, t.nazev AS trida, h.skupina AS skupina FROM (eval_hodiny h LEFT JOIN eval_predmety p ON h.predmet_id = p.id) LEFT JOIN eval_tridy t ON h.trida_id = t.id WHERE h.ucitel_id = '$ucitel' AND skolniHodina = '$skolniHodina' GROUP BY p.nazev, t.nazev, h.skupina");
+$data = mysqli_query($spojeni, "SELECT p.nazev AS predmet, t.nazev AS trida, h.skupina AS skupina FROM (eval_hodiny h LEFT JOIN eval_predmety p ON h.idPredmetu = p.id) LEFT JOIN eval_tridy t ON h.idTridy = t.id WHERE h.idUcitele = '$ucitel' AND skolniHodina = '$skolniHodina' GROUP BY p.nazev, t.nazev, h.skupina");
 
 mysqli_close($spojeni);
 
