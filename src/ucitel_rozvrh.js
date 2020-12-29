@@ -320,17 +320,17 @@ function vypsaniTemat(id) {
                         var datum = u.getDate() + "." + (u.getMonth() + 1) + "." + u.getFullYear();
                         if (json.temaHodiny[i] == "") {
                             if (json.skupina[i] == 1 || json.skupina[i] == 2) {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - <input type='button' value='Přidat téma hodiny'></div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - <input type='button' value='Přidat téma hodiny'> - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                             else {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - <input type='button' value='Přidat téma hodiny'></div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - <input type='button' value='Přidat téma hodiny'> - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                         } else {
                             if (json.skupina[i] == 1 || json.skupina[i] == 2) {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + "</div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + " - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                             else {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + "</div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + " - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                         }
                         
@@ -379,17 +379,17 @@ function hodinyPrepis() {
                         var datum = u.getDate() + "." + (u.getMonth() + 1) + "." + u.getFullYear();
                         if (json.temaHodiny[i] == "") {
                             if (json.skupina[i] == 1 || json.skupina[i] == 2) {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - <input type='button' value='Přidat téma hodiny'></div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - <input type='button' value='Přidat téma hodiny'> - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                             else {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - <input type='button' value='Přidat téma hodiny'></div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - <input type='button' value='Přidat téma hodiny'> - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                         } else {
                             if (json.skupina[i] == 1 || json.skupina[i] == 2) {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + "</div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + " - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                             else {
-                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + "</div>";
+                                pole += "<div id='radek'><input type='checkbox' id='zruseno'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + " - <a href='dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                             }
                         }
                         

@@ -15,7 +15,7 @@ while ($radek = mysqli_fetch_assoc($data2)) {
     $konkretniTrida = $radek['trida'];
 }
 
-$data = mysqli_query($spojeni, "SELECT p.nazev AS predmet, t.nazev AS trida, h.skupina AS skupina, h.datum AS datum, h.temaHodiny AS temaHodiny FROM (eval_hodiny h LEFT JOIN eval_predmety p ON h.predmet_id = p.id) LEFT JOIN eval_tridy t ON h.trida_id = t.id WHERE h.ucitel_id = '$ucitel' AND p.nazev = '$konkretniPredmet' AND t.nazev ='$konkretniTrida' ORDER BY datum");
+$data = mysqli_query($spojeni, "SELECT p.nazev AS predmet, t.nazev AS trida, h.skupina AS skupina, h.datum AS datum, h.temaHodiny AS temaHodiny, h.id AS idHodiny FROM (eval_hodiny h LEFT JOIN eval_predmety p ON h.predmet_id = p.id) LEFT JOIN eval_tridy t ON h.trida_id = t.id WHERE h.ucitel_id = '$ucitel' AND p.nazev = '$konkretniPredmet' AND t.nazev ='$konkretniTrida' ORDER BY datum");
 
 mysqli_close($spojeni);
 
@@ -43,6 +43,11 @@ $json .= '], "datum":[';
 $json .= '], "temaHodiny":[';
     foreach($data as $radek) {
         $json .= '"'.$radek["temaHodiny"].'",';
+    }
+
+$json .= '], "idHodiny":[';
+    foreach($data as $radek) {
+        $json .= '"'.$radek["idHodiny"].'",';
     }
 
 $json .= ']}';
