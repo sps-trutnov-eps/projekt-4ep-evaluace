@@ -37,6 +37,19 @@
     </tbody>
   </table>
 </div>
+  <div id="popup" style="display: none;">
+    <select id="predmet">
+    </select><br>
+    <select id="trida">
+    </select><br>
+    <select id="skupina">
+      <option value="" selected disabled hidden>Vyberte skupinu</option>
+      <option value="0">celá třída</option>
+      <option value="1">1. skupina</option>
+      <option value="2">2. skupina</option>
+    </select><br>
+    <input type="submit" value="Potvrdit" id="potvrdit">
+  </div>
   <div id="datum" style="display: none;">
     <div id='startdate'>
         <label for="start">Počáteční datum výběru:</label>
@@ -47,23 +60,10 @@
         <input onchange="zmenacasu()" type="date" id="end" name="end" value="" min="" max=""><br>
     </div>
     <div>
-        <input type="button" value="Reset" onclick="reset()">
+        <input type="submit" value="Reset" onclick="reset()">
     </div>
   </div>
   <div id="temata">
-  </div>
-  <div id="popup" style="display: none;">
-    <select id="predmet">
-    </select>
-    <select id="trida">
-    </select>
-    <select id="skupina">
-      <option value="" selected disabled hidden>Vyberte skupinu</option>
-      <option value="0">celá třída</option>
-      <option value="1">1. skupina</option>
-      <option value="2">2. skupina</option>
-    </select>
-    <button value="submit" id="potvrdit">Potvrdit</button>
   </div>
   <div id="popupTema" style="display: none;">
   
