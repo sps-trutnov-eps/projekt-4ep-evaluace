@@ -9,6 +9,14 @@
     <script src="ucitel_rozvrh.js"></script>
 </head>
 <body>
+  <?php
+    require_once "../../config.php";
+    $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
+    session_start();
+    if ($_SESSION['idUcitel'] == NULL) {
+      header("location:ucitel_prihlaseni.html");
+    }
+  ?>
   <header>
     <h1>Učitelský rozvrh</h1>
   </header>

@@ -625,7 +625,7 @@ function nastavitDatumyUVyberuDatumu() {
     document.getElementById("start").setAttribute("value", today);
 }
 
-function testPrihlaseni() {
+/*function testPrihlaseni() {
     $.ajax(
         {
             type: "LOAD",
@@ -641,12 +641,12 @@ function testPrihlaseni() {
             }
         }
     );
-}
+}*/
 
 $(document).ready(function () {
     sudyLichy();
     generovatRozvrh();
     upravaRozvrhu();
     dataProPopupOkenko();
-    testPrihlaseni();
+    //testPrihlaseni();
 });

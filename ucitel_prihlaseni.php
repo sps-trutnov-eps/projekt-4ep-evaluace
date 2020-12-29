@@ -16,7 +16,7 @@ if ($_SESSION['idUcitel'] == NULL) {
         $email = mysqli_fetch_assoc($data);
         if (password_verify($passwd, $email["passwd"])) {
             $_SESSION['idUcitel'] = $email["id"];
-            header("location:ucitel_rozvrh.html");
+            header("location:ucitel_rozvrh.php");
         } else if ($passwd == NULL) {
             echo "<p>Vyplňte heslo.</p>";
         } else if (!password_verify($passwd, $email["passwd"])) {
@@ -24,6 +24,6 @@ if ($_SESSION['idUcitel'] == NULL) {
         }
     }
 } else {
-    header("location:ucitel_rozvrh.html");
+    header("location:ucitel_rozvrh.php");
 }
 mysqli_close($spojeni);
