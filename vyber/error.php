@@ -17,7 +17,13 @@
     <div id="rozcesti">
         <a href="vyber.php">Zpět</a>
     </div>
+<?php
 
+session_start();
+$_SESSION = array();
+session_destroy();
+
+?>
     </main>
 </div>
     <footer>

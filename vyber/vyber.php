@@ -65,7 +65,7 @@
     $predmety = mysqli_query($spojeni, "SELECT * FROM eval_predmety");
     $tridy = mysqli_query($spojeni, "SELECT * FROM eval_tridy");
 
-
+    mysqli_close($spojeni);
 ?>
 
     <header>
