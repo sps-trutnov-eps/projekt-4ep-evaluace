@@ -11,7 +11,7 @@
 <div id="stranka">
 <main>
 <?php
-require_once "../config.php"; // získání configu
+require_once "../../config.php"; // získání configu
 
 if (isset($_POST["idHodiny"]))$idHodiny_post = $_POST["idHodiny"]; //kontrola pro existenci proměnné
 session_start();

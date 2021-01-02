@@ -1,7 +1,7 @@
 <?php
 
 
-require_once "../config.php";
+require_once "../../config.php";
 
 $tridaID = $_GET["trida"];
 $predmetID = $_GET["predmet"];

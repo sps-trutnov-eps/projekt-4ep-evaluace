@@ -1,6 +1,6 @@
 <?php
 
-require_once "../config.php";
+require_once "../../config.php";
 
 $predmet = $_POST["predmet"];
 $trida = $_POST["trida"];

@@ -11,7 +11,7 @@
 <div id="stranka">
 <main>
 <?php
-require_once "../config.php"; // získání configu
+require_once "../../config.php"; // získání configu
 
 if (isset($_POST["datum"]))$datum_post = $_POST["datum"]; //kontrola pro existenci proměnných je v ní někde chyba ale nedokázal jsem uzatím najít řešení i přesto že neexistuje tak se zapíše a pak je z toho dále problém
 if (isset($_POST["predmet"]))$predmet_post = $_POST["predmet"];

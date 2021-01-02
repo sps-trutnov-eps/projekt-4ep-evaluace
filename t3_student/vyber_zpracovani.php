@@ -1,5 +1,5 @@
 <?php
-require_once "../config.php";
+require_once "../../config.php";
 
 $tridaID = $_POST["trida"];
 $predmetID = $_POST["predmet"];
@@ -79,7 +79,7 @@ if(empty($dotazniky) == true)
 else
 {
     //echo "<script>console.log('classic funguje')</script>";
-    header("location:uspech.php");
+    header("location:../t5_vyplneni/formular.php");
 }
 
 }
@@ -117,7 +117,7 @@ if(empty($dotaznikNez) == true)
 else
 {
     //echo "<script>console.log('special funguje')</script>";
-    header("location:uspech.php");
+    header("location:../t5_vyplneni/formular.php");
 }
 
 

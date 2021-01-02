@@ -1,3 +1,9 @@
+
+
+
+
+
+
 let textareaVyber = "<div id='podvyber*' class='podvyber#'><input class='podvyberINPUT' type='text' name='podvyber#' cols='30' rows='2'></textarea><button class='odstranitPodVyber' onclick='odstranitPodvyber(*)'>Odstranit možnost k výběru</button><br></div>";
 let formularText = "";
 let formularVyber = "<div class='pridatVyber' id='pridatVyber#'><button type='button' class='pridatDalsiVyber'  onclick='pridatDalsiVyber(#)'>Přídat další možnost k výběru</button></div>";

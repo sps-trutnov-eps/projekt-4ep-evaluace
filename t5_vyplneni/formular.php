@@ -7,17 +7,12 @@
 </head>
 <body>
 
-<div id="stranka">
-        <a href="../vyber/vyber.php">Žák</a>
-        <a href="../src/ucitel_prihlaseni.html">Učitel</a>
-</div>
-
 <?php
-    require_once "../config.php";
+    require_once "../../config.php";
     $spojeni = mysqli_connect(dbhost, dbuser,dbpass,dbname);
+    session_start();
 
-
-    $idHodiny = $_POST[""];
+    $idHodiny = $_SESSION["hodinaID"];
     
     $idVzoru = mysqli_query($spojeni, "SELECT idVzoru FROM eval_formulare WHERE idHodiny = $idHodiny");
     $formular = mysqli_query($spojeni, "SELECT otazka FROM eval_formulare_vzory WHERE id = $idVzoru");
@@ -60,7 +55,7 @@ $data = '
 
 
 ?>
-<form action="./json.php" method="POST" name>
+<form action="json.php" method="POST" name>
 <?php
 echo "<table>";
 switch($objekt->moznostHodnoceni){
