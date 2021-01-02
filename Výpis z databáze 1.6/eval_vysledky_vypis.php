@@ -127,7 +127,7 @@ while($vysledky = mysqli_fetch_assoc($data_vysledky))
     $vysledek = $vysledky_email . " " . $vysledky_trida . " " . $vysledky_nazev . " " . $vysledky_tema; 
     //zobrazení "odkazu" ve formě formuláře pro zobrazení detailu
     echo"
-    <form method='post' action='eval_vasledek_detail.php'>
+    <form method='post' action='eval_vysledek_detail.php'>
         <input type='submit' value='$vysledek'>
         <input type='hidden' name='idHodiny' value='$vysledky_id'/></br>
     </form>";
