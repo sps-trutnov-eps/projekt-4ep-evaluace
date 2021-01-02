@@ -20,9 +20,7 @@ if ($_SESSION['idUcitel'] == NULL) {
         } else if ($passwd == NULL) {
             echo "<p>Vyplňte heslo.</p>";
         } else if (!password_verify($passwd, $email["passwd"])) {
-            //echo "<p>Neplatné heslo pro email</p>";
-            $_SESSION['idUcitel'] = $email["id"];
-            header("location:ucitel_rozvrh.php");
+            echo "<p>Neplatné heslo pro email</p>";
         }
     }
 } else {
