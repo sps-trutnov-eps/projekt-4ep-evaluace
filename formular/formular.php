@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,13 +19,10 @@
 
     $idHodiny = $_POST[""];
     
-    $idVzoru = mysqli_query($spojeni, "SELECT idVzoru FROM eval_formulare_vzory WHERE idHodiny = $idHodiny");
-    $formular = mysqli_query($spojeni, "SELECT * FROM eval_formulare_vzory WHERE id = $idVzoru")
+    $idVzoru = mysqli_query($spojeni, "SELECT idVzoru FROM eval_formulare WHERE idHodiny = $idHodiny");
+    $formular = mysqli_query($spojeni, "SELECT otazka FROM eval_formulare_vzory WHERE id = $idVzoru");
 
-
-    //$_POST["něco"]; //-> tady přijde id formuláře
-    //$formular = mysqli_query($spojeni, "SELECT * FROM databaze WHERE neco = 'neco'"); //-> tady se vytáhne formulář a uloží se
-    //json_decode($formular);
+    $objekt = json_decode($formular);
 
 
 $data = '
@@ -59,7 +56,9 @@ $data = '
     ]
 }';
 
-$objekt = json_decode($data);
+//$objekt = json_decode($data); test
+
+
 ?>
 <form action="./json.php" method="POST" name>
 <?php
@@ -72,6 +71,11 @@ switch($objekt->moznostHodnoceni){
         break;
     case "hvezdicky":
         echo "Hvězdičky";
+        echo "<td><input type='radio' name='hodnoceniHodiny' value='1'><label for='1'>1</label></td>";
+        echo "<td><input type='radio' name='hodnoceniHodiny' value='2'><label for='2'>2</label></td>";
+        echo "<td><input type='radio' name='hodnoceniHodiny' value='3'><label for='3'>3</label></td>";
+        echo "<td><input type='radio' name='hodnoceniHodiny' value='4'><label for='4'>4</label></td>";
+        echo "<td><input type='radio' name='hodnoceniHodiny' value='5'><label for='5'>5</label></td>";
         /*kód pro vytvoření hvězdiček*/
         break;
     default:       
@@ -116,5 +120,4 @@ foreach($objekt->otazky as $otazka){
 
 </body>
 </html>
->>>>>>> t5_vyplneni_sobotka
->>>>>>> t5_vyplneni
+
