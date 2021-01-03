@@ -2,7 +2,6 @@
     
     
     body{
-        background-image: url(obrazky/pozadi.jpg);
         background-position: center top;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -12,8 +11,6 @@
 		}
 }
 @media all and (max-width:1280px){
-
-
 
 
 }
@@ -153,6 +150,44 @@ width: 50%;
   display:block;
 }
 
+
+
+input[type=heslo]{
+    width: 50%;
+    color:black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-color: black;
+    cursor: pointer;
+    margin-top: 2%;
+    margin-left:10%;
+    margin-bottom: 2%;
+    
+  }
+
+  input[type=heslo_znovu]{
+    width: 50%;
+      color:black;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border-color: black;
+      cursor: pointer; 
+      margin-left:10%;
+      display:block;
+    }
+ input[type=button]{
+        width: 20%;
+        color:black;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border-color: black;
+        cursor: pointer;
+        margin-top: 2%;
+        margin-left:10%;
+        margin-bottom: 2%;
+        
+      }
+
 .prvkyOtazekDIV{
     padding-top: 1em;
 }
@@ -214,7 +249,7 @@ input[type=number]{
     width: min-content;
 }
 
-#upravy, #sudyLichy  {
+#upravy, #sudyLichy, #reset  {
     background-color: #F48B4C;
     border: none;
     color: white;
@@ -263,6 +298,7 @@ input[type=number]{
         margin-right: 3%;
   }
 
+
 /* Tablulka ucitel */
 #ucitel table,#ucitel td,#ucitel th {  
     border: 1px solid #ddd;
@@ -303,17 +339,25 @@ input[type=number]{
 
   /* Popup */
 
-  #popup{
+  #popup, #poupTema{
       width: 100%;
       height: 100%;
-      background-color: black;
-      opacity: 0.7;
-      position: absolute;
+      background-color: white;
+      /*position: absolute;*/
       top:0;
-      display: flex;
+     /* display: flex;*/
       justify-content: center;
       align-items: center;
+     /*display: none;*/
   }
+  #popup{
+    margin-top: 2%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 2%;
+  }
+  #popup
+  
 
   /*Student */
 
@@ -380,3 +424,31 @@ input[type=number]{
   #rozcesti a:hover,#rozcesti a:active {
     background-color: #FCC93A;
   }
+
+  /* registrace */
+.flash_ok {
+    margin: 10px 0px 10px 0px;
+    background: rgba(61, 172, 61, 0.644);
+    border: 2px solid darkgreen;
+    color:red;
+    padding: 9px;
+}
+.flash_err{
+    margin: 10px 0px 10px 0px;
+    background: lightpink;
+    border: 2px solid red;
+    color: red;
+    padding: 9px;
+}
+.input_register{
+    margin-left: 5px !important;
+}
+.overeni{
+    margin-top: 10px;
+    border: 0;
+    border-collapse: collapse;
+}
+.overeni td{
+    border: 0;
+    padding: 3px;
+}
