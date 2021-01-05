@@ -8,7 +8,7 @@
     * na email.
 */
 
-include_once "../config.php";
+include_once "../../config.php";
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 

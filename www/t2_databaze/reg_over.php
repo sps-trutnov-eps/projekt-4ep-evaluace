@@ -5,7 +5,7 @@ if(isset($_POST["code"]) && !empty($_POST["code"]))
 else
     die("Chyba: nesprávný požadavek.");
 
-include_once "../config.php";
+include_once "../../config.php";
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 

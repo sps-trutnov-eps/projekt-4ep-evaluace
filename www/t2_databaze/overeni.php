@@ -5,7 +5,7 @@ if(isset($_GET["code"]) && !empty($_GET["code"]))
 else
     die("Chyba: nesprávný požadavek.");
 
-include_once "../config.php";
+include_once "../../config.php";
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
@@ -27,7 +27,7 @@ $userinf = mysqli_fetch_assoc($res);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>SPŠ eval - registrace</title>
 </head>
 <body>

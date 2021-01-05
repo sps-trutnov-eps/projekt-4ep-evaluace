@@ -58,7 +58,7 @@
 <body onclick="Zjisti()">
 
 <?php
-    require_once "../config.php";
+    require_once "../../config.php";
 
 
     $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
@@ -89,7 +89,6 @@
                 echo "<option value=".$trida["id"].">".$trida["trida"]."</option>";
 
             }
-            // je samozrejme nutne aby v databazi neco bylo
             ?>
     </select><br>
 
