@@ -21,16 +21,16 @@
         if (isset($_SESSION["idUcitel"]))
             $ucitelID = $_SESSION["idUcitel"];
         else
-            header("Location: ucitel_prihlaseni.php");
+            header("Location: ../t4_ucitel/ucitel_prihlaseni.php");
 
         if(!isset($_GET['id']))
-            header("Location: ucitel_rozvrh.php");
+            header("Location: ../t4_ucitel/ucitel_rozvrh.php");
         else{
             $hodina = $_GET['id'];
             $sql = "SELECT * FROM eval_formulare WHERE idHodiny = $hodina";
             $data = mysqli_query($spojeni, $sql);
             if(mysqli_num_rows($data) > 0)
-                header("Location: ucitel_rozvrh.php");
+                header("Location: ../t4_ucitel/ucitel_rozvrh.php");
         }
         ?>
         <div id="formular">
