@@ -86,7 +86,7 @@
 
 
             foreach($tridy as $trida){
-                echo "<option value=".$trida["id"].">".$trida["trida"]."</option>";
+                echo "<option value=".$trida["id"].">".$trida["nazev"]."</option>";
 
             }
             ?>
