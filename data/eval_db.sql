@@ -99,6 +99,66 @@ CREATE TABLE `eval_predmety` (
   `nazev` varchar(100) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
+--
+-- Vypisuji data pro tabulku `eval_predmety`
+--
+
+INSERT INTO `eval_predmety` (`nazev`) VALUES
+('ANG'),
+('APS'),
+('ATT'),
+('AZA'),
+('CEK'),
+('CIT'),
+('CJL'),
+('CMT'),
+('CNC'),
+('DEJ'),
+('ECM'),
+('EKA'),
+('ELE'),
+('ELN'),
+('ELT'),
+('ESP'),
+('EZA'),
+('FYZ'),
+('HAE'),
+('ICT'),
+('INS'),
+('KOM'),
+('MAM'),
+('MAT'),
+('MEC'),
+('MIT'),
+('MUL'),
+('MZA'),
+('NEM'),
+('OBN'),
+('ODV'),
+('OPS'),
+('PELK'),
+('PGR'),
+('POS'),
+('PRA'),
+('PRO'),
+('PSY'),
+('PUK'),
+('PVA'),
+('PVY'),
+('PXE'),
+('RZA'),
+('SAZ'),
+('SPS'),
+('SPZ'),
+('STR'),
+('STT'),
+('TEC'),
+('TEK'),
+('TEV'),
+('UAD'),
+('ZEL'),
+('ZPV');
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +169,37 @@ CREATE TABLE `eval_tridy` (
   `id` int(11) NOT NULL,
   `trida` varchar(5) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+--
+-- Vypisuji data pro tabulku `eval_tridy`
+--
+
+INSERT INTO `eval_tridy` (`nazev`) VALUES
+('1.A'),
+('2.A'),
+('3.A'),
+('1.B'),
+('2.B'),
+('3.B'),
+('1.C'),
+('2.C'),
+('3.C'),
+('1.EP'),
+('2.EP'),
+('3.EP'),
+('4.EP'),
+('1.IT'),
+('2.IT'),
+('3.IT'),
+('4.IT'),
+('1.S'),
+('2.S'),
+('3.S'),
+('4.S'),
+('1.ST'),
+('2.ST'),
+('3.ST'),
+('4.ST');
 
 -- --------------------------------------------------------
 
