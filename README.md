@@ -11,3 +11,4 @@
 	- ```const dbname = "jmeno_sql_databaze";```
 4. Na SQL serveru vytvořte novou databázi pojmenovanou ve shodě s bodem 3.
 5. Do nově vytvořené databáze importujte soubor ```data/eval_db.sql```.
+6. Do tabulky ```eval_ucitele``` ručně doplňte e-mailové adresy učitelů.
