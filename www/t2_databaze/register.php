@@ -54,13 +54,15 @@ function getUser($email)
 
 function sendEmail($email, $code)
 {
-    $app_url = "http://jarolimek.epsilon.spstrutnov.cz/eval";
+	$dir_url = pathinfo($_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"])["dirname"];
+	$scheme = $_SERVER["REQUEST_SCHEME"];
 
     $headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= 'From: <no-reply@sps-eval.spstrutnov.cz>' . "\r\n";
 
     $subject = "Ověření registrace učitele v aplikaci SPŠ eval";
-    $body = "Klikněte zde pro registrace: <a href=\"$app_url/t2_databaze/overeni.php?code=$code\">ověřit</a>";
+    $body = "Klikněte zde pro registraci: <a href=\"$scheme://$dir_url/overeni.php?code=$code\">ověřit</a>";
+	
     if(mail($email, $subject, $body, $headers))
         return true;
     return false;
