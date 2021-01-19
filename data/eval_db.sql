@@ -53,12 +53,12 @@ CREATE TABLE `eval_formulare_vzory` (
 
 CREATE TABLE `eval_hodiny` (
   `id` int(11) NOT NULL,
-  `ucitel_id` int(11) NOT NULL,
-  `predmet_id` int(11) NOT NULL,
-  `trida_id` int(11) NOT NULL,
+  `idUcitele` int(11) NOT NULL,
+  `idPredmetu` int(11) NOT NULL,
+  `idTridy` int(11) NOT NULL,
   `skupina` int(1) NOT NULL,
   `datum` date NOT NULL,
-  `skolniHodina` int(1) NOT NULL,
+  `skolniHodina` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `temaHodiny` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `zruseno` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
