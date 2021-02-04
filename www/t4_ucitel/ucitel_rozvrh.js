@@ -551,25 +551,21 @@ function sudyLichy() {
                 document.getElementById("sudyLichy").innerHTML = sudy;
                 document.getElementById("sudyLichy").value = "2";
                 generovatRozvrh();
-                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
             else if (document.getElementById("sudyLichy").innerHTML == sudy && document.getElementById("sudyLichy").value == 2) {
                 document.getElementById("sudyLichy").innerHTML = lichy;
                 document.getElementById("sudyLichy").value = "1";
                 generovatRozvrh();
-                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
             else if (document.getElementById("sudyLichy").innerHTML == sudy && document.getElementById("sudyLichy").value == 1) {
                 document.getElementById("sudyLichy").innerHTML = lichy;
                 document.getElementById("sudyLichy").value = "2";
                 generovatRozvrh();
-                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
             else {
                 document.getElementById("sudyLichy").innerHTML = sudy;
                 document.getElementById("sudyLichy").value = "1";
                 generovatRozvrh();
-                $("td").attr("onclick", "pridatHodinu(this.id)");
             }
     })
 }
@@ -626,28 +622,9 @@ function nastavitDatumyUVyberuDatumu() {
     document.getElementById("start").setAttribute("value", today);
 }
 
-/*function testPrihlaseni() {
-    $.ajax(
-        {
-            type: "LOAD",
-            url: "ucitel_kontrolaPrihlaseni.php",
-            success: function(data) {
-                if (data == 0) {
-                    alert("Nejste přihlášen/a.");
-                    location.href = "ucitel_prihlaseni.html";
-                }
-            },
-            error: function() {
-                alert("Při zpracování dotazu došlo k neočekávané chybě.");
-            }
-        }
-    );
-}*/
-
 $(document).ready(function () {
     sudyLichy();
     generovatRozvrh();
     upravaRozvrhu();
     dataProPopupOkenko();
-    //testPrihlaseni();
 });
