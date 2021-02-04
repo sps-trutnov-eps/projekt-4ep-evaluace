@@ -8,7 +8,7 @@
 <body>
 
 <?php
-    require_once "../../config.php";
+    require_once "../../../config.php";
     $spojeni = mysqli_connect(dbhost, dbuser,dbpass,dbname);
     session_start();
 
