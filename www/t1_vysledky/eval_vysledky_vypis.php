@@ -3,6 +3,7 @@
 <head>
     <title>Evaulace</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="export_excel.js"></script>
 </head>
 <body>
 <header>
@@ -13,18 +14,17 @@
 <?php
 require_once "../../config.php"; // získání configu
 
-if (isset($_POST["datum"]))$datum_post = $_POST["datum"]; //kontrola pro existenci proměnných je v ní někde chyba ale nedokázal jsem zatím najít řešení i přesto že neexistuje tak se zapíše a pak je z toho dále problém
+if (isset($_POST["datum_od"]))$datum_od_post = $_POST["datum_od"]; //kontrola pro existenci proměnných je v ní někde chyba ale nedokázal jsem zatím najít řešení i přesto že neexistuje tak se zapíše a pak je z toho dále problém
+if (isset($_POST["datum_do"]))$datum_do_post = $_POST["datum_do"];
 if (isset($_POST["predmet"]))$predmet_post = $_POST["predmet"];
 if (isset($_POST["tridy"]))$tridy_post = $_POST["tridy"];
 if (isset($_POST["skupina"]))$skupina_post = $_POST["skupina"];
 
 session_start();//kontrola přihlášení učitele
-/*
 if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
-header("Location: ../t4_ucitel/ucitel_prihlaseni.php");*/
-$ucitelID = 2;
+header("Location: ../t4_ucitel/ucitel_prihlaseni.php");
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname); // připojení k db
 //začátek generování listů pro formulář
@@ -83,8 +83,10 @@ echo"
 <th>
 <div id='vysledky1'>
 <form method='post' action='eval_vysledky_vypis.php'>
-    <label for='datum'>Vyberte datum:</label><br>
-    <input type='list' list='datum' name='datum'/><br>
+    <label for='datum_od'>Vyberte datum od:</label><br>
+    <input type='list' list='datum' name='datum_od'/><br>
+    <label for='datum_do'>Vyberte datum od:</label><br>
+    <input type='list' list='datum' name='datum_do'/><br>
     <label for='predmet'>Vyberte předmět:</label><br>
     <input type='list' list='predmet' name='predmet'/><br>
     <label for='tridy'>Vyberte třídu:</label><br>
@@ -97,10 +99,25 @@ echo"
 </th>
 <th>
 <div id='vysledky2'>";
-$filtr = "";// nefunkčí kvůli předchozí kontrole z postu nenalezeno řešení prozatím
-if(isset($datum_post) AND $datum_post != NULL)
+$filtr = "";
+if(isset($datum_od_post) AND $datum_od_post != NULL)
+{  
+    if(isset($datum_do_post) AND $datum_do_post != NULL)
+    {
+        $filtr = $filtr . " AND h.datum BETWEEN '" . $datum_od_post . "' AND '" . $datum_do_post . "'";
+    }
+    else
+    {
+        $filtr = $filtr . " AND h.datum >= '" . $datum_od_post . "'";
+    }
+}
+if(isset($datum_do_post) AND $datum_do_post != NULL)
 {
-    $filtr = $filtr . " AND h.datum = '" . $datum_post . "'";
+    if(isset($datum_od_post) AND $datum_od_post != NULL){}
+    else
+    {        
+        $filtr = $filtr . " AND h.datum <= '" . $datum_do_post . "'";
+    }
 }
 if(isset($predmet_post) AND $predmet_post != NULL)
 {
@@ -124,7 +141,9 @@ $i = 0;//proměnná pro odpočet
 $oznaceni = "vysledek";//název pod kterým se budou posílat
 echo"
 <form method='post' action='eval_vysledek_detail.php'>
-    <input type='hidden' name='oznaceni' value='$oznaceni'>";
+    <input type='hidden' name='oznaceni' value='$oznaceni'>
+    <input type='checkbox' id='vse' onclick='chechbox_all(this);'/>
+    <label for='vse'>Označit vše</label><br>";
 while($vysledky = mysqli_fetch_assoc($data_vysledky))
 {
     //vybrání proměnných

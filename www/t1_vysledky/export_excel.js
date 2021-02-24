@@ -31,3 +31,11 @@ function fnExcelReport()
 
     return (sa);
 }
+
+function chechbox_all(vse) {
+    var checkboxy = document.querySelectorAll('input[type="checkbox"]');
+    for (var i = 0; i < checkboxy.length; i++) {
+        if (checkboxy[i] != vse)
+            checkboxy[i].checked = vse.checked;
+    }
+}
