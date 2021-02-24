@@ -19,10 +19,11 @@ if (isset($_POST["tridy"]))$tridy_post = $_POST["tridy"];
 if (isset($_POST["skupina"]))$skupina_post = $_POST["skupina"];
 
 session_start();//kontrola přihlášení učitele
-if (isset($_SESSION["idUcitel"]))
+/*if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
-header("Location: ../t4_ucitel/ucitel_prihlaseni.php");
+header("Location: ../t4_ucitel/ucitel_prihlaseni.php");*/
+$ucitelID = 2;
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname); // připojení k db
 //začátek generování listů pro formulář
@@ -30,7 +31,7 @@ echo"
 <datalist id='datum'>
 ";
 //získávání dat pro formuláře z daných míst v db
-$data_dotazniky = mysqli_query($spojeni,"SELECT DISTINCT datum FROM `eval_hodiny` WHERE h.idUcitele = '$ucitelID'"); 
+$data_dotazniky = mysqli_query($spojeni,"SELECT DISTINCT datum FROM `eval_hodiny` WHERE idUcitele = '$ucitelID'"); 
 while($datum = mysqli_fetch_assoc($data_dotazniky))
 {
     $date = $datum["datum"]; 
@@ -57,7 +58,7 @@ echo"
 $data_tridy = mysqli_query($spojeni,"SELECT DISTINCT t.nazev FROM eval_tridy t INNER JOIN eval_hodiny h ON h.idTridy = t.id WHERE h.idUcitele = '$ucitelID'"); 
 while($tridy = mysqli_fetch_assoc($data_tridy))
 {  
-    $trida = $tridy["trida"];
+    $trida = $tridy["nazev"];
     echo"<option value='$trida'>";
 }
 //generování listů pro formulář
@@ -66,7 +67,7 @@ echo"
 <datalist id='skupina'>
 ";
 //získávání dat pro formuláře z daných míst v db
-$data_dotazniky = mysqli_query($spojeni,"SELECT DISTINCT skupina FROM eval_hodiny WHERE h.idUcitele = '$ucitelID'"); 
+$data_dotazniky = mysqli_query($spojeni,"SELECT DISTINCT skupina FROM eval_hodiny WHERE idUcitele = '$ucitelID'"); 
 while($datum = mysqli_fetch_assoc($data_dotazniky))
 {
     $skupina = $datum["skupina"]; 
@@ -96,19 +97,19 @@ echo"
 <th>
 <div id='vysledky2'>";
 $filtr = "";// nefunkčí kvůli předchozí kontrole z postu nenalezeno řešení prozatím
-if(isset($datum_post))
+if(isset($datum_post) AND $datum_post != NULL)
 {
     $filtr = $filtr . " AND h.datum = '" . $datum_post . "'";
 }
-if(isset($predmet_post))
+if(isset($predmet_post) AND $predmet_post != NULL)
 {
     $filtr = $filtr . " AND p.nazev = '" . $predmet_post . "'";
 }
-if(isset($tridy_post))
+if(isset($tridy_post) AND $tridy_post != NULL)
 {
     $filtr = $filtr . " AND t.nazev = '" . $tridy_post . "'";
 }
-if(isset($skupina_post))
+if(isset($skupina_post) AND $skupina_post != NULL)
 {
     if($filtr != "")
     {
@@ -127,7 +128,7 @@ while($vysledky = mysqli_fetch_assoc($data_vysledky))
     $vysledek_obor = $vysledky["obor"];
     $vysledek_tema = $vysledky["temaHodiny"];
     //spojování textu do "srozumitelného" řeťezce pro identifikaci
-    $vysledek = $vysledek_email . " " . $vysledek_trida . " " . $vysledek_obor . " " . $vysledek_tema; 
+    $vysledek = $vysledek_datum . " | " . $vysledek_trida . " | " . $vysledek_obor . " - " . $vysledek_tema; 
     //zobrazení "odkazu" ve formě formuláře pro zobrazení detailu
     echo"
     <form method='post' action='eval_vysledek_detail.php'>
@@ -142,6 +143,7 @@ echo"
 </tr>
 </table>
 </div>";
+//uzavření spojení s db
 mysqli_close($spojeni);
 ?>
 </main>

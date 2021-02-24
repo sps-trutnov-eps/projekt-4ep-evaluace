@@ -3,6 +3,7 @@
 <head>
     <title>Evaulace</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="export_excel.js"></script>
 </head>
 <body>
 <header>
@@ -16,10 +17,11 @@ require_once "../../config.php"; // získání configu
 if (isset($_POST["idHodiny"]))$idHodiny_post = $_POST["idHodiny"]; //kontrola pro existenci proměnné
 
 session_start();//kontrola přihlášení učitele
-if (isset($_SESSION["idUcitel"]))
+/*if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
-header("Location: ../t4_ucitel/ucitel_prihlaseni.php");
+header("Location: ../t4_ucitel/ucitel_prihlaseni.php");*/
+$ucitelID = 2;
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname); //připojení k db
 
@@ -40,8 +42,10 @@ while($vysledky = mysqli_fetch_assoc($data_vysledky))
         <input type='hidden' name='idHodiny' value='$vysledek_id'/></br>
     </form>";
 }
+//uzavření spojení s db
 mysqli_close($spojeni);
 ?>
+<button id="btnExport" onclick="fnExcelReport();"> EXPORT </button>
 </main>
 </div>
 <footer>
