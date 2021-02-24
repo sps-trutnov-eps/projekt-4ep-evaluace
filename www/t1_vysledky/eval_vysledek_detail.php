@@ -14,33 +14,39 @@
 <?php
 require_once "../../config.php"; // získání configu
 
-if (isset($_POST["idHodiny"]))$idHodiny_post = $_POST["idHodiny"]; //kontrola pro existenci proměnné
+if (isset($_POST["oznaceni"]))$oznaceni = $_POST["oznaceni"];//kontrola pro existenci proměnné
+if (isset($_POST["pocet"]))$pocet = $_POST["pocet"];
+$x = 1; //proměnná pro while
+$i = 0; //odpočet
+while ($x) { //získání všech poslaných id
+    $i++;
+    if (isset($_POST["$oznaceni$i"]))$idHodiny_post[$i] = $_POST["$oznaceni$i"];
+    if($i >= $pocet)$x = 0;
+}
 
 session_start();//kontrola přihlášení učitele
-/*if (isset($_SESSION["idUcitel"]))
+if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
-header("Location: ../t4_ucitel/ucitel_prihlaseni.php");*/
-$ucitelID = 2;
+header("Location: ../t4_ucitel/ucitel_prihlaseni.php");
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname); //připojení k db
 
-$data_vysledky = mysqli_query($spojeni,"SELECT * FROM `eval_hodiny` WHERE id = '$idHodiny_post'");
+foreach($idHodiny_post as $idHodiny){//vypsání všech výsledků
+    $data_vysledky = mysqli_query($spojeni,"SELECT * FROM `eval_hodiny` WHERE id = '$idHodiny'");
 
-while($vysledky = mysqli_fetch_assoc($data_vysledky))
-{
-    $vysledek_datum = $vysledky["datum"];
-    $vysledek_trida = $vysledky["trida"];
-    $vysledek_obor = $vysledky["obor"];
-    $vysledek_tema = $vysledky["temaHodiny"];
-    //spojování textu do "srozumitelného" řeťezce pro identifikaci
-    $vysledek = $vysledek_datum . " " . $vysledek_trida . " " . $vysledek_obor . " " . $vysledek_tema; 
-    //zobrazení "odkazu" ve formě formuláře pro zobrazení detailu
-    echo"
-    <form method='post' action='eval_vysledek_detail.php'>
-        <input type='submit' value='$vysledek'>
-        <input type='hidden' name='idHodiny' value='$vysledek_id'/></br>
-    </form>";
+    while($vysledky = mysqli_fetch_assoc($data_vysledky))
+    {
+        $vysledek_datum = $vysledky["datum"];
+        $vysledek_tema = $vysledky["temaHodiny"];
+        //spojování textu do "srozumitelného" řeťezce pro identifikaci
+        $vysledek = $vysledek_datum . " " . $vysledek_tema; 
+        //zobrazení "odkazu" ve formě formuláře pro zobrazení detailu
+        echo"
+        <form method='post' action='eval_vysledek_detail.php'>
+            <input type='submit' value='$vysledek'>
+        </form>";
+    }
 }
 //uzavření spojení s db
 mysqli_close($spojeni);

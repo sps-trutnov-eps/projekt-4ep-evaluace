@@ -19,7 +19,8 @@ if (isset($_POST["tridy"]))$tridy_post = $_POST["tridy"];
 if (isset($_POST["skupina"]))$skupina_post = $_POST["skupina"];
 
 session_start();//kontrola přihlášení učitele
-/*if (isset($_SESSION["idUcitel"]))
+/*
+if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
 header("Location: ../t4_ucitel/ucitel_prihlaseni.php");*/
@@ -119,8 +120,14 @@ if(isset($skupina_post) AND $skupina_post != NULL)
 //získávání vyfiltrovaných dat pro vísledky po zprovoznění filtru
 $data_vysledky = mysqli_query($spojeni,"SELECT u.email, t.nazev AS trida, p.nazev AS obor, h.datum, h.temaHodiny, h.zruseno, h.id FROM eval_hodiny h INNER JOIN eval_ucitele u ON h.idUcitele = u.id LEFT JOIN eval_tridy t ON h.idTridy = t.id LEFT JOIN eval_predmety p ON h.idPredmetu = p.id  WHERE idUcitele = '$ucitelID'$filtr"); 
 //generování jednotlivých výsledků jako formuláře s hidden informací o daném výsledku pro poslání na další stránku kde se zobrazí výsledek v detailu
+$i = 0;//proměnná pro odpočet
+$oznaceni = "vysledek";//název pod kterým se budou posílat
+echo"
+<form method='post' action='eval_vysledek_detail.php'>
+    <input type='hidden' name='oznaceni' value='$oznaceni'>";
 while($vysledky = mysqli_fetch_assoc($data_vysledky))
 {
+    //vybrání proměnných
     $vysledek_id = $vysledky["id"];
     $vysledek_datum = $vysledky["datum"];
     $vysledek_email = $vysledky["email"];
@@ -130,12 +137,17 @@ while($vysledky = mysqli_fetch_assoc($data_vysledky))
     //spojování textu do "srozumitelného" řeťezce pro identifikaci
     $vysledek = $vysledek_datum . " | " . $vysledek_trida . " | " . $vysledek_obor . " - " . $vysledek_tema; 
     //zobrazení "odkazu" ve formě formuláře pro zobrazení detailu
+    $i++;//opočet výsledků
     echo"
-    <form method='post' action='eval_vysledek_detail.php'>
-        <input type='submit' value='$vysledek'>
-        <input type='hidden' name='idHodiny' value='$vysledek_id'/></br>
-    </form>";
+        <input type='checkbox' id='$oznaceni$i' name='$oznaceni$i' value='$vysledek_id'/>
+        <label for='$oznaceni$i'>$vysledek</label><br>";
 }
+//konec formuláře s konečným číslem výsledků
+echo"
+<input type='hidden' name='pocet' value='$i'>
+<label>Celkem nalezeno:$i výsledků</label><br>
+<input type='submit' value='Přejít na detail'>
+</form>";
 //věci pro css
 echo"
 </div>
