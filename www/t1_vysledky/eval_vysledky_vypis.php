@@ -4,6 +4,7 @@
     <title>Evaulace</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="export_excel.js"></script>
+    <meta charset="utf-8" />
 </head>
 <body>
 <header>
@@ -21,10 +22,12 @@ if (isset($_POST["tridy"]))$tridy_post = $_POST["tridy"];
 if (isset($_POST["skupina"]))$skupina_post = $_POST["skupina"];
 
 session_start();//kontrola přihlášení učitele
+/*
 if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
-header("Location: ../t4_ucitel/ucitel_prihlaseni.php");
+header("Location: ../t4_ucitel/ucitel_prihlaseni.html");*/
+$ucitelID = 2;
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname); // připojení k db
 //začátek generování listů pro formulář
@@ -99,7 +102,9 @@ echo"
 </th>
 <th>
 <div id='vysledky2'>";
+//filtr
 $filtr = "";
+//pro datum
 if(isset($datum_od_post) AND $datum_od_post != NULL)
 {  
     if(isset($datum_do_post) AND $datum_do_post != NULL)
@@ -119,14 +124,17 @@ if(isset($datum_do_post) AND $datum_do_post != NULL)
         $filtr = $filtr . " AND h.datum <= '" . $datum_do_post . "'";
     }
 }
+//pro předmět
 if(isset($predmet_post) AND $predmet_post != NULL)
 {
     $filtr = $filtr . " AND p.nazev = '" . $predmet_post . "'";
 }
+//pro třídy
 if(isset($tridy_post) AND $tridy_post != NULL)
 {
     $filtr = $filtr . " AND t.nazev = '" . $tridy_post . "'";
 }
+//pro skupiny
 if(isset($skupina_post) AND $skupina_post != NULL)
 {
     if($filtr != "")
@@ -135,8 +143,8 @@ if(isset($skupina_post) AND $skupina_post != NULL)
     }
 }
 //získávání vyfiltrovaných dat pro vísledky po zprovoznění filtru
-$data_vysledky = mysqli_query($spojeni,"SELECT u.email, t.nazev AS trida, p.nazev AS obor, h.datum, h.temaHodiny, h.zruseno, h.id FROM eval_hodiny h INNER JOIN eval_ucitele u ON h.idUcitele = u.id LEFT JOIN eval_tridy t ON h.idTridy = t.id LEFT JOIN eval_predmety p ON h.idPredmetu = p.id  WHERE idUcitele = '$ucitelID'$filtr"); 
-//generování jednotlivých výsledků jako formuláře s hidden informací o daném výsledku pro poslání na další stránku kde se zobrazí výsledek v detailu
+$data_vysledky = mysqli_query($spojeni,"SELECT u.email, t.nazev AS trida, p.nazev AS obor, h.datum, h.temaHodiny, h.zruseno, h.id FROM eval_hodiny h INNER JOIN eval_ucitele u ON h.idUcitele = u.id LEFT JOIN eval_tridy t ON h.idTridy = t.id LEFT JOIN eval_predmety p ON h.idPredmetu = p.id  WHERE h.idUcitele = '$ucitelID'$filtr"); 
+//generování jednotlivých výsledků jako formuláře s hidden informací o daném názvu a délce výsledků pro poslání na další stránku kde se zobrazí výsledky v detailu
 $i = 0;//proměnná pro odpočet
 $oznaceni = "vysledek";//název pod kterým se budou posílat
 echo"
@@ -144,6 +152,7 @@ echo"
     <input type='hidden' name='oznaceni' value='$oznaceni'>
     <input type='checkbox' id='vse' onclick='chechbox_all(this);'/>
     <label for='vse'>Označit vše</label><br>";
+//procházení výsledků
 while($vysledky = mysqli_fetch_assoc($data_vysledky))
 {
     //vybrání proměnných
@@ -154,9 +163,9 @@ while($vysledky = mysqli_fetch_assoc($data_vysledky))
     $vysledek_obor = $vysledky["obor"];
     $vysledek_tema = $vysledky["temaHodiny"];
     //spojování textu do "srozumitelného" řeťezce pro identifikaci
-    $vysledek = $vysledek_datum . " | " . $vysledek_trida . " | " . $vysledek_obor . " - " . $vysledek_tema; 
-    //zobrazení "odkazu" ve formě formuláře pro zobrazení detailu
+    $vysledek = $vysledek_datum . " | " . $vysledek_trida . " | " . $vysledek_obor . " - " . $vysledek_tema;
     $i++;//opočet výsledků
+    //vytvoření dalšího výsledku
     echo"
         <input type='checkbox' id='$oznaceni$i' name='$oznaceni$i' value='$vysledek_id'/>
         <label for='$oznaceni$i'>$vysledek</label><br>";
