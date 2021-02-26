@@ -12,7 +12,7 @@
 </header>
 <div id="stranka">
 <main>
-<button id="btnExport" onclick="fnExcelReport();">EXPORT</button>
+<button id="btnExport" onclick="fnExcelReport();">Exportovat do excelu</button>
 <?php
 require_once "../../config.php"; // získání configu
 
@@ -27,23 +27,22 @@ while ($x) { //získání všech poslaných id
 }
 
 session_start();//kontrola přihlášení učitele
-/*
 if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
-header("Location: ../t4_ucitel/ucitel_prihlaseni.html");*/
-$ucitelID = 2;
+header("Location: ../t4_ucitel/ucitel_prihlaseni.html");
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);//připojení k db
 //vytvoření tabulky a jejích názvů
 echo"
 <table id='Detail'>
-<tr><th>Otázka</th><th>Odpověď</th><th>Datum</th><th>Třída</th><th>Skupina</th><th>Předmět</th><th>Téma hodiny</th><th>Hodina</th><th>Konání</th></tr>";
+<tr><th>Otázka</th><th>Odpověď</th><th>Datum</th><th>Třída</th><th>Skupina</th><th>Předmět</th><th>Téma hodiny</th><th>Hodina</th><th>Konání</th></tr>
+";
 foreach($idHodiny_post as $idHodiny){//vypsání všech výsledků
     $data_vysledky = mysqli_query($spojeni,"SELECT h.datum, h.skupina, h.skolniHodina AS hodina, h.temaHodiny AS tema, h.zruseno, o.odpoved, fv.otazka, p.nazev AS predmet, t.nazev AS trida FROM eval_odpovedi o INNER JOIN eval_formulare f ON o.idFormulare = f.id INNER JOIN eval_formulare_vzory fv  ON f.idVzoru = fv.id INNER JOIN eval_hodiny h ON f.idHodiny = h.id INNER JOIN eval_predmety p ON h.idPredmetu = p.id INNER JOIN eval_tridy  t ON h.idTridy = t.id WHERE h.id = '$idHodiny'");
     //postupné procházení výsledků
     while($vysledky = mysqli_fetch_assoc($data_vysledky))
-    {
+    {        
         //získávání proměnných
         $vysledek_datum = $vysledky["datum"];
         $vysledek_skupina = $vysledky["skupina"];
@@ -56,11 +55,16 @@ foreach($idHodiny_post as $idHodiny){//vypsání všech výsledků
         $vysledek_trida = $vysledky["trida"];
         //srozumitelnější zrušeno
         if ($vysledek_zruseno)
-        $vysledek_zruseno = "zrušeno";
+        {
+            $vysledek_zruseno = "zrušeno";
+        }
         else
-        $vysledek_zruseno = "proběhla";
+        {
+            $vysledek_zruseno = "proběhla";
+        }
         //zapisování řádků
-        echo"<tr><td>$vysledek_otazka</td><td>$vysledek_odpoved</td><td>$vysledek_datum</td><td>$vysledek_trida</td><td>$vysledek_skupina</td><td>$vysledek_predmet</td><td>$vysledek_tema</td><td>$vysledek_hodina</td><td>$vysledek_zruseno</td></tr>";
+        echo"<tr><td>$vysledek_otazka</td><td>$vysledek_odpoved</td><td>$vysledek_datum</td><td>$vysledek_trida</td><td>$vysledek_skupina</td><td>$vysledek_predmet</td><td>$vysledek_tema</td><td>$vysledek_hodina</td><td>$vysledek_zruseno</td></tr>
+        ";
     }
 }
 //konec tabulky
@@ -70,6 +74,7 @@ echo"
 mysqli_close($spojeni);
 ?>
 <iframe id="txtArea1" style="display:none"></iframe>
+<button id="btnExport2" onclick="fnExcelReport();">Exportovat do excelu</button>
 </main>
 </div>
 <footer>

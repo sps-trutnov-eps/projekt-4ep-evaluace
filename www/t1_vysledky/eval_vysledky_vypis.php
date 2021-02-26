@@ -22,12 +22,10 @@ if (isset($_POST["tridy"]))$tridy_post = $_POST["tridy"];
 if (isset($_POST["skupina"]))$skupina_post = $_POST["skupina"];
 
 session_start();//kontrola přihlášení učitele
-/*
 if (isset($_SESSION["idUcitel"]))
 $ucitelID = $_SESSION["idUcitel"];
 else
-header("Location: ../t4_ucitel/ucitel_prihlaseni.html");*/
-$ucitelID = 2;
+header("Location: ../t4_ucitel/ucitel_prihlaseni.html");
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname); // připojení k db
 //začátek generování listů pro formulář
@@ -172,8 +170,8 @@ while($vysledky = mysqli_fetch_assoc($data_vysledky))
 }
 //konec formuláře s konečným číslem výsledků
 echo"
-<input type='hidden' name='pocet' value='$i'>
-<label>Celkem nalezeno:$i výsledků</label><br>
+<input type='hidden' name='pocet' value='$i'><br>
+<label id='vysledek_celkem'>Celkem nalezeno:$i výsledků</label><br>
 <input type='submit' value='Přejít na detail'>
 </form>";
 //věci pro css
