@@ -356,7 +356,7 @@ input[type=number]{
     margin-right:auto;
     margin-bottom: 2%;
   }
-  #popup
+
   
 
   /*Student */
@@ -394,6 +394,16 @@ input[type=number]{
     margin-left:10%;
     margin-right: 10%;
   }
+#vysledky2 input[type=checkbox]{
+    margin-top: 5%;
+  }
+  #vysledky2 input[type=submit]{
+    margin-top: 3%;
+  }
+.vysledek_celkem{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 .spodek{
     padding-bottom: 2%;
