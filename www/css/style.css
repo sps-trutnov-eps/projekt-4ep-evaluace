@@ -213,7 +213,8 @@ div[class^='podvyber']{
     display: inline-block;
     width: 50%;
 }
-.odstranit, .pridatDalsiVyber, .odstranitPodVyber{
+
+.odstranit, .pridatDalsiVyber, .odstranitPodVyber {
     padding: 1em;
     background-color:#F48B4C;
     border: solid 1px white;
@@ -315,6 +316,49 @@ input[type=number]{
   #ucitel th,#ucitel td {
     padding: 15px;
   }
+ /* Tablulka detail */
+#Detail{
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#Detail table,#Detail td,#Detail th {  
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+#Detail table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  
+  #Detail th,#Detail td {
+    padding: 15px;
+  }
+
+  #btnExport{
+    margin-top: 1%;
+    margin-left: 1%;
+    padding: 1em;
+    background-color:#F48B4C;
+    border: solid 1px white;
+    color: white;
+    box-shadow: none;
+}
+#btnExport2{
+    margin-bottom: 1%;
+    margin-left: 1%;
+    padding: 1em;
+    background-color:#F48B4C;
+    border: solid 1px white;
+    color: white;
+    box-shadow: none;
+}
 
   /* Tabulka vysledky */
 
