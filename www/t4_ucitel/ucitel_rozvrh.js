@@ -325,6 +325,22 @@ function vypsaniTemat(id) {
                         var datum = u.getDate() + "." + (u.getMonth() + 1) + "." + u.getFullYear();
                         if (json.temaHodiny[i] == "") {
                             if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina<input type='button' onclick='popupTema(" + idTema + ")' value='Přidat téma hodiny'><a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                            else {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída<input type='button' onclick='popupTema(" + idTema + ")' value='Přidat téma hodiny'><a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                        } else {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + "<a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                            else {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + "<a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                        }
+                        /*
+                        if (json.temaHodiny[i] == "") {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
                                 if (json.zruseno[i] == 0) {
                                     pole += "<div id='radek'><input type='checkbox' id='" + datumVALUE + "' onclick='zruseno(this.id)' unchecked>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina<input type='button' onclick='popupTema(" + idTema + ")' value='Přidat téma hodiny'><a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                                 }
@@ -358,7 +374,7 @@ function vypsaniTemat(id) {
                                 }
                             }
                         }
-                        
+                        */
                     }
                     
                     document.getElementById("temata").innerHTML = pole;
@@ -409,6 +425,22 @@ function hodinyPrepis() {
                         var datum = u.getDate() + "." + (u.getMonth() + 1) + "." + u.getFullYear();
                         if (json.temaHodiny[i] == "") {
                             if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina<input type='button' onclick='popupTema(" + idTema + ")' value='Přidat téma hodiny'><a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                            else {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída<input type='button' onclick='popupTema(" + idTema + ")' value='Přidat téma hodiny'><a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                        } else {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina - " + json.temaHodiny[i] + "<a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                            else {
+                                pole += "<div id='radek'>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + "Celá třída - " + json.temaHodiny[i] + "<a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
+                            }
+                        }
+                        /*
+                        if (json.temaHodiny[i] == "") {
+                            if (json.skupina[i] == 1 || json.skupina[i] == 2) {
                                 if (json.zruseno[i] == 0) {
                                     pole += "<div id='radek'><input type='checkbox' id='" + datumVALUE + "' onclick='zruseno(this.id)' unchecked>" + datum + " - " + json.predmet[i] + " - " + json.trida[i] + " - " + json.skupina[i] + ". skupina<input type='button' onclick='popupTema(" + idTema + ")' value='Přidat téma hodiny'><a href='../t6_otazky/dotaznik.php?id=" + json.idHodiny[i] + "'><input type='button' value='Tvorba dotazníku'></a></div>";
                                 }
@@ -442,7 +474,7 @@ function hodinyPrepis() {
                                 }
                             }
                         }
-                        
+                        */
                     }
                     
                     document.getElementById("temata").innerHTML = pole;
@@ -456,6 +488,7 @@ function hodinyPrepis() {
 }
 
 //ZRUŠENO JE NEFUNKČNÍ PROZATÍM
+/*
 function zruseno (id) {
     var datum = id;
     var predmet = $("#datum").attr("value");
@@ -479,7 +512,7 @@ function zruseno (id) {
         }
     );
 }
-
+*/
 function zmenacasu() {
     document.getElementById("end").setAttribute("min", document.getElementById("start").value);
     document.getElementById("start").setAttribute("max", document.getElementById("end").value);
