@@ -75,7 +75,7 @@ function zjistitHodnoty() {
                 break;
             default: 
                 console.log(xhr.response);
-                window.location = "../t4_ucitel//ucitel_rozvrh.php";
+                window.location = "../t4_ucitel/ucitel_rozvrh.php";
                 break;
         }
     }
