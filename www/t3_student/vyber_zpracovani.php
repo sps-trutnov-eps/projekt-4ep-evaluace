@@ -7,10 +7,10 @@ $skupina = $_POST["skupina"];
 
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
 
-$dotazHodiny = "SELECT * FROM eval_hodiny WHERE trida_id = '$tridaID' AND predmet_id = '$predmetID' AND skupina = '$skupina'";
+$dotazHodiny = "SELECT * FROM eval_hodiny WHERE idTridy = '$tridaID' AND idPredmetu = '$predmetID' AND skupina = '$skupina'";
 $data = mysqli_query($spojeni, $dotazHodiny);
 
-$dotazHodiny2 = "SELECT * FROM eval_hodiny WHERE trida_id = '$tridaID' AND predmet_id = '$predmetID' AND skupina = '$skupina' LIMIT 1";
+$dotazHodiny2 = "SELECT * FROM eval_hodiny WHERE idTridy = '$tridaID' AND idPredmetu = '$predmetID' AND skupina = '$skupina' LIMIT 1";
 
 $dotazniky = mysqli_fetch_all($data);
 session_start();
@@ -93,7 +93,7 @@ else if (isset($_POST['special']) == true)
 $data2 = mysqli_query($spojeni, $dotazHodiny2);
 $pomocnyDotaznik = mysqli_fetch_assoc($data2);
 
-$ucitelID = $pomocnyDotaznik["ucitel_id"];
+$ucitelID = $pomocnyDotaznik["idUcitele"];
 
 $dotaz1 = "SELECT * FROM eval_formulare_vzory WHERE idUcitel = '$ucitelID' ORDER BY id DESC LIMIT 1";
 $data3 = mysqli_query($spojeni, $dotaz1);
