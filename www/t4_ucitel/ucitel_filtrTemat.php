@@ -52,11 +52,11 @@ $json .= '], "dotaznik":[';
     foreach($data as $radek1) {
         foreach($data2 as $radek2) {
             if($radek1["idHodiny"] == $radek2["idHodiny"]) {
-                $json .= '"1",';
-            } else {
-                $json .= '"0",';
+                $json .= '1';
+                break;
             }
         }
+        $json .= '0,';
     }
 
 $json .= ']}';
