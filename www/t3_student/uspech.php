@@ -43,7 +43,7 @@
         
         echo "<p>Clasic:</p>";
         echo "<p> id dotazníku: " . $dotaznik["id"] . "</p>"; 
-        echo "<p> id učitele: " . $dotaznik["idUcitel"] . "</p>"; 
+        echo "<p> id učitele: " . $dotaznik["idUcitele"] . "</p>"; 
         echo "<p> id předmětu: " . $dotaznik["idPredmetu"] . "</p>"; 
         echo "<p> skupina: " . $dotaznik["skupina"] . "</p>"; 
         echo "<p> datum hodiny: " . $dotaznik["datum"] . "</p>"; 

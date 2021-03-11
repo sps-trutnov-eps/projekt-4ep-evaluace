@@ -12,11 +12,15 @@ $data = mysqli_query($spojeni, $dotazHodiny);
 
 $dotazHodiny2 = "SELECT * FROM eval_hodiny WHERE idTridy = '$tridaID' AND idPredmetu = '$predmetID' AND skupina = '$skupina' LIMIT 1";
 
-$dotazniky = mysqli_fetch_all($data);
+$neupraveneDotazniky = mysqli_fetch_all($data);
 session_start();
 
 $i = 0;
 $nejvetsi;
+$dotazniky;
+$index = 0;
+
+date_default_timezone_set('Europe/Prague');
 
 
 ///////////////////////////////////////////////////////////// normální vyplnění dotazníku
@@ -24,6 +28,21 @@ if (isset($_POST['classic']) == true)
 {
 
 
+foreach($neupraveneDotazniky as $dotaznik)
+{
+    if ($dotaznik[5] <= date("Y\-m\-d"))
+    {
+
+        $dotazniky[$index] = $dotaznik;
+        $index++;
+    }
+
+
+}
+
+if (is_array($dotazniky) == true)
+{
+    /// Odpovídá více záznamů
 
 while($i <= count($dotazniky))
 {
@@ -36,6 +55,7 @@ while($i <= count($dotazniky))
             {
                 if ($dotazniky[$i][5] > $nejvetsi[5])
                 {
+                    
                     $nejvetsi = $dotazniky[$i];
                 }
             }
@@ -53,11 +73,24 @@ while($i <= count($dotazniky))
     $i++;
 
 }
+}
+
+/// Odpovídá pouze 1 záznam
+
+if (is_array($dotazniky) == false)
+{
+    if(empty($dotazniky) == false)
+    {
+        $nejvetsi = $dotazniky;
+    }
+
+}
+
 // Zobrazí datum a id hodiny
-//echo "<script>console.log('".$nejvetsi[5]."')</script>";
+echo "<script>console.log('".$nejvetsi[5]."')</script>";
+echo "<script>console.log('fghfggh')</script>";
+echo "<script>console.log('".date("Y\-m\-d")."')</script>";
 //echo "<script>console.log('".$nejvetsi[0]."')</script>";
-
-
 
 
 $hodinaID = $nejvetsi[0];
@@ -70,15 +103,18 @@ $formularID = $formular["id"];
 $_SESSION["formularID"] = $formularID;
 $_SESSION["hodinaID"] = $hodinaID;
 
+/// Neodpovídá žádný záznam
+
 if(empty($dotazniky) == true)
 {
     //echo "<script>console.log('classic nefunguje')</script>";
-    header("location:error.php");
+    header("location:nenaslo.php");
 }
 
 else
 {
     //echo "<script>console.log('classic funguje')</script>";
+    //header("location:uspech.php");
     header("location:../t5_vyplneni/formular.php");
 }
 
@@ -111,7 +147,7 @@ $_SESSION["NezID"] = $dotaznikID;
 if(empty($dotaznikNez) == true)
 {
     //echo "<script>console.log('special nefunguje')</script>";
-    header("location:error.php");
+    header("location:nenaslo.php");
 }
 
 else
