@@ -1,17 +1,18 @@
 <?php
 session_start();
-
-$idHodiny = $_SESSION["hodinaID"]
-
+require_once "../../config.php";
+$spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
+    //odstranit po debugu
+    $idHodiny = 153;//$_SESSION["hodinaID"];
+    //odstranit po debugu
 $poslanaData = $_POST;
 $encodeJson = array();
 foreach($poslanaData as $odpoved){
     $encodeJson[] = array("odpoved" => "$odpoved");
 }
-
 $data = $encodeJson = json_encode($encodeJson);
-
-$idFormulare = mysqli_query($spojeni, "SELECT idVzoru FROM eval_formulare WHERE idHodiny = $idHodiny");
-mysqli_query($spojeni, "INSERT INTO eval_odpovedi (odpoved, IDformulare) VALUES ('$data', '$idFormulare')");
-
-
+$idFormulare = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare WHERE idHodiny = $idHodiny"));
+$idFormulare = $idFormulare["idVzoru"];
+mysqli_query($spojeni, "INSERT INTO eval_odpovedi (odpoved, idFormulare) VALUES ('$data', '$idFormulare')");
+session_destroy();
+header('Location: ../index.html');
