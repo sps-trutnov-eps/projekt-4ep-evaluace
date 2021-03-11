@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cz">
+<html lang="cs">
 
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,9 @@
 </head>
 
 <body>
-
+    <header>
+        <h1>UI pro vyplnění otázek pomocí formuláře k danné hodině</h1>
+    </header>
     <?php
     require_once "../../config.php";
     $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
@@ -79,7 +81,10 @@
         ?>
         <input type="submit" value="Odeslat">
     </form>
-
+    <footer>
+    <address> &copy; 2020-2021 | 4.EP | #SPŠ101 </address>
+    *Image by <a style="font-size: 14pt; border: none; padding: 0; margin: 0;" href="https://pixabay.com/users/chiplanay-1971251/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4232859">chiplanay</a> from <a style="font-size: 14pt; border: none; padding: 0; margin: 0;" href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4232859">Pixabay</a>
+    </footer>
 </body>
 
 </html>
