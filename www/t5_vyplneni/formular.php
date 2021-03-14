@@ -15,9 +15,8 @@
     require_once "../../config.php";
     $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
     session_start();
-        //odstranit do debugu
-        $idHodiny = 153;//$_SESSION["hodinaID"];
-        //odstranit do debugu
+        $idHodiny = $_SESSION["hodinaID"];
+        //echo($_SESSION["hodinaID"]);
     $idVzoru = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare WHERE idHodiny = $idHodiny"));
     $idVzoru = $idVzoru["idVzoru"];
     $formular = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare_vzory WHERE id = $idVzoru"));

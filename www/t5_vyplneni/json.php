@@ -2,9 +2,7 @@
 session_start();
 require_once "../../config.php";
 $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
-    //odstranit po debugu
-    $idHodiny = 153;//$_SESSION["hodinaID"];
-    //odstranit po debugu
+    $idHodiny = $_SESSION["hodinaID"];
 $poslanaData = $_POST;
 $encodeJson = array();
 foreach($poslanaData as $odpoved){
