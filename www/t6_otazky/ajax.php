@@ -11,6 +11,11 @@
             } else {
                 $array = $_POST['array'];
                 $ucitelID = $_SESSION['idUcitel'];
+                $casRozsahu = $_POST['rozsah'];
+                $cas = time();
+                $cas += 60*$casRozsahu;
+                $cas = date("Y-m-d H:i:s",$cas);
+
                 if(isset($_POST['nazev'])) {
                     $nazev = $_POST['nazev'];
                     mysqli_query($spojeni, "INSERT INTO eval_formulare_vzory (`otazka`,`idUcitel`,`nazev`) VALUES ('$array','$ucitelID','$nazev')");
@@ -20,7 +25,7 @@
                                 
                 $idForm = mysqli_insert_id($spojeni);
     
-                mysqli_query($spojeni, "INSERT INTO eval_formulare (`idVzoru`, `idHodiny`) VALUES ('$idForm','$idHodiny')");
+                mysqli_query($spojeni, "INSERT INTO eval_formulare (`idVzoru`, `idHodiny`, `cas`) VALUES ('$idForm','$idHodiny','$cas')");
             }
         }
     }

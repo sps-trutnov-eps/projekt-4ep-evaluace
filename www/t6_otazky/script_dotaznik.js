@@ -10,6 +10,9 @@ let z = 1;
 let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
+let slider = document.getElementById("rozsah");
+let output = document.getElementById("cas");
+
 //window.addEventListener("load", nastavitDatumyUVyberuDatumu());
 window.onload = (event) => {
     //zmenacasu();
@@ -64,10 +67,12 @@ function zjistitHodnoty() {
         nazev = "";
     }
 
+    let cas = slider.value;
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "./ajax.php", false);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny + nazev);
+    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny + nazev + "&rozsah=" + cas);
     if (xhr.readyState == 4 && xhr.status == 200) {
         switch (xhr.response) {
             case "NeniVybranaHodina":
@@ -243,6 +248,12 @@ function kontrolaUpravyVybranehoFormulareZmena(prostor){
             document.getElementById("ulozitFormular").style.visibility = "visible";
             document.getElementById("ulozitLabel").style.visibility = "visible";
         }
+}
+
+
+output.innerHTML = slider.value;
+slider.oninput = function() {
+  output.innerHTML = this.value;
 }
 
 /*

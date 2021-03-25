@@ -123,6 +123,10 @@
                     <!--pokud je vybraný některý již uložený formulář nenabízet tuto možnost-->
                     <label for="ulozitFormular" id="ulozitLabel">Uložit tento formulář</label><br>
                 </div>
+                <div>
+                    <input type="range" min="5" max="30" value="5" class="slider" id="rozsah">
+                    <p>Čas: <span id="cas"></span> minut</p>
+                </div>
                 <div id="odeslat">
                     <input id="odeslatFormular" type='submit' value='Odeslat' />
                 </div>
