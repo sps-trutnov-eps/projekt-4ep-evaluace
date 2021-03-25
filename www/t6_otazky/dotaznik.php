@@ -124,8 +124,10 @@
                     <label for="ulozitFormular" id="ulozitLabel">Uložit tento formulář</label><br>
                 </div>
                 <div>
-                    <input type="range" min="5" max="30" value="5" class="slider" id="rozsah">
+                    <input type="range" min="5" max="30" value="5" class="slider" id="rozsahCas">
                     <p>Čas: <span id="cas"></span> minut</p>
+                    <input type="range" min="1" max="30" value="15" class="slider" id="rozsahPouziti">
+                    <p>Počet použití: <span id="pouziti"></span></p>
                 </div>
                 <div id="odeslat">
                     <input id="odeslatFormular" type='submit' value='Odeslat' />

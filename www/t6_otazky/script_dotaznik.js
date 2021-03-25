@@ -10,8 +10,10 @@ let z = 1;
 let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
-let slider = document.getElementById("rozsah");
-let output = document.getElementById("cas");
+let sliderCas = document.getElementById("rozsahCas");
+let sliderPouziti = document.getElementById("rozsahPouziti");
+let outputCas = document.getElementById("cas");
+let outputPouziti = document.getElementById("pouziti");
 
 //window.addEventListener("load", nastavitDatumyUVyberuDatumu());
 window.onload = (event) => {
@@ -67,12 +69,13 @@ function zjistitHodnoty() {
         nazev = "";
     }
 
-    let cas = slider.value;
+    let cas = sliderCas.value;
+    let pouziti = sliderPouziti.value;
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "./ajax.php", false);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny + nazev + "&rozsah=" + cas);
+    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny + nazev + "&rozsahCas=" + cas + "&rozsahPouziti=" + pouziti);
     if (xhr.readyState == 4 && xhr.status == 200) {
         switch (xhr.response) {
             case "NeniVybranaHodina":
@@ -251,10 +254,14 @@ function kontrolaUpravyVybranehoFormulareZmena(prostor){
 }
 
 
-output.innerHTML = slider.value;
-slider.oninput = function() {
-  output.innerHTML = this.value;
+outputCas.innerHTML = sliderCas.value;
+outputPouziti.innerHTML = sliderPouziti.value;
+sliderCas.oninput = function() {
+  outputCas.innerHTML = this.value;
 }
+sliderPouziti.oninput = function() {
+    outputPouziti.innerHTML = this.value;
+  }
 
 /*
 //odkladiště dějin
