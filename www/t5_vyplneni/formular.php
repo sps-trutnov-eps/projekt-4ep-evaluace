@@ -17,8 +17,16 @@
         header("location:../t3_student/vyber.php");
     }else{
         $cas = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare WHERE idHodiny = $idHodiny"));
-        $cas = $cas["cas"];
-        setcookie("idHodiny", $idHodiny, $cas,"/");
+        $cas = strtotime($cas["cas"]);
+        date_default_timezone_set( 'CET' );
+        $ted = strtotime(date("Y-m-d H:i:s"));
+        $rozdil = $cas - $ted;
+        if($rozdil > 0){
+            setcookie("idHodiny", $idHodiny, time() + $rozdil,"/");
+            setcookie("casdeletu", $rozdil, time() + $rozdil,"/");
+        }else{
+            header("location:../t3_student/vyber.php");
+        }
     }
     ?>
     <header>
