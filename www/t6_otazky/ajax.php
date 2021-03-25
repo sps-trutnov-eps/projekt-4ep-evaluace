@@ -16,9 +16,11 @@
                 $cas = time();
                 $cas += 60*$casRozsahu;
                 $cas = date("Y-m-d H:i:s",$cas);
+                $_SESSION['cas'] = $cas;
                 
                 $kod = generaceKodu(5);
                 $dataKod = mysqli_query($spojeni, "SELECT * FROM `eval_formulare` WHERE `kod` = '$kod'");
+                $_SESSION['kod'] = $kod;
 
                 while(true) {
                     if (mysqli_num_rows($dataKod) == 0) {
@@ -36,6 +38,7 @@
                     } else {
                         $kod = generaceKodu(5);
                         $dataKod = mysqli_query($spojeni, "SELECT * FROM `eval_formulare` WHERE `kod` = '$kod'");
+                        $_SESSION['kod'] = $kod;
                     }
                 }
             }

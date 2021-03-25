@@ -83,7 +83,7 @@ function zjistitHodnoty() {
                 break;
             default: 
                 console.log(xhr.response);
-                window.location = "../t4_ucitel/ucitel_rozvrh.php";
+                window.location = "./zobrazeniKodu.php";
                 break;
         }
     }
@@ -253,6 +253,9 @@ function kontrolaUpravyVybranehoFormulareZmena(prostor){
         }
 }
 
+function locationRozvrh() {
+    window.location = "../t4_ucitel/ucitel_rozvrh.php";
+}
 
 outputCas.innerHTML = sliderCas.value;
 outputPouziti.innerHTML = sliderPouziti.value;
