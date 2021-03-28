@@ -8,15 +8,31 @@
 </head>
 
 <body>
+<?php
+    require_once "../../config.php";
+    $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
+    session_start();
+    $idHodiny = $_SESSION["hodinaID"];
+    if(isset($_COOKIE["idHodiny"]) && $idHodiny == $_COOKIE["idHodiny"]){
+        header("location:../t3_student/vyber.php");
+    }else{
+        $cas = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare WHERE idHodiny = $idHodiny"));
+        $cas = strtotime($cas["cas"]);
+        date_default_timezone_set( 'CET' );
+        $ted = strtotime(date("Y-m-d H:i:s"));
+        $rozdil = $cas - $ted;
+        if($rozdil > 0){
+            setcookie("idHodiny", $idHodiny, time() + $rozdil,"/");
+            setcookie("casdeletu", $rozdil, time() + $rozdil,"/");
+        }else{
+            header("location:../t3_student/vyber.php");
+        }
+    }
+    ?>
     <header>
         <h1>UI pro vyplnění otázek pomocí formuláře k danné hodině</h1>
     </header>
     <?php
-    require_once "../../config.php";
-    $spojeni = mysqli_connect(dbhost, dbuser, dbpass, dbname);
-    session_start();
-        $idHodiny = $_SESSION["hodinaID"];
-        //echo($_SESSION["hodinaID"]);
     $idVzoru = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare WHERE idHodiny = $idHodiny"));
     $idVzoru = $idVzoru["idVzoru"];
     $formular = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare_vzory WHERE id = $idVzoru"));
