@@ -10,6 +10,11 @@ let z = 1;
 let k = 1;
 let pocetpodvyber = 0;
 let formularOtazky = document.getElementById('formularOtazky');
+let sliderCas = document.getElementById("rozsahCas");
+let sliderPouziti = document.getElementById("rozsahPouziti");
+let outputCas = document.getElementById("cas");
+let outputPouziti = document.getElementById("pouziti");
+
 //window.addEventListener("load", nastavitDatumyUVyberuDatumu());
 window.onload = (event) => {
     //zmenacasu();
@@ -64,10 +69,13 @@ function zjistitHodnoty() {
         nazev = "";
     }
 
+    let cas = sliderCas.value;
+    let pouziti = sliderPouziti.value;
+
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "./ajax.php", false);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny + nazev);
+    xhr.send("a=otazky&array=" + otazky + "&idHodiny=" + idHodiny + nazev + "&rozsahCas=" + cas + "&rozsahPouziti=" + pouziti);
     if (xhr.readyState == 4 && xhr.status == 200) {
         switch (xhr.response) {
             case "NeniVybranaHodina":
@@ -75,7 +83,7 @@ function zjistitHodnoty() {
                 break;
             default: 
                 console.log(xhr.response);
-                window.location = "../t4_ucitel/ucitel_rozvrh.php";
+                window.location = "./zobrazeniKodu.php";
                 break;
         }
     }
@@ -244,6 +252,19 @@ function kontrolaUpravyVybranehoFormulareZmena(prostor){
             document.getElementById("ulozitLabel").style.visibility = "visible";
         }
 }
+
+function locationRozvrh() {
+    window.location = "../t4_ucitel/ucitel_rozvrh.php";
+}
+
+outputCas.innerHTML = sliderCas.value;
+outputPouziti.innerHTML = sliderPouziti.value;
+sliderCas.oninput = function() {
+  outputCas.innerHTML = this.value;
+}
+sliderPouziti.oninput = function() {
+    outputPouziti.innerHTML = this.value;
+  }
 
 /*
 //odkladiště dějin
