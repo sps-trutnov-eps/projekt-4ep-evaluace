@@ -25,6 +25,7 @@
 <form method="post" action="vyber_zpracovani.php">
     <label for="kod"></label>
     <input type="text" id="kod" name="kod"><br>
+    <input type="submit" value="OK">
 </form>
 
 </main>
