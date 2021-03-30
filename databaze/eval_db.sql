@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost:3306
--- Vytvořeno: Pon 29. bře 2021, 19:47
+-- Vytvořeno: Úte 30. bře 2021, 09:34
 -- Verze serveru: 10.1.41-MariaDB-0+deb9u1
 -- Verze PHP: 7.3.10-1+0~20191008.45+debian9~1.gbp365209
 
@@ -102,6 +102,66 @@ CREATE TABLE `eval_predmety` (
   `nazev` varchar(100) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
+--
+-- Vypisuji data pro tabulku `eval_predmety`
+--
+
+INSERT INTO `eval_predmety` (`id`, `nazev`) VALUES
+(1, 'ANG'),
+(2, 'APS'),
+(3, 'ATT'),
+(4, 'AZA'),
+(5, 'CEK'),
+(6, 'CIT'),
+(7, 'CJL'),
+(8, 'CMT'),
+(9, 'CNC'),
+(10, 'DEJ'),
+(11, 'ECM'),
+(12, 'EKA'),
+(13, 'ELE'),
+(14, 'ELN'),
+(15, 'ELT'),
+(16, 'ESP'),
+(17, 'EZA'),
+(18, 'FYZ'),
+(19, 'HAE'),
+(20, 'ICT'),
+(21, 'INS'),
+(22, 'KOM'),
+(23, 'MAM'),
+(24, 'MAT'),
+(25, 'MEC'),
+(26, 'MIT'),
+(27, 'MUL'),
+(28, 'MZA'),
+(29, 'NEM'),
+(30, 'OBN'),
+(31, 'ODV'),
+(32, 'OPS'),
+(33, 'PELK'),
+(34, 'PGR'),
+(35, 'POS'),
+(36, 'PRA'),
+(37, 'PRO'),
+(38, 'PSY'),
+(39, 'PUK'),
+(40, 'PVA'),
+(41, 'PVY'),
+(42, 'PXE'),
+(43, 'RZA'),
+(44, 'SAZ'),
+(45, 'SPS'),
+(46, 'SPZ'),
+(47, 'STR'),
+(48, 'STT'),
+(49, 'TEC'),
+(50, 'TEK'),
+(51, 'TEV'),
+(52, 'UAD'),
+(53, 'ZEL'),
+(54, 'ZPV');
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +172,37 @@ CREATE TABLE `eval_tridy` (
   `id` int(11) NOT NULL,
   `nazev` varchar(5) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+--
+-- Vypisuji data pro tabulku `eval_tridy`
+--
+
+INSERT INTO `eval_tridy` (`id`, `nazev`) VALUES
+(1, '1.A'),
+(4, '1.B'),
+(7, '1.C'),
+(10, '1.EP'),
+(14, '1.IT'),
+(18, '1.S'),
+(22, '1.ST'),
+(2, '2.A'),
+(5, '2.B'),
+(8, '2.C'),
+(11, '2.EP'),
+(15, '2.IT'),
+(19, '2.S'),
+(23, '2.ST'),
+(3, '3.A'),
+(6, '3.B'),
+(9, '3.C'),
+(12, '3.EP'),
+(16, '3.IT'),
+(20, '3.S'),
+(24, '3.ST'),
+(13, '4.EP'),
+(17, '4.IT'),
+(21, '4.S'),
+(25, '4.ST');
 
 -- --------------------------------------------------------
 
@@ -188,12 +279,12 @@ ALTER TABLE `eval_ucitele`
 -- AUTO_INCREMENT pro tabulku `eval_formulare`
 --
 ALTER TABLE `eval_formulare`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT pro tabulku `eval_formulare_vzory`
 --
 ALTER TABLE `eval_formulare_vzory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pro tabulku `eval_hodiny`
 --
