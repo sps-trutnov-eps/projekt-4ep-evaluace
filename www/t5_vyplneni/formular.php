@@ -14,6 +14,11 @@
     session_start();
     $idHodiny = $_SESSION["hodinaID"];
     if(isset($_COOKIE["idHodiny"]) && $idHodiny == $_COOKIE["idHodiny"]){
+		
+		// Tento radek je osklivy hack negujici chybu v modulu t3,
+		// kde se snizuje pocet volnych vyplneni nezavisle na kontrole delane az tady.
+		mysqli_query($spojeni, "UPDATE eval_formulare SET pocet = pocet + 1 WHERE idHodiny='$idHodiny'");
+		
         header("location:../t3_student/vyber.php");
     }else{
         $cas = mysqli_fetch_assoc(mysqli_query($spojeni, "SELECT * FROM eval_formulare WHERE idHodiny = $idHodiny"));
