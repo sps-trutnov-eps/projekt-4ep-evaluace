@@ -24,7 +24,7 @@ if(empty($formular) == true)
     header("location:nenaslo.php");
 }
 
-if(date("Y\-m\-d") <= $formular["cas"])
+if(date("Y-m-d H:i:s") <= $formular["cas"])
 {
     session_start();
     if($formular["pocet"] > 0)
@@ -44,7 +44,7 @@ if(date("Y\-m\-d") <= $formular["cas"])
         header("location: nenaslo.php");
     }
 }
-elseif(date("Y\-m\-d") > $formular["cas"])
+elseif(date("Y-m-d H:i:s") > $formular["cas"])
 {
     header("location: nenaslo.php");
 }
