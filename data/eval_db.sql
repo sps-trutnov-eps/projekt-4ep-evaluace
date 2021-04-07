@@ -62,7 +62,7 @@ CREATE TABLE `eval_hodiny` (
   `skupina` int(1) NOT NULL,
   `datum` date NOT NULL,
   `skolniHodina` varchar(255) COLLATE utf8_czech_ci NOT NULL,
-  `temaHodiny` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `temaHodiny` varchar(255) COLLATE utf8_czech_ci,
   `zruseno` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
