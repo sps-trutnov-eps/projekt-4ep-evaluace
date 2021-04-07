@@ -45,7 +45,7 @@ CREATE TABLE `eval_formulare_vzory` (
   `id` int(11) NOT NULL,
   `otazka` text COLLATE utf8_czech_ci NOT NULL,
   `idUcitel` int(11) NOT NULL,
-  `nazev` text COLLATE utf8_czech_ci NOT NULL
+  `nazev` text COLLATE utf8_czech_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 -- --------------------------------------------------------
