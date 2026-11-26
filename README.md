@@ -1,3 +1,5 @@
+> Žákovský projekt třídy 4.EP, školní rok 2020/21, SPŠ Trutnov. Projekt se už neudržuje.
+
 # Studentská evaluace výuky
 
 ## Deployment
